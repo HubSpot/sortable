@@ -1,3 +1,8 @@
 JavaScript client-side sortable tables
 
 See http://www.kryogenix.org/code/browser/sorttable/ for details and FAQ.
+
+Running the tests:
+python -m SimpleHTTPServer (or stick the folder on a server somewhere)
+open tests/core/TestRunner.html
+Note that some tests fail precisely because sorttable doesn't handle those things yet.
