@@ -1,0 +1,363 @@
+<html>
+<head>
+<title>Zebra stripe sorting</title>
+</head>
+<body>
+
+<table>
+<tr><td colspan="3">Zebra stripe sorting</td></tr>
+<tr><td>open</td><td>ZebraStripeSorting.html</td><td></td></tr>
+
+<tr><td colspan="3">Striped with tr.even</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber1</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber1</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword1</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword1</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t1']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+
+<tr><td colspan="3">Striped with tr.odd</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber2</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber2</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword2</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword2</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t2']//tr[6]/td[2]</td><td>transparent</td></tr>
+
+<tr><td colspan="3">Striped with tr.odd, tr.even</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber3</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber3</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword3</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword3</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t3']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+
+<tr><td colspan="3">Striped with td.even</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber4</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber4</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword4</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword4</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t4']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+
+<tr><td colspan="3">Striped with td.odd</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber5</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber5</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword5</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword5</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t5']//tr[6]/td[2]</td><td>transparent</td></tr>
+
+<tr><td colspan="3">Striped with td.odd, td.even</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber6</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber6</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword6</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword6</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[1]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[2]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[3]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[4]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[5]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t6']//tr[6]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+
+<tr><td colspan="3">Striped with td style=background on odd rows</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber7</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[1]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[3]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[5]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber7</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[1]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[3]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[5]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword7</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[1]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[3]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[5]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[6]/td[2]</td><td>transparent</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword7</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[1]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[2]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[3]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[4]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[5]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t7']//tr[6]/td[2]</td><td>transparent</td></tr>
+
+<tr><td colspan="3">Striped with td style=background on even rows</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber8</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[2]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[4]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[6]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber8</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[2]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[4]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[6]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword8</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[2]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[4]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[6]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword8</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[1]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[2]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[3]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[4]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[5]/td[2]</td><td>transparent</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t8']//tr[6]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+
+<tr><td colspan="3">Striped with td style=background on odd and even rows</td></tr>
+<tr><td colspan="3">Sort by number</td></tr>
+<tr><td>click</td> <td>thnumber9</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[1]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[2]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[3]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[4]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[5]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[6]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td colspan="3">Sort by number reversed</td></tr>
+<tr><td>click</td> <td>thnumber9</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[1]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[2]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[3]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[4]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[5]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[6]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td colspan="3">Sort by word</td></tr>
+<tr><td>click</td> <td>thword9</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[1]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[2]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[3]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[4]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[5]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[6]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td colspan="3">Sort by word reversed</td></tr>
+<tr><td>click</td> <td>thword9</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[1]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[2]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[3]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[4]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[5]/td[2]</td><td>rgb(204, 204, 204)</td></tr>
+<tr><td>verifyBackgroundColor</td><td>//table[@id='t9']//tr[6]/td[2]</td><td>rgb(102, 102, 102)</td></tr>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

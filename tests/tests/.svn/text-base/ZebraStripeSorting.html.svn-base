@@ -1,0 +1,180 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<head>
+<title>Zebra striped tables</title>
+<script src="../../sorttable.js" type="text/javascript"></script>
+<script src="jquery-1.2.1.min.js" type="text/javascript"></script>
+<style type="text/css">
+table { border-collapse: collapse; }
+td { padding: 10px; }
+tr.even td, td.even { background: #ccc; }
+tr.odd td, td.odd { background: #666; color: white; }
+</style>
+</head>
+<body>
+
+<h1>Striped with tr.even</h1>
+<table class="sortable" id="t1">
+<thead>
+  <tr>
+    <th id="thnumber1">Number</th>
+    <th id="thword1">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr><td>4</td><td>charlie</td></tr>
+  <tr class="even"><td id="td1">3</td><td>bravo</td></tr>
+  <tr><td>2</td><td>alpha</td></tr>
+  <tr class="even"><td>1</td><td>foxtrot</td></tr>
+  <tr><td>6</td><td>delta</td></tr>
+  <tr class="even"><td>5</td><td>echo</td></tr>
+</tbody>
+</table>
+
+<h1>Striped with tr.odd</h1>
+<table class="sortable" id="t2">
+<thead>
+  <tr>
+    <th id="thnumber2">Number</th>
+    <th id="thword2">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr class="odd"><td>4</td><td>charlie</td></tr>
+  <tr><td>3</td><td>bravo</td></tr>
+  <tr class="odd"><td>2</td><td>alpha</td></tr>
+  <tr><td>1</td><td>foxtrot</td></tr>
+  <tr class="odd"><td>6</td><td>delta</td></tr>
+  <tr><td>5</td><td>echo</td></tr>
+</tbody>
+</table>
+
+<h1>Striped with tr.odd, tr.even</h1>
+<table class="sortable" id="t3">
+<thead>
+  <tr>
+    <th id="thnumber3">Number</th>
+    <th id="thword3">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr class="odd"><td>4</td><td>charlie</td></tr>
+  <tr class="even"><td>3</td><td>bravo</td></tr>
+  <tr class="odd"><td>2</td><td>alpha</td></tr>
+  <tr class="even"><td>1</td><td>foxtrot</td></tr>
+  <tr class="odd"><td>6</td><td>delta</td></tr>
+  <tr class="even"><td>5</td><td>echo</td></tr>
+</tbody>
+</table>
+
+<h1>Striped with td.even</h1>
+<table class="sortable" id="t4">
+<thead>
+  <tr>
+    <th id="thnumber4">Number</th>
+    <th id="thword4">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr><td>4</td><td>charlie</td></tr>
+  <tr><td class="even">3</td><td class="even">bravo</td></tr>
+  <tr><td>2</td><td>alpha</td></tr>
+  <tr><td class="even">1</td><td class="even">foxtrot</td></tr>
+  <tr><td>6</td><td>delta</td></tr>
+  <tr><td class="even">5</td><td class="even">echo</td></tr>
+</tbody>
+</table>
+
+<h1>Striped with td.odd</h1>
+<table class="sortable" id="t5">
+<thead>
+  <tr>
+    <th id="thnumber5">Number</th>
+    <th id="thword5">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr><td class="odd">4</td><td class="odd">charlie</td></tr>
+  <tr><td>3</td><td>bravo</td></tr>
+  <tr><td class="odd">2</td><td class="odd">alpha</td></tr>
+  <tr><td>1</td><td>foxtrot</td></tr>
+  <tr><td class="odd">6</td><td class="odd">delta</td></tr>
+  <tr><td>5</td><td>echo</td></tr>
+</tbody>
+</table>
+
+<h1>Striped with td.odd, td.even</h1>
+<table class="sortable" id="t6">
+<thead>
+  <tr>
+    <th id="thnumber6">Number</th>
+    <th id="thword6">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr><td class="odd">4</td><td class="odd">charlie</td></tr>
+  <tr><td class="even">3</td><td class="even">bravo</td></tr>
+  <tr><td class="odd">2</td><td class="odd">alpha</td></tr>
+  <tr><td class="even">1</td><td class="even">foxtrot</td></tr>
+  <tr><td class="odd">6</td><td class="odd">delta</td></tr>
+  <tr><td class="even">5</td><td class="even">echo</td></tr>
+</tbody>
+</table>
+
+<h1>Striped with td style=background on odd rows</h1>
+<table class="sortable" id="t7">
+<thead>
+  <tr>
+    <th id="thnumber7">Number</th>
+    <th id="thword7">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr><td style="background-color: #ccc">4</td><td style="background-color: #ccc">charlie</td></tr>
+  <tr><td>3</td><td>bravo</td></tr>
+  <tr><td style="background-color: #ccc">2</td><td style="background-color: #ccc">alpha</td></tr>
+  <tr><td>1</td><td>foxtrot</td></tr>
+  <tr><td style="background-color: #ccc">6</td><td style="background-color: #ccc">delta</td></tr>
+  <tr><td>5</td><td>echo</td></tr>
+</tbody>
+</table>
+
+<h1>Striped with td style=background on even rows</h1>
+<table class="sortable" id="t8">
+<thead>
+  <tr>
+    <th id="thnumber8">Number</th>
+    <th id="thword8">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr><td>4</td><td>charlie</td></tr>
+  <tr><td style="background-color: #666; color: white">3</td><td style="background-color: #666; color: white">bravo</td></tr>
+  <tr><td>2</td><td>alpha</td></tr>
+  <tr><td style="background-color: #666; color: white">1</td><td style="background-color: #666; color: white">foxtrot</td></tr>
+  <tr><td>6</td><td>delta</td></tr>
+  <tr><td style="background-color: #666; color: white">5</td><td style="background-color: #666; color: white">echo</td></tr>
+</tbody>
+</table>
+
+<h1>Striped with td style=background on odd and even rows</h1>
+<table class="sortable" id="t9">
+<thead>
+  <tr>
+    <th id="thnumber9">Number</th>
+    <th id="thword9">Word</th>
+  </tr>
+</thead>
+<tbody>
+  <tr><td style="background-color: #ccc">4</td><td style="background-color: #ccc">charlie</td></tr>
+  <tr><td style="background-color: #666; color: white">3</td><td style="background-color: #666; color: white">bravo</td></tr>
+  <tr><td style="background-color: #ccc">2</td><td style="background-color: #ccc">alpha</td></tr>
+  <tr><td style="background-color: #666; color: white">1</td><td style="background-color: #666; color: white">foxtrot</td></tr>
+  <tr><td style="background-color: #ccc">6</td><td style="background-color: #ccc">delta</td></tr>
+  <tr><td style="background-color: #666; color: white">5</td><td style="background-color: #666; color: white">echo</td></tr>
+</tbody>
+</table>
+
+</body>
+</html>
+

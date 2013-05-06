@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Date Sorting</title>
+</head>
+<body>
+
+<table>
+<tr><td colspan="3">Date and Time Sorting</td></tr>
+<tr><td>open</td><td>DateTimeSorting.html</td><td></td></tr>
+<tr><td colspan="3">Check table is OK at first</td></tr>
+<tr><td>verifyText</td><td>//table//tr[1]/td[1]</td><td>1</td></tr>
+<tr><td>verifyText</td><td>//table//tr[2]/td[1]</td><td>2</td></tr>
+<tr><td>verifyText</td><td>//table//tr[3]/td[1]</td><td>3</td></tr>
+
+<tr><td colspan="3">Sort by DD-MM-YY hh:mm:ss AM/PM</td></tr>
+<tr><td>click</td> <td>thddmmyydashhhmmsscolonampm</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyText</td><td>//table//tr[1]/td[1]</td><td>3</td></tr>
+<tr><td>verifyText</td><td>//table//tr[2]/td[1]</td><td>1</td></tr>
+<tr><td>verifyText</td><td>//table//tr[3]/td[1]</td><td>2</td></tr>
+<tr><td colspan="3">Sort by DD-MM-YY hh:mm:ss AM/PM reversed</td></tr>
+<tr><td>click</td> <td>thddmmyydashhhmmsscolonampm</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyText</td><td>//table//tr[3]/td[1]</td><td>3</td></tr>
+<tr><td>verifyText</td><td>//table//tr[2]/td[1]</td><td>1</td></tr>
+<tr><td>verifyText</td><td>//table//tr[1]/td[1]</td><td>2</td></tr>
+<tr><td colspan="3">Sort by number to reset</td></tr>
+<tr><td>click</td> <td>thnumber</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+
+<tr><td colspan="3">Sort by MM/DD/YYYY hh:mm:ss AM/PM</td></tr>
+<tr><td>click</td> <td>thmmddyyyyslashhhmmsscolonampm</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyText</td><td>//table//tr[1]/td[1]</td><td>3</td></tr>
+<tr><td>verifyText</td><td>//table//tr[2]/td[1]</td><td>1</td></tr>
+<tr><td>verifyText</td><td>//table//tr[3]/td[1]</td><td>2</td></tr>
+<tr><td colspan="3">Sort by MM/DD/YYYY hh:mm:ss AM/PM reversed</td></tr>
+<tr><td>click</td> <td>thmmddyyyyslashhhmmsscolonampm</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyText</td><td>//table//tr[3]/td[1]</td><td>3</td></tr>
+<tr><td>verifyText</td><td>//table//tr[2]/td[1]</td><td>1</td></tr>
+<tr><td>verifyText</td><td>//table//tr[1]/td[1]</td><td>2</td></tr>
+<tr><td colspan="3">Sort by number to reset</td></tr>
+<tr><td>click</td> <td>thnumber</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+
+
+
+</body>
+</html>
+

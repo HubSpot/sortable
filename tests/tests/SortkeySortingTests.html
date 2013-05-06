@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Sortkey Sorting</title>
+</head>
+<body>
+
+<table>
+<tr><td colspan="3">Sortkey Sorting</td></tr>
+<tr><td>open</td><td>SortkeySorting.html</td><td></td></tr>
+<tr><td colspan="3">Check table is OK at first</td></tr>
+<tr><td>verifyText</td><td>//table//tr[1]/td[2]</td><td>two</td></tr>
+<tr><td>verifyText</td><td>//table//tr[2]/td[2]</td><td>four</td></tr>
+<tr><td>verifyText</td><td>//table//tr[3]/td[2]</td><td>six</td></tr>
+<tr><td>verifyText</td><td>//table//tr[4]/td[2]</td><td>three</td></tr>
+<tr><td>verifyText</td><td>//table//tr[5]/td[2]</td><td>five</td></tr>
+<tr><td>verifyText</td><td>//table//tr[6]/td[2]</td><td>one</td></tr>
+<tr><td colspan="3">Sort by words column (test sorttable_customkey)</td></tr>
+<tr><td>click</td> <td>thwords</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyText</td><td>//table//tr[1]/td[1]</td><td>1</td></tr>
+<tr><td>verifyText</td><td>//table//tr[2]/td[1]</td><td>2</td></tr>
+<tr><td>verifyText</td><td>//table//tr[3]/td[1]</td><td>3</td></tr>
+<tr><td>verifyText</td><td>//table//tr[4]/td[1]</td><td>4</td></tr>
+<tr><td>verifyText</td><td>//table//tr[5]/td[1]</td><td>5</td></tr>
+<tr><td>verifyText</td><td>//table//tr[6]/td[1]</td><td>6</td></tr>
+<tr><td colspan="3">Sort by words column reversed (test sorttable_customkey)</td></tr>
+<tr><td>click</td> <td>thwords</td><td></td></tr>
+<tr><td>pause</td><td>500</td><td></td></tr>
+<tr><td>verifyText</td><td>//table//tr[6]/td[1]</td><td>1</td></tr>
+<tr><td>verifyText</td><td>//table//tr[5]/td[1]</td><td>2</td></tr>
+<tr><td>verifyText</td><td>//table//tr[4]/td[1]</td><td>3</td></tr>
+<tr><td>verifyText</td><td>//table//tr[3]/td[1]</td><td>4</td></tr>
+<tr><td>verifyText</td><td>//table//tr[2]/td[1]</td><td>5</td></tr>
+<tr><td>verifyText</td><td>//table//tr[1]/td[1]</td><td>6</td></tr>
+</body>
+</html>
+
