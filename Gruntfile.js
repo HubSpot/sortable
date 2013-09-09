@@ -97,26 +97,40 @@ module.exports = function(grunt) {
         var done = this.async();
 
         fs.readdir(rootdir, function(err, files) {
+            var testFiles = [];
             files.forEach(function(fn) {
                 if (fn.match(/^test-.*\.html$/)) {
-                    console.log("teeeeesting", fn);
-                    var ffn = rootdir + fn;
-                    grunt.util.spawn({
-                        cmd: "phantomjs",
-                        args: [
-                            rootdir + "wru-phantom.js",
-                            ffn
-                        ]
-                    }, function(err, result, code) {
-                        console.log(result.stdout);
-                        if (err) {
-                            console.log("TESTS FAILED");
-                            throw(err);
-                        }
-                        done();
-                    });
+                    testFiles.push(fn);
                 }
             });
+
+            console.log("Files to test:", testFiles);
+
+            function next() {
+                var fn = testFiles.shift();
+                if (!fn) {
+                    done();
+                    return;
+                }
+                console.log("=== Testing: ", fn);
+                var ffn = rootdir + fn;
+                grunt.util.spawn({
+                    cmd: "phantomjs",
+                    args: [
+                        rootdir + "wru-phantom.js",
+                        ffn
+                    ]
+                }, function(err, result, code) {
+                    console.log(result.stdout);
+                    if (err) {
+                        console.log("TESTS FAILED");
+                        throw(err);
+                    }
+                    next();
+                });
+            }
+
+            next();
         });
     });
 
