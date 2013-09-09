@@ -1,0 +1,10 @@
+{
+  "name": "sorttable",
+  "version": "2.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4",
+    "mustache": "~0.7.2",
+    "wru": "~0.2.5"
+  }
+}
