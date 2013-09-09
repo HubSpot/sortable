@@ -104,8 +104,6 @@ module.exports = function(grunt) {
                 }
             });
 
-            console.log("Files to test:", testFiles);
-
             function next() {
                 var fn = testFiles.shift();
                 if (!fn) {
