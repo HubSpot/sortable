@@ -23,42 +23,10 @@ sorttable = {
   makeSortable: function(table) {
     var i, j;
 
-    if (table.getElementsByTagName('thead').length === 0) {
-      // table doesn't have a tHead. Since it should have, create one and
-      // put the first table row in it.
-      the = document.createElement('thead');
-      the.appendChild(table.rows[0]);
-      table.insertBefore(the,table.firstChild);
-    }
-    // Safari doesn't support table.tHead, sigh
-    if (table.tHead === null) table.tHead = table.getElementsByTagName('thead')[0];
+    if (table.tHead.rows.length !== 1) return;
 
-    if (table.tHead.rows.length != 1) return; // can't cope with two header rows
-
-    // Sorttable v1 put rows with a class of "sortbottom" at the bottom (as
-    // "total" rows, for example). This is B&R, since what you're supposed
-    // to do is put them in a tfoot. So, if there are sortbottom rows,
-    // for backwards compatibility, move them to tfoot (creating it if needed).
-    sortbottomrows = [];
-    for (i = 0; i<table.rows.length; i++) {
-      if (table.rows[i].className.search(/\bsortbottom\b/) != -1) {
-        sortbottomrows[sortbottomrows.length] = table.rows[i];
-      }
-    }
-    if (sortbottomrows) {
-      if (table.tFoot === null) {
-        // table doesn't have a tfoot. Create one.
-        tfo = document.createElement('tfoot');
-        table.appendChild(tfo);
-      }
-      for (i = 0; i<sortbottomrows.length; i++) {
-        tfo.appendChild(sortbottomrows[i]);
-      }
-      delete sortbottomrows;
-    }
-
-    // work through each column and calculate its type
     headrow = table.tHead.rows[0].cells;
+
     for (i = 0; i<headrow.length; i++) {
       if (headrow[i].getAttribute('data-sort') !== 'false') {
         mtch = headrow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
