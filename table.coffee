@@ -1,6 +1,7 @@
-Table =
+numberRegExp = /^-?[£$¤]?[\d,.]+%?$/
+trimRegExp = /^\s+|\s+$/g
 
-  numberRegExp: /^-?[£$¤]?[\d,.]+%?$/
+Table =
 
   makeSortable: (table) ->
     return if table.tHead.rows.length isnt 1
@@ -62,8 +63,8 @@ Table =
   getNodeValue: (node) ->
     return '' unless node
     return node.getAttribute('data-value') if node.getAttribute('data-value') isnt null
-    return node.innerText.replace(/^\s+|\s+$/g, '') unless typeof node.innerText is 'undefined'
-    node.textContent.replace /^\s+|\s+$/g, ''
+    return node.innerText.replace(trimRegExp, '') unless typeof node.innerText is 'undefined'
+    node.textContent.replace trimRegExp, ''
 
   reverse: (table) ->
     tBody = table.tBodies[0]

@@ -1,7 +1,8 @@
 (function() {
-  var Table;
+  var Table, numberRegExp, trimRegExp;
+  numberRegExp = /^-?[£$¤]?[\d,.]+%?$/;
+  trimRegExp = /^\s+|\s+$/g;
   Table = {
-    numberRegExp: /^-?[£$¤]?[\d,.]+%?$/,
     makeSortable: function(table) {
       var i, th, ths, _len;
       if (table.tHead.rows.length !== 1) {
@@ -72,9 +73,9 @@
         return node.getAttribute('data-value');
       }
       if (typeof node.innerText !== 'undefined') {
-        return node.innerText.replace(/^\s+|\s+$/g, '');
+        return node.innerText.replace(trimRegExp, '');
       }
-      return node.textContent.replace(/^\s+|\s+$/g, '');
+      return node.textContent.replace(trimRegExp, '');
     },
     reverse: function(table) {
       var fragment, r, tBody;
