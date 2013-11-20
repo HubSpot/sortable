@@ -1,27 +1,27 @@
 numberRegExp = /^-?[£$¤]?[\d,.]+%?$/
 trimRegExp = /^\s+|\s+$/g
 
-Table =
+SortTable =
 
-  makeSortable: (table) ->
+  init: (table) ->
     return if table.tHead.rows.length isnt 1
 
     ths = table.querySelectorAll('th')
 
     for th, i in ths
       if th.getAttribute('data-sort') isnt 'false'
-        Table.setupClickableTH table, th, i
+        SortTable.setupClickableTH table, th, i
 
     table
 
   setupClickableTH: (table, th, i) ->
-    sortFunction = Table.getSortFunctionFromColumnIndex table, i
+    sortFunction = SortTable.getSortFunctionFromColumnIndex table, i
 
     th.addEventListener 'click', (e) ->
       tBody = table.tBodies[0]
 
       if @getAttribute('data-sorted') is 'true'
-        Table.reverse table
+        SortTable.reverse table
         @setAttribute 'data-sorted-reverse', if @getAttribute('data-sorted-reverse') isnt 'true' then 'true' else 'false'
         return
 
@@ -36,7 +36,7 @@ Table =
 
       r = 0
       while r < tBody.rows.length
-        rowArray[rowArray.length] = [Table.getNodeValue(tBody.rows[r].cells[i]), tBody.rows[r]]
+        rowArray[rowArray.length] = [SortTable.getNodeValue(tBody.rows[r].cells[i]), tBody.rows[r]]
         r++
 
       rowArray.sort sortFunction
@@ -52,11 +52,11 @@ Table =
       tBody.appendChild fragment
 
   getSortFunctionFromColumnIndex: (table, i) ->
-    sortFn = Table.sortAlpha
+    sortFn = SortTable.sortAlpha
     r = 0
     while r < table.tBodies[0].rows.length
-      text = Table.getNodeValue table.tBodies[0].rows[r].cells[i]
-      return Table.sortNumeric if text isnt '' and text.match(Table.numberRegExp)
+      text = SortTable.getNodeValue table.tBodies[0].rows[r].cells[i]
+      return SortTable.sortNumeric if text isnt '' and text.match(SortTable.numberRegExp)
       r++
     sortFn
 
@@ -92,4 +92,4 @@ Table =
     return -1 if aa < bb
     1
 
-window.Table = Table
+window.SortTable = SortTable

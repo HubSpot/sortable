@@ -1,9 +1,9 @@
 (function() {
-  var Table, numberRegExp, trimRegExp;
+  var SortTable, numberRegExp, trimRegExp;
   numberRegExp = /^-?[£$¤]?[\d,.]+%?$/;
   trimRegExp = /^\s+|\s+$/g;
-  Table = {
-    makeSortable: function(table) {
+  SortTable = {
+    init: function(table) {
       var i, th, ths, _len;
       if (table.tHead.rows.length !== 1) {
         return;
@@ -12,19 +12,19 @@
       for (i = 0, _len = ths.length; i < _len; i++) {
         th = ths[i];
         if (th.getAttribute('data-sort') !== 'false') {
-          Table.setupClickableTH(table, th, i);
+          SortTable.setupClickableTH(table, th, i);
         }
       }
       return table;
     },
     setupClickableTH: function(table, th, i) {
       var sortFunction;
-      sortFunction = Table.getSortFunctionFromColumnIndex(table, i);
+      sortFunction = SortTable.getSortFunctionFromColumnIndex(table, i);
       return th.addEventListener('click', function(e) {
         var fragment, r, rowArray, tBody, th, ths, _i, _len;
         tBody = table.tBodies[0];
         if (this.getAttribute('data-sorted') === 'true') {
-          Table.reverse(table);
+          SortTable.reverse(table);
           this.setAttribute('data-sorted-reverse', this.getAttribute('data-sorted-reverse') !== 'true' ? 'true' : 'false');
           return;
         }
@@ -38,7 +38,7 @@
         rowArray = [];
         r = 0;
         while (r < tBody.rows.length) {
-          rowArray[rowArray.length] = [Table.getNodeValue(tBody.rows[r].cells[i]), tBody.rows[r]];
+          rowArray[rowArray.length] = [SortTable.getNodeValue(tBody.rows[r].cells[i]), tBody.rows[r]];
           r++;
         }
         rowArray.sort(sortFunction);
@@ -54,12 +54,12 @@
     },
     getSortFunctionFromColumnIndex: function(table, i) {
       var r, sortFn, text;
-      sortFn = Table.sortAlpha;
+      sortFn = SortTable.sortAlpha;
       r = 0;
       while (r < table.tBodies[0].rows.length) {
-        text = Table.getNodeValue(table.tBodies[0].rows[r].cells[i]);
-        if (text !== '' && text.match(Table.numberRegExp)) {
-          return Table.sortNumeric;
+        text = SortTable.getNodeValue(table.tBodies[0].rows[r].cells[i]);
+        if (text !== '' && text.match(SortTable.numberRegExp)) {
+          return SortTable.sortNumeric;
         }
         r++;
       }
@@ -114,5 +114,5 @@
       return 1;
     }
   };
-  window.Table = Table;
+  window.SortTable = SortTable;
 }).call(this);
