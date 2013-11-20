@@ -1,0 +1,47 @@
+table[data-sortable="true"]
+    border-collapse: collapse
+    border-spacing: 0
+    background: rgba(0, 0, 0, .05)
+
+    tbody td
+        border-top: 1px solid rgba(0, 0, 0, .05)
+
+    th, td
+        text-align: left
+        padding: 10px
+
+    th:not([data-sort="false"])
+        -webkit-user-select: none
+        cursor: pointer
+        position: relative
+
+    th[data-sorted="true"]
+        background: rgba(0, 0, 0, .05)
+
+        &:after
+            content: ""
+            display: inline-block
+            height: 0
+            width: 30px
+
+        &:before
+            content: ""
+            display: inline-block
+            height: 0
+            width: 0
+            border-width: 5px
+            border-style: solid
+            border-color: transparent
+            position: absolute
+            margin: auto
+            right: 10px
+
+        &[data-sorted-reverse="true"]:before
+            border-top-color: inherit
+            top: 4px
+            bottom: 0
+
+        &[data-sorted-reverse="false"]:before
+            border-bottom-color: inherit
+            top: 0
+            bottom: 4px
