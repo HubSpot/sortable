@@ -56,7 +56,7 @@ SorTable =
     r = 0
     while r < table.tBodies[0].rows.length
       text = SorTable.getNodeValue table.tBodies[0].rows[r].cells[i]
-      return SorTable.sortNumeric if text isnt '' and text.match(SorTable.numberRegExp)
+      return SorTable.sortNumeric if text isnt '' and text.match(numberRegExp)
       r++
     sortFn
 

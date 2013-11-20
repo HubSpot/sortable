@@ -61,7 +61,7 @@
       r = 0;
       while (r < table.tBodies[0].rows.length) {
         text = SorTable.getNodeValue(table.tBodies[0].rows[r].cells[i]);
-        if (text !== '' && text.match(SorTable.numberRegExp)) {
+        if (text !== '' && text.match(numberRegExp)) {
           return SorTable.sortNumeric;
         }
         r++;
