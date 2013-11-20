@@ -18,6 +18,7 @@
 
 
 sorttable = {
+  numberRegExp: /^-?[£$¤]?[\d,.]+%?$/,
 
   makeSortable: function(table) {
     var i, j;
@@ -146,16 +147,18 @@ sorttable = {
   },
 
   guessType: function(table, column) {
-    // guess the type of a column based on its first non-blank row
+    var i, sortfn;
+
     sortfn = sorttable.sortAlpha;
-    for (var i=0; i<table.tBodies[0].rows.length; i++) {
+
+    for (i = 0; i < table.tBodies[0].rows.length; i++) {
       text = sorttable.getCellValue(table.tBodies[0].rows[i].cells[column]);
-      if (text !== '') {
-        if (text.match(/^-?[£$¤]?[\d,.]+%?$/)) {
-          return sorttable.sort_numeric;
-        }
+
+      if (text !== '' && text.match(sorttable.numberRegExp)) {
+        return sorttable.sortNumeric;
       }
     }
+
     return sortfn;
   },
 
