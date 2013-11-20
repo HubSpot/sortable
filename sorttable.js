@@ -21,7 +21,7 @@ sorttable = {
   numberRegExp: /^-?[£$¤]?[\d,.]+%?$/,
 
   makeSortable: function(table) {
-    var i, j;
+    var i, j, tHeadRow;
 
     if (table.tHead.rows.length !== 1) return;
 
@@ -87,9 +87,9 @@ sorttable = {
   },
 
   guessType: function(table, column) {
-    var i, sortfn;
+    var i, text, sortFn;
 
-    sortfn = sorttable.sortAlpha;
+    sortFn = sorttable.sortAlpha;
 
     for (i = 0; i < table.tBodies[0].rows.length; i++) {
       text = sorttable.getCellValue(table.tBodies[0].rows[i].cells[column]);
@@ -99,7 +99,7 @@ sorttable = {
       }
     }
 
-    return sortfn;
+    return sortFn;
   },
 
   getCellValue: function(node) {
