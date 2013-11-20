@@ -27,8 +27,8 @@ sorttable = {
 
     tHeadRow = table.tHead.rows[0].cells;
 
-    for (i = 0; i<tHeadRow.length; i++) {
-      if (tHeadRow[i].getAttribute('data-sort') !== 'false') {
+    for (i = 0; i < tHeadRow.length; i++) {
+      if (tHeadRow[i].getAttribute('data-sort') === 'false') { continue; }
         mtch = tHeadRow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
         if (mtch) { override = mtch[1]; }
         if (mtch && typeof sorttable["sort_"+override] == 'function') {
@@ -107,7 +107,6 @@ sorttable = {
 
           delete row_array;
         });
-      }
     }
   },
 
