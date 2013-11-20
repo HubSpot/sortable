@@ -22,7 +22,6 @@ Table = {
 
       tHeadRow[i].sortFunction = Table.guessType(table, i);
 
-      // make it clickable to sort
       tHeadRow[i].columnIndex = i;
       tHeadRow[i].tBody = table.tBodies[0];
 
@@ -51,14 +50,12 @@ Table = {
 
         this.setAttribute('data-sorted', 'true');
 
-        // build an array to sort. This is a Schwartzian transform thing,
-        // i.e., we "decorate" each row with the actual sort key,
-        // sort based on the sort keys, and then put the rows back in order
-        // which is a lot faster because you only do getCellValue once per row
         rowArray = [];
+
         col = this.columnIndex;
         rows = this.tBody.rows;
-        for (var j=0; j<rows.length; j++) {
+
+        for (j = 0; j < rows.length; j++) {
           rowArray[rowArray.length] = [Table.getCellValue(rows[j].cells[col]), rows[j]];
         }
 
@@ -66,7 +63,7 @@ Table = {
 
         var fragment = document.createDocumentFragment();
 
-        for (j = 0; j<rowArray.length; j++) {
+        for (j = 0; j < rowArray.length; j++) {
           fragment.appendChild(rowArray[j][1].cloneNode(true));
         }
 
