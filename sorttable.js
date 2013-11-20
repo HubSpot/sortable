@@ -65,21 +65,23 @@ sorttable = {
         // i.e., we "decorate" each row with the actual sort key,
         // sort based on the sort keys, and then put the rows back in order
         // which is a lot faster because you only do getCellValue once per row
-        row_array = [];
+        rowArray = [];
         col = this.sorttable_columnindex;
         rows = this.sorttable_tbody.rows;
         for (var j=0; j<rows.length; j++) {
-          row_array[row_array.length] = [sorttable.getCellValue(rows[j].cells[col]), rows[j]];
+          rowArray[rowArray.length] = [sorttable.getCellValue(rows[j].cells[col]), rows[j]];
         }
 
-        row_array.sort(this.sortFunction);
+        rowArray.sort(this.sortFunction);
 
-        tb = this.sorttable_tbody;
-        for (j = 0; j<row_array.length; j++) {
-          tb.appendChild(row_array[j][1]);
+        var fragment = document.createDocumentFragment();
+
+        for (j = 0; j<rowArray.length; j++) {
+          fragment.appendChild(rowArray[j][1].cloneNode(true));
         }
 
-        delete row_array;
+        this.sorttable_tbody.innerHTML = '';
+        this.sorttable_tbody.appendChild(fragment);
       });
     }
   },
