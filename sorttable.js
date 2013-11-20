@@ -60,8 +60,7 @@ sorttable = {
     // work through each column and calculate its type
     headrow = table.tHead.rows[0].cells;
     for (i = 0; i<headrow.length; i++) {
-      // manually override the type with a sorttable_type attribute
-      if (!headrow[i].className.match(/\bsorttable_nosort\b/)) { // skip this col
+      if (headrow[i].getAttribute('data-sort') !== 'false') {
         mtch = headrow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
         if (mtch) { override = mtch[1]; }
         if (mtch && typeof sorttable["sort_"+override] == 'function') {
