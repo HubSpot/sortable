@@ -4,7 +4,7 @@ descending = 'descending'
 numberRegExp = /^-?[£$¤]?[\d,.]+%?$/
 trimRegExp = /^\s+|\s+$/g
 
-SorTable =
+sortable =
 
   init: (table) ->
     return if table.tHead.rows.length isnt 1
@@ -13,12 +13,12 @@ SorTable =
 
     for th, i in ths
       if th.getAttribute('data-sort') isnt 'false'
-        SorTable.setupClickableTH table, th, i
+        sortable.setupClickableTH table, th, i
 
     table
 
   setupClickableTH: (table, th, i) ->
-    type = SorTable.getColumnType table, i
+    type = sortable.getColumnType table, i
 
     th.addEventListener 'click', (e) ->
       sorted = @getAttribute('data-sorted') is 'true'
@@ -41,7 +41,7 @@ SorTable =
       rowArray = []
 
       for row in tBody.rows
-        rowArray.push [SorTable.getNodeValue(row.cells[i]), row]
+        rowArray.push [sortable.getNodeValue(row.cells[i]), row]
 
       if sorted
         rowArray.reverse()
@@ -53,9 +53,9 @@ SorTable =
 
   getColumnType: (table, i) ->
     for row in table.tBodies[0].rows
-      text = SorTable.getNodeValue row.cells[i]
-      return SorTable.types.numeric if text isnt '' and text.match(numberRegExp)
-    return SorTable.types.alpha
+      text = sortable.getNodeValue row.cells[i]
+      return sortable.types.numeric if text isnt '' and text.match(numberRegExp)
+    return sortable.types.alpha
 
   getNodeValue: (node) ->
     return '' unless node
@@ -83,4 +83,4 @@ SorTable =
         return -1 if aa < bb
         1
 
-window.SorTable = SorTable
+window.sortable = sortable

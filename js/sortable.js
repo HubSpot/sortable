@@ -1,5 +1,5 @@
 (function() {
-  var SorTable, ascending, descending, numberRegExp, trimRegExp;
+  var ascending, descending, numberRegExp, sortable, trimRegExp;
 
   ascending = 'ascending';
 
@@ -9,7 +9,7 @@
 
   trimRegExp = /^\s+|\s+$/g;
 
-  SorTable = {
+  sortable = {
     init: function(table) {
       var i, th, ths, _i, _len;
       if (table.tHead.rows.length !== 1) {
@@ -19,14 +19,14 @@
       for (i = _i = 0, _len = ths.length; _i < _len; i = ++_i) {
         th = ths[i];
         if (th.getAttribute('data-sort') !== 'false') {
-          SorTable.setupClickableTH(table, th, i);
+          sortable.setupClickableTH(table, th, i);
         }
       }
       return table;
     },
     setupClickableTH: function(table, th, i) {
       var type;
-      type = SorTable.getColumnType(table, i);
+      type = sortable.getColumnType(table, i);
       return th.addEventListener('click', function(e) {
         var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
         sorted = this.getAttribute('data-sorted') === 'true';
@@ -49,7 +49,7 @@
         _ref = tBody.rows;
         for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
           row = _ref[_j];
-          rowArray.push([SorTable.getNodeValue(row.cells[i]), row]);
+          rowArray.push([sortable.getNodeValue(row.cells[i]), row]);
         }
         if (sorted) {
           rowArray.reverse();
@@ -69,12 +69,12 @@
       _ref = table.tBodies[0].rows;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         row = _ref[_i];
-        text = SorTable.getNodeValue(row.cells[i]);
+        text = sortable.getNodeValue(row.cells[i]);
         if (text !== '' && text.match(numberRegExp)) {
-          return SorTable.types.numeric;
+          return sortable.types.numeric;
         }
       }
-      return SorTable.types.alpha;
+      return sortable.types.alpha;
     },
     getNodeValue: function(node) {
       if (!node) {
@@ -122,6 +122,6 @@
     }
   };
 
-  window.SorTable = SorTable;
+  window.sortable = sortable;
 
 }).call(this);
