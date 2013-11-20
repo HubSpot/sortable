@@ -21,7 +21,9 @@ sorttable = {
   DATE_RE: /^(\d\d?)[\/\.-](\d\d?)[\/\.-]((\d\d)?\d\d)$/,
 
   makeSortable: function(table) {
-    if (table.getElementsByTagName('thead').length == 0) {
+    var i, j;
+
+    if (table.getElementsByTagName('thead').length === 0) {
       // table doesn't have a tHead. Since it should have, create one and
       // put the first table row in it.
       the = document.createElement('thead');
@@ -29,7 +31,7 @@ sorttable = {
       table.insertBefore(the,table.firstChild);
     }
     // Safari doesn't support table.tHead, sigh
-    if (table.tHead == null) table.tHead = table.getElementsByTagName('thead')[0];
+    if (table.tHead === null) table.tHead = table.getElementsByTagName('thead')[0];
 
     if (table.tHead.rows.length != 1) return; // can't cope with two header rows
 
@@ -38,18 +40,18 @@ sorttable = {
     // to do is put them in a tfoot. So, if there are sortbottom rows,
     // for backwards compatibility, move them to tfoot (creating it if needed).
     sortbottomrows = [];
-    for (var i=0; i<table.rows.length; i++) {
+    for (i = 0; i<table.rows.length; i++) {
       if (table.rows[i].className.search(/\bsortbottom\b/) != -1) {
         sortbottomrows[sortbottomrows.length] = table.rows[i];
       }
     }
     if (sortbottomrows) {
-      if (table.tFoot == null) {
+      if (table.tFoot === null) {
         // table doesn't have a tfoot. Create one.
         tfo = document.createElement('tfoot');
         table.appendChild(tfo);
       }
-      for (var i=0; i<sortbottomrows.length; i++) {
+      for (i = 0; i<sortbottomrows.length; i++) {
         tfo.appendChild(sortbottomrows[i]);
       }
       delete sortbottomrows;
@@ -57,7 +59,7 @@ sorttable = {
 
     // work through each column and calculate its type
     headrow = table.tHead.rows[0].cells;
-    for (var i=0; i<headrow.length; i++) {
+    for (i = 0; i<headrow.length; i++) {
       // manually override the type with a sorttable_type attribute
       if (!headrow[i].className.match(/\bsorttable_nosort\b/)) { // skip this col
         mtch = headrow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
@@ -134,7 +136,7 @@ sorttable = {
           row_array.sort(this.sorttable_sortfunction);
 
           tb = this.sorttable_tbody;
-          for (var j=0; j<row_array.length; j++) {
+          for (j = 0; j<row_array.length; j++) {
             tb.appendChild(row_array[j][1]);
           }
 
@@ -149,18 +151,18 @@ sorttable = {
     sortfn = sorttable.sort_alpha;
     for (var i=0; i<table.tBodies[0].rows.length; i++) {
       text = sorttable.getInnerText(table.tBodies[0].rows[i].cells[column]);
-      if (text != '') {
+      if (text !== '') {
         if (text.match(/^-?[£$¤]?[\d,.]+%?$/)) {
           return sorttable.sort_numeric;
         }
         // check for a date: dd/mm/yyyy or dd/mm/yy
         // can have / or . or - as separator
         // can be mm/dd as well
-        possdate = text.match(sorttable.DATE_RE)
+        possdate = text.match(sorttable.DATE_RE);
         if (possdate) {
           // looks like a date
-          first = parseInt(possdate[1]);
-          second = parseInt(possdate[2]);
+          first = parseInt(possdate[1], 10);
+          second = parseInt(possdate[2], 10);
           if (first > 12) {
             // definitely dd/mm
             return sorttable.sort_ddmm;
@@ -189,7 +191,7 @@ sorttable = {
     hasInputs = (typeof node.getElementsByTagName == 'function') &&
                  node.getElementsByTagName('input').length;
 
-    if (node.getAttribute("sorttable_customkey") != null) {
+    if (node.getAttribute("sorttable_customkey") !== null) {
       return node.getAttribute("sorttable_customkey");
     }
     else if (typeof node.textContent != 'undefined' && !hasInputs) {
@@ -207,9 +209,9 @@ sorttable = {
           if (node.nodeName.toLowerCase() == 'input') {
             return node.value.replace(/^\s+|\s+$/g, '');
           }
+          break;
         case 4:
           return node.nodeValue.replace(/^\s+|\s+$/g, '');
-          break;
         case 1:
         case 11:
           var innerText = '';
@@ -217,7 +219,6 @@ sorttable = {
             innerText += sorttable.getInnerText(node.childNodes[i]);
           }
           return innerText.replace(/^\s+|\s+$/g, '');
-          break;
         default:
           return '';
       }
@@ -226,11 +227,12 @@ sorttable = {
 
   reverse: function(tbody) {
     // reverse the rows in a tbody
+    var i;
     newrows = [];
-    for (var i=0; i<tbody.rows.length; i++) {
+    for (i=0; i<tbody.rows.length; i++) {
       newrows[newrows.length] = tbody.rows[i];
     }
-    for (var i=newrows.length-1; i>=0; i--) {
+    for (i=newrows.length-1; i>=0; i--) {
        tbody.appendChild(newrows[i]);
     }
     delete newrows;
@@ -290,11 +292,14 @@ sorttable = {
     var t = list.length - 1;
     var swap = true;
 
+    var i;
+    var q;
+
     while(swap) {
         swap = false;
-        for(var i = b; i < t; ++i) {
+        for(i = b; i < t; ++i) {
             if ( comp_func(list[i], list[i+1]) > 0 ) {
-                var q = list[i]; list[i] = list[i+1]; list[i+1] = q;
+                q = list[i]; list[i] = list[i+1]; list[i+1] = q;
                 swap = true;
             }
         } // for
@@ -302,9 +307,9 @@ sorttable = {
 
         if (!swap) break;
 
-        for(var i = t; i > b; --i) {
+        for(i = t; i > b; --i) {
             if ( comp_func(list[i], list[i-1]) < 0 ) {
-                var q = list[i]; list[i] = list[i-1]; list[i-1] = q;
+                q = list[i]; list[i] = list[i-1]; list[i-1] = q;
                 swap = true;
             }
         } // for
@@ -312,7 +317,7 @@ sorttable = {
 
     } // while(swap)
   }
-}
+};
 
 // written by Dean Edwards, 2005
 // with input from Tino Zijdel, Matthias Miller, Diego Perini
@@ -341,7 +346,8 @@ function dean_addEvent(element, type, handler) {
     // assign a global event handler to do all the work
     element["on" + type] = handleEvent;
   }
-};
+}
+
 // a counter used to create unique IDs
 dean_addEvent.guid = 1;
 
@@ -354,7 +360,7 @@ function removeEvent(element, type, handler) {
       delete element.events[type][handler.$$guid];
     }
   }
-};
+}
 
 function handleEvent(event) {
   var returnValue = true;
@@ -370,20 +376,22 @@ function handleEvent(event) {
     }
   }
   return returnValue;
-};
+}
 
 function fixEvent(event) {
   // add W3C standard event methods
   event.preventDefault = fixEvent.preventDefault;
   event.stopPropagation = fixEvent.stopPropagation;
   return event;
-};
+}
+
 fixEvent.preventDefault = function() {
   this.returnValue = false;
 };
+
 fixEvent.stopPropagation = function() {
   this.cancelBubble = true;
-}
+};
 
 // Dean's forEach: http://dean.edwards.name/base/forEach.js
 /*
