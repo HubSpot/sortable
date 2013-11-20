@@ -30,7 +30,7 @@ table[data-sortable="true"] th[data-sorted="true"]:after {
   height: 0;
   width: 30px;
 }
-/* line 27, ../sass/sortable.sass */
+/* line 28, ../sass/sortable.sass */
 table[data-sortable="true"] th[data-sorted="true"]:before {
   content: "";
   display: inline-block;
@@ -43,14 +43,14 @@ table[data-sortable="true"] th[data-sorted="true"]:before {
   margin: auto;
   right: 10px;
 }
-/* line 39, ../sass/sortable.sass */
-table[data-sortable="true"] th[data-sorted="true"][data-sorted-reverse="true"]:before {
+/* line 40, ../sass/sortable.sass */
+table[data-sortable="true"] th[data-sorted="true"][data-sorted-direction="descending"]:before {
   border-top-color: inherit;
   top: 4px;
   bottom: 0;
 }
-/* line 44, ../sass/sortable.sass */
-table[data-sortable="true"] th[data-sorted="true"][data-sorted-reverse="false"]:before {
+/* line 45, ../sass/sortable.sass */
+table[data-sortable="true"] th[data-sorted="true"][data-sorted-direction="ascending"]:before {
   border-bottom-color: inherit;
   top: 0;
   bottom: 4px;

@@ -1,5 +1,9 @@
 (function() {
-  var SorTable, numberRegExp, trimRegExp;
+  var SorTable, ascending, descending, numberRegExp, trimRegExp;
+
+  ascending = 'ascending';
+
+  descending = 'descending';
 
   numberRegExp = /^-?[£$¤]?[\d,.]+%?$/;
 
@@ -21,52 +25,56 @@
       return table;
     },
     setupClickableTH: function(table, th, i) {
-      var sortFunction;
-      sortFunction = SorTable.getSortFunctionFromColumnIndex(table, i);
+      var type;
+      type = SorTable.getColumnType(table, i);
       return th.addEventListener('click', function(e) {
-        var fragment, r, rowArray, tBody, ths, _i, _len;
-        tBody = table.tBodies[0];
-        if (this.getAttribute('data-sorted') === 'true') {
-          SorTable.reverse(table);
-          this.setAttribute('data-sorted-reverse', this.getAttribute('data-sorted-reverse') !== 'true' ? 'true' : 'false');
-          return;
+        var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
+        sorted = this.getAttribute('data-sorted') === 'true';
+        sortedDirection = this.getAttribute('data-sorted-direction');
+        if (sorted) {
+          newSortedDirection = sortedDirection === ascending ? descending : ascending;
+        } else {
+          newSortedDirection = type.defaultSortDirection;
         }
         ths = this.parentNode.querySelectorAll('th');
         for (_i = 0, _len = ths.length; _i < _len; _i++) {
           th = ths[_i];
           th.setAttribute('data-sorted', 'false');
-          th.setAttribute('data-sorted-reverse', 'false');
+          th.removeAttribute('data-sorted-direction');
         }
         this.setAttribute('data-sorted', 'true');
+        this.setAttribute('data-sorted-direction', newSortedDirection);
+        tBody = table.tBodies[0];
         rowArray = [];
-        r = 0;
-        while (r < tBody.rows.length) {
-          rowArray[rowArray.length] = [SorTable.getNodeValue(tBody.rows[r].cells[i]), tBody.rows[r]];
-          r++;
+        _ref = tBody.rows;
+        for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+          row = _ref[_j];
+          rowArray.push([SorTable.getNodeValue(row.cells[i]), row]);
         }
-        rowArray.sort(sortFunction);
-        fragment = document.createDocumentFragment();
-        r = 0;
-        while (r < rowArray.length) {
-          fragment.appendChild(rowArray[r][1].cloneNode(true));
-          r++;
+        if (sorted) {
+          rowArray.reverse();
+        } else {
+          rowArray.sort(type.compare);
         }
-        tBody.innerHTML = '';
-        return tBody.appendChild(fragment);
+        _results = [];
+        for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
+          rowArrayObject = rowArray[_k];
+          _results.push(tBody.appendChild(rowArrayObject[1]));
+        }
+        return _results;
       });
     },
-    getSortFunctionFromColumnIndex: function(table, i) {
-      var r, sortFn, text;
-      sortFn = SorTable.sortAlpha;
-      r = 0;
-      while (r < table.tBodies[0].rows.length) {
-        text = SorTable.getNodeValue(table.tBodies[0].rows[r].cells[i]);
+    getColumnType: function(table, i) {
+      var row, text, _i, _len, _ref;
+      _ref = table.tBodies[0].rows;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        row = _ref[_i];
+        text = SorTable.getNodeValue(row.cells[i]);
         if (text !== '' && text.match(numberRegExp)) {
-          return SorTable.sortNumeric;
+          return SorTable.types.numeric;
         }
-        r++;
       }
-      return sortFn;
+      return SorTable.types.alpha;
     },
     getNodeValue: function(node) {
       if (!node) {
@@ -80,41 +88,37 @@
       }
       return node.textContent.replace(trimRegExp, '');
     },
-    reverse: function(table) {
-      var fragment, r, tBody;
-      tBody = table.tBodies[0];
-      fragment = document.createDocumentFragment();
-      r = tBody.rows.length - 1;
-      while (r >= 0) {
-        fragment.appendChild(tBody.rows[r].cloneNode(true));
-        r--;
+    types: {
+      numeric: {
+        defaultSortDirection: descending,
+        compare: function(a, b) {
+          var aa, bb;
+          aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''));
+          bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''));
+          if (isNaN(aa)) {
+            aa = 0;
+          }
+          if (isNaN(bb)) {
+            bb = 0;
+          }
+          return bb - aa;
+        }
+      },
+      alpha: {
+        defaultSortDirection: ascending,
+        compare: function(a, b) {
+          var aa, bb;
+          aa = a[0].toLowerCase();
+          bb = b[0].toLowerCase();
+          if (aa === bb) {
+            return 0;
+          }
+          if (aa < bb) {
+            return -1;
+          }
+          return 1;
+        }
       }
-      tBody.innerHTML = '';
-      return tBody.appendChild(fragment);
-    },
-    sortNumeric: function(a, b) {
-      var aa, bb;
-      aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''));
-      bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''));
-      if (isNaN(aa)) {
-        aa = 0;
-      }
-      if (isNaN(bb)) {
-        bb = 0;
-      }
-      return aa - bb;
-    },
-    sortAlpha: function(a, b) {
-      var aa, bb;
-      aa = a[0].toLowerCase();
-      bb = b[0].toLowerCase();
-      if (aa === bb) {
-        return 0;
-      }
-      if (aa < bb) {
-        return -1;
-      }
-      return 1;
     }
   };
 

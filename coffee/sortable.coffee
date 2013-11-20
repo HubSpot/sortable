@@ -1,3 +1,6 @@
+ascending = 'ascending'
+descending = 'descending'
+
 numberRegExp = /^-?[£$¤]?[\d,.]+%?$/
 trimRegExp = /^\s+|\s+$/g
 
@@ -15,50 +18,44 @@ SorTable =
     table
 
   setupClickableTH: (table, th, i) ->
-    sortFunction = SorTable.getSortFunctionFromColumnIndex table, i
+    type = SorTable.getColumnType table, i
 
     th.addEventListener 'click', (e) ->
-      tBody = table.tBodies[0]
+      sorted = @getAttribute('data-sorted') is 'true'
+      sortedDirection = @getAttribute 'data-sorted-direction'
 
-      if @getAttribute('data-sorted') is 'true'
-        SorTable.reverse table
-        @setAttribute 'data-sorted-reverse', if @getAttribute('data-sorted-reverse') isnt 'true' then 'true' else 'false'
-        return
+      if sorted
+        newSortedDirection = if sortedDirection is ascending then descending else ascending
+      else
+        newSortedDirection = type.defaultSortDirection
 
       ths = @parentNode.querySelectorAll('th')
       for th in ths
         th.setAttribute 'data-sorted', 'false'
-        th.setAttribute 'data-sorted-reverse', 'false'
+        th.removeAttribute 'data-sorted-direction'
 
       @setAttribute 'data-sorted', 'true'
+      @setAttribute 'data-sorted-direction', newSortedDirection
 
+      tBody = table.tBodies[0]
       rowArray = []
 
-      r = 0
-      while r < tBody.rows.length
-        rowArray[rowArray.length] = [SorTable.getNodeValue(tBody.rows[r].cells[i]), tBody.rows[r]]
-        r++
+      for row in tBody.rows
+        rowArray.push [SorTable.getNodeValue(row.cells[i]), row]
 
-      rowArray.sort sortFunction
+      if sorted
+        rowArray.reverse()
+      else
+        rowArray.sort type.compare
 
-      fragment = document.createDocumentFragment()
+      for rowArrayObject in rowArray
+        tBody.appendChild rowArrayObject[1]
 
-      r = 0
-      while r < rowArray.length
-        fragment.appendChild rowArray[r][1].cloneNode(true)
-        r++
-
-      tBody.innerHTML = ''
-      tBody.appendChild fragment
-
-  getSortFunctionFromColumnIndex: (table, i) ->
-    sortFn = SorTable.sortAlpha
-    r = 0
-    while r < table.tBodies[0].rows.length
-      text = SorTable.getNodeValue table.tBodies[0].rows[r].cells[i]
-      return SorTable.sortNumeric if text isnt '' and text.match(numberRegExp)
-      r++
-    sortFn
+  getColumnType: (table, i) ->
+    for row in table.tBodies[0].rows
+      text = SorTable.getNodeValue row.cells[i]
+      return SorTable.types.numeric if text isnt '' and text.match(numberRegExp)
+    return SorTable.types.alpha
 
   getNodeValue: (node) ->
     return '' unless node
@@ -66,30 +63,24 @@ SorTable =
     return node.innerText.replace(trimRegExp, '') unless typeof node.innerText is 'undefined'
     node.textContent.replace trimRegExp, ''
 
-  reverse: (table) ->
-    tBody = table.tBodies[0]
-    fragment = document.createDocumentFragment()
+  types:
 
-    r = tBody.rows.length - 1
-    while r >= 0
-      fragment.appendChild tBody.rows[r].cloneNode(true)
-      r--
+    numeric:
+      defaultSortDirection: descending
+      compare: (a, b) ->
+        aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''))
+        bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''))
+        aa = 0 if isNaN(aa)
+        bb = 0 if isNaN(bb)
+        bb - aa
 
-    tBody.innerHTML = ''
-    tBody.appendChild fragment
-
-  sortNumeric: (a, b) ->
-    aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''))
-    bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''))
-    aa = 0 if isNaN(aa)
-    bb = 0 if isNaN(bb)
-    aa - bb
-
-  sortAlpha: (a, b) ->
-    aa = a[0].toLowerCase()
-    bb = b[0].toLowerCase()
-    return 0 if aa is bb
-    return -1 if aa < bb
-    1
+    alpha:
+      defaultSortDirection: ascending
+      compare: (a, b) ->
+        aa = a[0].toLowerCase()
+        bb = b[0].toLowerCase()
+        return 0 if aa is bb
+        return -1 if aa < bb
+        1
 
 window.SorTable = SorTable
