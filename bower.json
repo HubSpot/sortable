@@ -1,12 +1,12 @@
 {
-  "name": "sortTable",
+  "name": "sortable",
   "version": "0.1.0",
-  "homepage": "http://adamschwartz.co/sortTable",
+  "homepage": "http://adamschwartz.co/sortable",
   "authors": [
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>"
   ],
   "description": "The simplest and cleanest way to make an HTML table sortable.",
-  "main": "sortTable.coffee",
+  "main": "sortable.coffee",
   "license": "MIT",
   "keywords": [
     "table",

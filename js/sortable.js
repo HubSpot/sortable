@@ -1,30 +1,33 @@
 (function() {
-  var SortTable, numberRegExp, trimRegExp;
+  var SorTable, numberRegExp, trimRegExp;
+
   numberRegExp = /^-?[£$¤]?[\d,.]+%?$/;
+
   trimRegExp = /^\s+|\s+$/g;
-  SortTable = {
+
+  SorTable = {
     init: function(table) {
-      var i, th, ths, _len;
+      var i, th, ths, _i, _len;
       if (table.tHead.rows.length !== 1) {
         return;
       }
       ths = table.querySelectorAll('th');
-      for (i = 0, _len = ths.length; i < _len; i++) {
+      for (i = _i = 0, _len = ths.length; _i < _len; i = ++_i) {
         th = ths[i];
         if (th.getAttribute('data-sort') !== 'false') {
-          SortTable.setupClickableTH(table, th, i);
+          SorTable.setupClickableTH(table, th, i);
         }
       }
       return table;
     },
     setupClickableTH: function(table, th, i) {
       var sortFunction;
-      sortFunction = SortTable.getSortFunctionFromColumnIndex(table, i);
+      sortFunction = SorTable.getSortFunctionFromColumnIndex(table, i);
       return th.addEventListener('click', function(e) {
-        var fragment, r, rowArray, tBody, th, ths, _i, _len;
+        var fragment, r, rowArray, tBody, ths, _i, _len;
         tBody = table.tBodies[0];
         if (this.getAttribute('data-sorted') === 'true') {
-          SortTable.reverse(table);
+          SorTable.reverse(table);
           this.setAttribute('data-sorted-reverse', this.getAttribute('data-sorted-reverse') !== 'true' ? 'true' : 'false');
           return;
         }
@@ -38,7 +41,7 @@
         rowArray = [];
         r = 0;
         while (r < tBody.rows.length) {
-          rowArray[rowArray.length] = [SortTable.getNodeValue(tBody.rows[r].cells[i]), tBody.rows[r]];
+          rowArray[rowArray.length] = [SorTable.getNodeValue(tBody.rows[r].cells[i]), tBody.rows[r]];
           r++;
         }
         rowArray.sort(sortFunction);
@@ -54,12 +57,12 @@
     },
     getSortFunctionFromColumnIndex: function(table, i) {
       var r, sortFn, text;
-      sortFn = SortTable.sortAlpha;
+      sortFn = SorTable.sortAlpha;
       r = 0;
       while (r < table.tBodies[0].rows.length) {
-        text = SortTable.getNodeValue(table.tBodies[0].rows[r].cells[i]);
-        if (text !== '' && text.match(SortTable.numberRegExp)) {
-          return SortTable.sortNumeric;
+        text = SorTable.getNodeValue(table.tBodies[0].rows[r].cells[i]);
+        if (text !== '' && text.match(SorTable.numberRegExp)) {
+          return SorTable.sortNumeric;
         }
         r++;
       }
@@ -114,5 +117,7 @@
       return 1;
     }
   };
-  window.SortTable = SortTable;
+
+  window.SorTable = SorTable;
+
 }).call(this);

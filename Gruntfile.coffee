@@ -4,7 +4,7 @@ module.exports = (grunt) ->
     coffee:
       compile:
         files:
-          'js/sortTable.js': 'coffee/sortTable.coffee'
+          'js/sortable.js': 'coffee/sortable.coffee'
 
     watch:
       coffee:
@@ -13,10 +13,10 @@ module.exports = (grunt) ->
 
     uglify:
       vex:
-        src: 'js/sortTable.js'
-        dest: 'js/sortTable.min.js'
+        src: 'js/sortable.js'
+        dest: 'js/sortable.min.js'
         options:
-          banner: "/*! sortTable.js <%= pkg.version %> */\n"
+          banner: "/*! sortable.js <%= pkg.version %> */\n"
 
     compass:
       dist:
