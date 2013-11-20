@@ -99,17 +99,17 @@ Table = {
     return node.innerText.replace(/^\s+|\s+$/g, '');
   },
 
-  reverse: function(tbody) {
+  reverse: function(tBody) {
     var r, fragment;
 
     fragment = document.createDocumentFragment();
 
-    for (r = tbody.rows.length - 1; r >= 0; r--) {
-      fragment.appendChild(tbody.rows[r].cloneNode(true));
+    for (r = tBody.rows.length - 1; r >= 0; r--) {
+      fragment.appendChild(tBody.rows[r].cloneNode(true));
     }
 
-    tbody.innerHTML = '';
-    tbody.appendChild(fragment);
+    tBody.innerHTML = '';
+    tBody.appendChild(fragment);
   },
 
   sortNumeric: function(a, b) {
