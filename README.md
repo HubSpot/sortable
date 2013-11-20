@@ -1,5 +1,5 @@
 ## Sort Table
 
-### [Example](http://adamschwartz.co/sortTable/example/)
+### [Example](http://adamschwartz.co/sortable/example/)
 
 Documentation coming soon.
