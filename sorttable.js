@@ -26,6 +26,7 @@ Table = {
       tHeadRow[c].tBody = table.tBodies[0];
 
       tHeadRow[c].addEventListener('click', function(e) {
+        var col, rows, rowArray;
 
         if (this.getAttribute('data-sorted') === 'true') {
           Table.reverse(this.tBody);
