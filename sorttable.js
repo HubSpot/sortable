@@ -1,23 +1,13 @@
 /*
-  SortTable
-  version 2
-  7th April 2007
-  Stuart Langridge, http://www.kryogenix.org/code/browser/sorttable/
+  Table v0.1
+  Adam Schwartz
 
-  Instructions:
-  Download this file
-  Add <script src="sorttable.js"></script> to your HTML
-  Add class="sortable" to any table you'd like to make sortable
-  Click on the headers to sort
-
-  Thanks to many, many people for contributions and suggestions.
-  Licenced as X11: http://www.kryogenix.org/code/browser/licence.html
-  This basically means: do what you want with it.
+  Based on:
+  SortTable version 2
+  Stuart Langridge, http://www.kryogenix.org/code/browser/Table/, 7th April 2007
 */
 
-
-
-sorttable = {
+Table = {
   numberRegExp: /^-?[£$¤]?[\d,.]+%?$/,
 
   makeSortable: function(table) {
@@ -30,7 +20,7 @@ sorttable = {
     for (i = 0; i < tHeadRow.length; i++) {
       if (tHeadRow[i].getAttribute('data-sort') === 'false') continue;
 
-      tHeadRow[i].sortFunction = sorttable.guessType(table, i);
+      tHeadRow[i].sortFunction = Table.guessType(table, i);
 
       // make it clickable to sort
       tHeadRow[i].columnIndex = i;
@@ -39,7 +29,7 @@ sorttable = {
       tHeadRow[i].addEventListener('click', function(e) {
 
         if (this.getAttribute('data-sorted') === 'true') {
-          sorttable.reverse(this.tBody);
+          Table.reverse(this.tBody);
 
           if (this.getAttribute('data-sorted-reverse') !== 'true') {
             this.setAttribute('data-sorted-reverse', 'true');
@@ -69,7 +59,7 @@ sorttable = {
         col = this.columnIndex;
         rows = this.tBody.rows;
         for (var j=0; j<rows.length; j++) {
-          rowArray[rowArray.length] = [sorttable.getCellValue(rows[j].cells[col]), rows[j]];
+          rowArray[rowArray.length] = [Table.getCellValue(rows[j].cells[col]), rows[j]];
         }
 
         rowArray.sort(this.sortFunction);
@@ -89,13 +79,13 @@ sorttable = {
   guessType: function(table, column) {
     var i, text, sortFn;
 
-    sortFn = sorttable.sortAlpha;
+    sortFn = Table.sortAlpha;
 
     for (i = 0; i < table.tBodies[0].rows.length; i++) {
-      text = sorttable.getCellValue(table.tBodies[0].rows[i].cells[column]);
+      text = Table.getCellValue(table.tBodies[0].rows[i].cells[column]);
 
-      if (text !== '' && text.match(sorttable.numberRegExp)) {
-        return sorttable.sortNumeric;
+      if (text !== '' && text.match(Table.numberRegExp)) {
+        return Table.sortNumeric;
       }
     }
 
