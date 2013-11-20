@@ -113,16 +113,16 @@ sorttable = {
   },
 
   reverse: function(tbody) {
-    // reverse the rows in a tbody
-    var i;
-    newrows = [];
-    for (i=0; i<tbody.rows.length; i++) {
-      newrows[newrows.length] = tbody.rows[i];
+    var i, fragment;
+
+    fragment = document.createDocumentFragment();
+
+    for (i = tbody.rows.length - 1; i >= 0; i--) {
+      fragment.appendChild(tbody.rows[i].cloneNode(true));
     }
-    for (i=newrows.length-1; i>=0; i--) {
-       tbody.appendChild(newrows[i]);
-    }
-    delete newrows;
+
+    tbody.innerHTML = '';
+    tbody.appendChild(fragment);
   },
 
   /* sort functions
