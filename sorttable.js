@@ -18,7 +18,6 @@
 
 
 sorttable = {
-  DATE_RE: /^(\d\d?)[\/\.-](\d\d?)[\/\.-]((\d\d)?\d\d)$/,
 
   makeSortable: function(table) {
     var i, j;
