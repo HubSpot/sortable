@@ -41,72 +41,72 @@ sorttable = {
         tHeadRow[i].sorttable_tbody = table.tBodies[0];
         tHeadRow[i].addEventListener('click', function(e) {
 
-          if (this.className.search(/\bsorttable_sorted\b/) != -1) {
-            // if we're already sorted by this column, just
-            // reverse the table, which is quicker
-            sorttable.reverse(this.sorttable_tbody);
-            this.className = this.className.replace('sorttable_sorted',
-                                                    'sorttable_sorted_reverse');
-            this.removeChild(document.getElementById('sorttable_sortfwdind'));
-            sortrevind = document.createElement('span');
-            sortrevind.id = "sorttable_sortrevind";
-            sortrevind.innerHTML = '&nbsp;&#x25B4;';
-            this.appendChild(sortrevind);
-            return;
-          }
-          if (this.className.search(/\bsorttable_sorted_reverse\b/) != -1) {
-            // if we're already sorted by this column in reverse, just
-            // re-reverse the table, which is quicker
-            sorttable.reverse(this.sorttable_tbody);
-            this.className = this.className.replace('sorttable_sorted_reverse',
-                                                    'sorttable_sorted');
-            this.removeChild(document.getElementById('sorttable_sortrevind'));
-            sortfwdind = document.createElement('span');
-            sortfwdind.id = "sorttable_sortfwdind";
-            sortfwdind.innerHTML = '&nbsp;&#x25BE;';
-            this.appendChild(sortfwdind);
-            return;
-          }
-
-          // remove sorttable_sorted classes
-          theadrow = this.parentNode;
-          Array.prototype.slice.call(theadrow.childNodes).forEach(function(cell) {
-            if (cell.nodeType == 1) { // an element
-              cell.className = cell.className.replace('sorttable_sorted_reverse','');
-              cell.className = cell.className.replace('sorttable_sorted','');
-            }
-          });
-          sortfwdind = document.getElementById('sorttable_sortfwdind');
-          if (sortfwdind) { sortfwdind.parentNode.removeChild(sortfwdind); }
-          sortrevind = document.getElementById('sorttable_sortrevind');
-          if (sortrevind) { sortrevind.parentNode.removeChild(sortrevind); }
-
-          this.className += ' sorttable_sorted';
+        if (this.className.search(/\bsorttable_sorted\b/) != -1) {
+          // if we're already sorted by this column, just
+          // reverse the table, which is quicker
+          sorttable.reverse(this.sorttable_tbody);
+          this.className = this.className.replace('sorttable_sorted',
+                                                  'sorttable_sorted_reverse');
+          this.removeChild(document.getElementById('sorttable_sortfwdind'));
+          sortrevind = document.createElement('span');
+          sortrevind.id = "sorttable_sortrevind";
+          sortrevind.innerHTML = '&nbsp;&#x25B4;';
+          this.appendChild(sortrevind);
+          return;
+        }
+        if (this.className.search(/\bsorttable_sorted_reverse\b/) != -1) {
+          // if we're already sorted by this column in reverse, just
+          // re-reverse the table, which is quicker
+          sorttable.reverse(this.sorttable_tbody);
+          this.className = this.className.replace('sorttable_sorted_reverse',
+                                                  'sorttable_sorted');
+          this.removeChild(document.getElementById('sorttable_sortrevind'));
           sortfwdind = document.createElement('span');
           sortfwdind.id = "sorttable_sortfwdind";
           sortfwdind.innerHTML = '&nbsp;&#x25BE;';
           this.appendChild(sortfwdind);
+          return;
+        }
 
-          // build an array to sort. This is a Schwartzian transform thing,
-          // i.e., we "decorate" each row with the actual sort key,
-          // sort based on the sort keys, and then put the rows back in order
-          // which is a lot faster because you only do getCellValue once per row
-          row_array = [];
-          col = this.sorttable_columnindex;
-          rows = this.sorttable_tbody.rows;
-          for (var j=0; j<rows.length; j++) {
-            row_array[row_array.length] = [sorttable.getCellValue(rows[j].cells[col]), rows[j]];
+        // remove sorttable_sorted classes
+        theadrow = this.parentNode;
+        Array.prototype.slice.call(theadrow.childNodes).forEach(function(cell) {
+          if (cell.nodeType == 1) { // an element
+            cell.className = cell.className.replace('sorttable_sorted_reverse','');
+            cell.className = cell.className.replace('sorttable_sorted','');
           }
-
-          row_array.sort(this.sorttable_sortfunction);
-
-          tb = this.sorttable_tbody;
-          for (j = 0; j<row_array.length; j++) {
-            tb.appendChild(row_array[j][1]);
-          }
-
-          delete row_array;
         });
+        sortfwdind = document.getElementById('sorttable_sortfwdind');
+        if (sortfwdind) { sortfwdind.parentNode.removeChild(sortfwdind); }
+        sortrevind = document.getElementById('sorttable_sortrevind');
+        if (sortrevind) { sortrevind.parentNode.removeChild(sortrevind); }
+
+        this.className += ' sorttable_sorted';
+        sortfwdind = document.createElement('span');
+        sortfwdind.id = "sorttable_sortfwdind";
+        sortfwdind.innerHTML = '&nbsp;&#x25BE;';
+        this.appendChild(sortfwdind);
+
+        // build an array to sort. This is a Schwartzian transform thing,
+        // i.e., we "decorate" each row with the actual sort key,
+        // sort based on the sort keys, and then put the rows back in order
+        // which is a lot faster because you only do getCellValue once per row
+        row_array = [];
+        col = this.sorttable_columnindex;
+        rows = this.sorttable_tbody.rows;
+        for (var j=0; j<rows.length; j++) {
+          row_array[row_array.length] = [sorttable.getCellValue(rows[j].cells[col]), rows[j]];
+        }
+
+        row_array.sort(this.sorttable_sortfunction);
+
+        tb = this.sorttable_tbody;
+        for (j = 0; j<row_array.length; j++) {
+          tb.appendChild(row_array[j][1]);
+        }
+
+        delete row_array;
+      });
     }
   },
 
