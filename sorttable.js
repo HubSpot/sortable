@@ -185,18 +185,21 @@ sorttable = {
   /* sort functions
      each sort function takes two parameters, a and b
      you are comparing a[0] and b[0] */
-  sort_numeric: function(a,b) {
-    aa = parseFloat(a[0].replace(/[^0-9.-]/g,''));
+  sortNumeric: function(a,b) {
+    var aa = parseFloat(a[0].replace(/[^0-9.-]/g, '')),
+        bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''))
+    ;
     if (isNaN(aa)) aa = 0;
-    bb = parseFloat(b[0].replace(/[^0-9.-]/g,''));
     if (isNaN(bb)) bb = 0;
-    return aa-bb;
+    return aa - bb;
   },
 
   sortAlpha: function(a, b) {
-    var a0 = a[0].toLowerCase(), b0 = b[0].toLowerCase();
-    if (a0 === b0) return 0;
-    if (a0 < b0) return -1;
+    var aa = a[0].toLowerCase(),
+        bb = b[0].toLowerCase()
+    ;
+    if (aa === bb) return 0;
+    if (aa < bb) return -1;
     return 1;
   },
 
