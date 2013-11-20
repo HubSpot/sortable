@@ -11,21 +11,21 @@ Table = {
   numberRegExp: /^-?[£$¤]?[\d,.]+%?$/,
 
   makeSortable: function(table) {
-    var i, j, tHeadRow;
+    var c, r, tHeadRow;
 
     if (table.tHead.rows.length !== 1) return;
 
     tHeadRow = table.tHead.rows[0].cells;
 
-    for (i = 0; i < tHeadRow.length; i++) {
-      if (tHeadRow[i].getAttribute('data-sort') === 'false') continue;
+    for (c = 0; c < tHeadRow.length; c++) {
+      if (tHeadRow[c].getAttribute('data-sort') === 'false') continue;
 
-      tHeadRow[i].sortFunction = Table.guessType(table, i);
+      tHeadRow[c].sortFunction = Table.guessSortFunctionFromColumn(table, c);
 
-      tHeadRow[i].columnIndex = i;
-      tHeadRow[i].tBody = table.tBodies[0];
+      tHeadRow[c].columnIndex = c;
+      tHeadRow[c].tBody = table.tBodies[0];
 
-      tHeadRow[i].addEventListener('click', function(e) {
+      tHeadRow[c].addEventListener('click', function(e) {
 
         if (this.getAttribute('data-sorted') === 'true') {
           Table.reverse(this.tBody);
@@ -55,16 +55,16 @@ Table = {
         col = this.columnIndex;
         rows = this.tBody.rows;
 
-        for (j = 0; j < rows.length; j++) {
-          rowArray[rowArray.length] = [Table.getCellValue(rows[j].cells[col]), rows[j]];
+        for (r = 0; r < rows.length; r++) {
+          rowArray[rowArray.length] = [Table.getCellValue(rows[r].cells[col]), rows[r]];
         }
 
         rowArray.sort(this.sortFunction);
 
         var fragment = document.createDocumentFragment();
 
-        for (j = 0; j < rowArray.length; j++) {
-          fragment.appendChild(rowArray[j][1].cloneNode(true));
+        for (r = 0; r < rowArray.length; r++) {
+          fragment.appendChild(rowArray[r][1].cloneNode(true));
         }
 
         this.tBody.innerHTML = '';
@@ -73,7 +73,7 @@ Table = {
     }
   },
 
-  guessType: function(table, column) {
+  guessSortFunctionFromColumn: function(table, column) {
     var i, text, sortFn;
 
     sortFn = Table.sortAlpha;
@@ -100,12 +100,12 @@ Table = {
   },
 
   reverse: function(tbody) {
-    var i, fragment;
+    var r, fragment;
 
     fragment = document.createDocumentFragment();
 
-    for (i = tbody.rows.length - 1; i >= 0; i--) {
-      fragment.appendChild(tbody.rows[i].cloneNode(true));
+    for (r = tbody.rows.length - 1; r >= 0; r--) {
+      fragment.appendChild(tbody.rows[r].cloneNode(true));
     }
 
     tbody.innerHTML = '';
