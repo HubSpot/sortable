@@ -1,0 +1,20 @@
+{
+  "name": "sortTable",
+  "repo": "adamschwartz/sortTable",
+  "description": "The simplest and cleanest way to make an HTML table sortable.",
+  "version": "0.1.0",
+  "homepage": "http://adamschwartz.co/sortTable",
+  "license": "MIT",
+  "keywords": [
+    "table",
+    "sort",
+    "sortable",
+    "sorting"
+  ],
+  "scripts": [
+    "sortTable.js",
+  ],
+  "styles": [
+    "sortTable.css"
+  ],
+}

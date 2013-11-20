@@ -1,0 +1,21 @@
+{
+  "name": "sortTable",
+  "version": "0.1.0",
+  "homepage": "http://adamschwartz.co/sortTable",
+  "authors": [
+    "Adam Schwartz <adam.flynn.schwartz@gmail.com>"
+  ],
+  "description": "The simplest and cleanest way to make an HTML table sortable.",
+  "main": "sortTable.coffee",
+  "license": "MIT",
+  "keywords": [
+    "table",
+    "sort",
+    "sortable",
+    "sorting"
+  ],
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ]
+}
