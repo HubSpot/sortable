@@ -123,12 +123,12 @@ sorttable = {
           // build an array to sort. This is a Schwartzian transform thing,
           // i.e., we "decorate" each row with the actual sort key,
           // sort based on the sort keys, and then put the rows back in order
-          // which is a lot faster because you only do getInnerText once per row
+          // which is a lot faster because you only do getCellValue once per row
           row_array = [];
           col = this.sorttable_columnindex;
           rows = this.sorttable_tbody.rows;
           for (var j=0; j<rows.length; j++) {
-            row_array[row_array.length] = [sorttable.getInnerText(rows[j].cells[col]), rows[j]];
+            row_array[row_array.length] = [sorttable.getCellValue(rows[j].cells[col]), rows[j]];
           }
           /* If you want a stable sort, uncomment the following line */
           //sorttable.shaker_sort(row_array, this.sorttable_sortfunction);
@@ -150,7 +150,7 @@ sorttable = {
     // guess the type of a column based on its first non-blank row
     sortfn = sorttable.sort_alpha;
     for (var i=0; i<table.tBodies[0].rows.length; i++) {
-      text = sorttable.getInnerText(table.tBodies[0].rows[i].cells[column]);
+      text = sorttable.getCellValue(table.tBodies[0].rows[i].cells[column]);
       if (text !== '') {
         if (text.match(/^-?[£$¤]?[\d,.]+%?$/)) {
           return sorttable.sort_numeric;
@@ -179,50 +179,14 @@ sorttable = {
     return sortfn;
   },
 
-  getInnerText: function(node) {
-    // gets the text we want to use for sorting for a cell.
-    // strips leading and trailing whitespace.
-    // this is *not* a generic getInnerText function; it's special to sorttable.
-    // for example, you can override the cell text with a customkey attribute.
-    // it also gets .value for <input> fields.
+  getCellValue: function(node) {
+    if (!node) return '';
 
-    if (!node) return "";
+    if (node.getAttribute('data-value') !== null) {
+      return node.getAttribute('data-value');
+    }
 
-    hasInputs = (typeof node.getElementsByTagName == 'function') &&
-                 node.getElementsByTagName('input').length;
-
-    if (node.getAttribute("sorttable_customkey") !== null) {
-      return node.getAttribute("sorttable_customkey");
-    }
-    else if (typeof node.textContent != 'undefined' && !hasInputs) {
-      return node.textContent.replace(/^\s+|\s+$/g, '');
-    }
-    else if (typeof node.innerText != 'undefined' && !hasInputs) {
-      return node.innerText.replace(/^\s+|\s+$/g, '');
-    }
-    else if (typeof node.text != 'undefined' && !hasInputs) {
-      return node.text.replace(/^\s+|\s+$/g, '');
-    }
-    else {
-      switch (node.nodeType) {
-        case 3:
-          if (node.nodeName.toLowerCase() == 'input') {
-            return node.value.replace(/^\s+|\s+$/g, '');
-          }
-          break;
-        case 4:
-          return node.nodeValue.replace(/^\s+|\s+$/g, '');
-        case 1:
-        case 11:
-          var innerText = '';
-          for (var i = 0; i < node.childNodes.length; i++) {
-            innerText += sorttable.getInnerText(node.childNodes[i]);
-          }
-          return innerText.replace(/^\s+|\s+$/g, '');
-        default:
-          return '';
-      }
-    }
+    return node.innerText.replace(/^\s+|\s+$/g, '');
   },
 
   reverse: function(tbody) {
