@@ -33,13 +33,13 @@ sorttable = {
       tHeadRow[i].sortFunction = sorttable.guessType(table, i);
 
       // make it clickable to sort
-      tHeadRow[i].sorttable_columnindex = i;
-      tHeadRow[i].sorttable_tbody = table.tBodies[0];
+      tHeadRow[i].columnIndex = i;
+      tHeadRow[i].tBody = table.tBodies[0];
 
       tHeadRow[i].addEventListener('click', function(e) {
 
         if (this.getAttribute('data-sorted') === 'true') {
-          sorttable.reverse(this.sorttable_tbody);
+          sorttable.reverse(this.tBody);
 
           if (this.getAttribute('data-sorted-reverse') !== 'true') {
             this.setAttribute('data-sorted-reverse', 'true');
@@ -66,8 +66,8 @@ sorttable = {
         // sort based on the sort keys, and then put the rows back in order
         // which is a lot faster because you only do getCellValue once per row
         rowArray = [];
-        col = this.sorttable_columnindex;
-        rows = this.sorttable_tbody.rows;
+        col = this.columnIndex;
+        rows = this.tBody.rows;
         for (var j=0; j<rows.length; j++) {
           rowArray[rowArray.length] = [sorttable.getCellValue(rows[j].cells[col]), rows[j]];
         }
@@ -80,8 +80,8 @@ sorttable = {
           fragment.appendChild(rowArray[j][1].cloneNode(true));
         }
 
-        this.sorttable_tbody.innerHTML = '';
-        this.sorttable_tbody.appendChild(fragment);
+        this.tBody.innerHTML = '';
+        this.tBody.appendChild(fragment);
       });
     }
   },
@@ -125,9 +125,6 @@ sorttable = {
     tbody.appendChild(fragment);
   },
 
-  /* sort functions
-     each sort function takes two parameters, a and b
-     you are comparing a[0] and b[0] */
   sortNumeric: function(a,b) {
     var aa = parseFloat(a[0].replace(/[^0-9.-]/g, '')),
         bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''))
