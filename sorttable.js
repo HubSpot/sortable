@@ -35,52 +35,31 @@ sorttable = {
       // make it clickable to sort
       tHeadRow[i].sorttable_columnindex = i;
       tHeadRow[i].sorttable_tbody = table.tBodies[0];
+
       tHeadRow[i].addEventListener('click', function(e) {
-        if (this.className.search(/\bsorttable_sorted\b/) != -1) {
-          // if we're already sorted by this column, just
-          // reverse the table, which is quicker
+
+        if (this.getAttribute('data-sorted') === 'true') {
           sorttable.reverse(this.sorttable_tbody);
-          this.className = this.className.replace('sorttable_sorted',
-                                                  'sorttable_sorted_reverse');
-          this.removeChild(document.getElementById('sorttable_sortfwdind'));
-          sortrevind = document.createElement('span');
-          sortrevind.id = "sorttable_sortrevind";
-          sortrevind.innerHTML = '&nbsp;&#x25B4;';
-          this.appendChild(sortrevind);
-          return;
-        }
-        if (this.className.search(/\bsorttable_sorted_reverse\b/) != -1) {
-          // if we're already sorted by this column in reverse, just
-          // re-reverse the table, which is quicker
-          sorttable.reverse(this.sorttable_tbody);
-          this.className = this.className.replace('sorttable_sorted_reverse',
-                                                  'sorttable_sorted');
-          this.removeChild(document.getElementById('sorttable_sortrevind'));
-          sortfwdind = document.createElement('span');
-          sortfwdind.id = "sorttable_sortfwdind";
-          sortfwdind.innerHTML = '&nbsp;&#x25BE;';
-          this.appendChild(sortfwdind);
+
+          if (this.getAttribute('data-sorted-reverse') !== 'true') {
+            this.setAttribute('data-sorted-reverse', 'true');
+          } else {
+            this.setAttribute('data-sorted-reverse', 'false');
+          }
+
           return;
         }
 
-        // remove sorttable_sorted classes
-        theadrow = this.parentNode;
-        Array.prototype.slice.call(theadrow.childNodes).forEach(function(cell) {
-          if (cell.nodeType == 1) { // an element
-            cell.className = cell.className.replace('sorttable_sorted_reverse','');
-            cell.className = cell.className.replace('sorttable_sorted','');
+        tHeadRow = this.parentNode;
+
+        Array.prototype.slice.call(tHeadRow.childNodes).forEach(function(cell) {
+          if (cell.nodeType == 1) {
+            cell.setAttribute('data-sorted', 'false');
+            cell.setAttribute('data-sorted-reverse', 'false');
           }
         });
-        sortfwdind = document.getElementById('sorttable_sortfwdind');
-        if (sortfwdind) { sortfwdind.parentNode.removeChild(sortfwdind); }
-        sortrevind = document.getElementById('sorttable_sortrevind');
-        if (sortrevind) { sortrevind.parentNode.removeChild(sortrevind); }
 
-        this.className += ' sorttable_sorted';
-        sortfwdind = document.createElement('span');
-        sortfwdind.id = "sorttable_sortfwdind";
-        sortfwdind.innerHTML = '&nbsp;&#x25BE;';
-        this.appendChild(sortfwdind);
+        this.setAttribute('data-sorted', 'true');
 
         // build an array to sort. This is a Schwartzian transform thing,
         // i.e., we "decorate" each row with the actual sort key,
