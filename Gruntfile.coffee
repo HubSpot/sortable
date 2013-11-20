@@ -8,7 +8,7 @@ module.exports = (grunt) ->
 
     watch:
       coffee:
-        files: ['vex.coffee']
+        files: ['coffee/sortable.coffee']
         tasks: ["coffee", "uglify"]
 
     uglify:
