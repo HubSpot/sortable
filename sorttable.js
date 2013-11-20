@@ -103,7 +103,7 @@ sorttable = {
 
           // remove sorttable_sorted classes
           theadrow = this.parentNode;
-          makeArray(theadrow.childNodes).forEach(function(cell) {
+          Array.prototype.slice.call(theadrow.childNodes).forEach(function(cell) {
             if (cell.nodeType == 1) { // an element
               cell.className = cell.className.replace('sorttable_sorted_reverse','');
               cell.className = cell.className.replace('sorttable_sorted','');
@@ -232,8 +232,4 @@ sorttable = {
 
     } // while(swap)
   }
-};
-
-var makeArray = function(arrayLikeThing) {
-  return Array.prototype.slice.call(arrayLikeThing);
 };
