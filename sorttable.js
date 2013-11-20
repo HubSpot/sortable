@@ -25,21 +25,21 @@ sorttable = {
 
     if (table.tHead.rows.length !== 1) return;
 
-    headrow = table.tHead.rows[0].cells;
+    tHeadRow = table.tHead.rows[0].cells;
 
-    for (i = 0; i<headrow.length; i++) {
-      if (headrow[i].getAttribute('data-sort') !== 'false') {
-        mtch = headrow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
+    for (i = 0; i<tHeadRow.length; i++) {
+      if (tHeadRow[i].getAttribute('data-sort') !== 'false') {
+        mtch = tHeadRow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
         if (mtch) { override = mtch[1]; }
         if (mtch && typeof sorttable["sort_"+override] == 'function') {
-          headrow[i].sorttable_sortfunction = sorttable["sort_"+override];
+          tHeadRow[i].sorttable_sortfunction = sorttable["sort_"+override];
         } else {
-          headrow[i].sorttable_sortfunction = sorttable.guessType(table,i);
+          tHeadRow[i].sorttable_sortfunction = sorttable.guessType(table,i);
         }
         // make it clickable to sort
-        headrow[i].sorttable_columnindex = i;
-        headrow[i].sorttable_tbody = table.tBodies[0];
-        headrow[i].addEventListener('click', function(e) {
+        tHeadRow[i].sorttable_columnindex = i;
+        tHeadRow[i].sorttable_tbody = table.tBodies[0];
+        tHeadRow[i].addEventListener('click', function(e) {
 
           if (this.className.search(/\bsorttable_sorted\b/) != -1) {
             // if we're already sorted by this column, just
