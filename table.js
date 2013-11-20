@@ -97,7 +97,11 @@ Table = {
       return node.getAttribute('data-value');
     }
 
-    return node.innerText.replace(/^\s+|\s+$/g, '');
+    if (typeof node.innerText != 'undefined') {
+      return node.innerText.replace(/^\s+|\s+$/g, '');
+    }
+
+    return node.textContent.replace(/^\s+|\s+$/g, '');
   },
 
   reverse: function(tBody) {
