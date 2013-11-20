@@ -28,7 +28,7 @@ sorttable = {
     tHeadRow = table.tHead.rows[0].cells;
 
     for (i = 0; i < tHeadRow.length; i++) {
-      if (tHeadRow[i].getAttribute('data-sort') === 'false') { continue; }
+      if (tHeadRow[i].getAttribute('data-sort') === 'false') continue;
 
       tHeadRow[i].sortFunction = sorttable.guessType(table, i);
 
