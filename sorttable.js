@@ -148,7 +148,7 @@ sorttable = {
 
   guessType: function(table, column) {
     // guess the type of a column based on its first non-blank row
-    sortfn = sorttable.sort_alpha;
+    sortfn = sorttable.sortAlpha;
     for (var i=0; i<table.tBodies[0].rows.length; i++) {
       text = sorttable.getCellValue(table.tBodies[0].rows[i].cells[column]);
       if (text !== '') {
@@ -193,9 +193,11 @@ sorttable = {
     if (isNaN(bb)) bb = 0;
     return aa-bb;
   },
-  sort_alpha: function(a,b) {
-    if (a[0]==b[0]) return 0;
-    if (a[0]<b[0]) return -1;
+
+  sortAlpha: function(a, b) {
+    var a0 = a[0].toLowerCase(), b0 = b[0].toLowerCase();
+    if (a0 === b0) return 0;
+    if (a0 < b0) return -1;
     return 1;
   },
 
