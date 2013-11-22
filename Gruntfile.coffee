@@ -8,15 +8,15 @@ module.exports = (grunt) ->
 
     watch:
       coffee:
-        files: ['coffee/sortable.coffee']
-        tasks: ["coffee", "uglify"]
+        files: ['coffee/*', 'sass/*']
+        tasks: ['coffee', 'uglify', 'compass']
 
     uglify:
       vex:
         src: 'js/sortable.js'
         dest: 'js/sortable.min.js'
         options:
-          banner: "/*! sortable.js <%= pkg.version %> */\n"
+          banner: '/*! sortable.js <%= pkg.version %> */\n'
 
     compass:
       dist:
