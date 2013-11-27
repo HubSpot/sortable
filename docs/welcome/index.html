@@ -115,6 +115,10 @@
             background: #fff1dd;
         }
 
+        table.showcase.about a {
+            color: #c96c24;
+        }
+
         table.showcase.about p > code {
             background: rgba(0, 0, 0, .05);
         }
@@ -260,18 +264,21 @@
             </p>
         </div>
     </td></tr></table>
+
     <table class="showcase about"><tr><td>
         <div class="showcase-inner">
-            <h1>About</h1>
+            <h1>How to Use</h1>
             <p>Sortable is an open-source javascript and CSS library which adds sorting functionality to tables. It is tiny (<code>&lt;2kb</code>) and has no dependencies.</p>
-            <p>To use, simply add <code>sortable.js</code> and a <a href="https://github.com/HubSpot/sortable/tree/master/css" target="_blank">theme file</a> to your page:</p>
+            <p>To use, first <a href="https://github.com/HubSpot/sortable/releases" target="_blank">download the latest release</a>.
+            <p>Then simply add <code>sortable.min.js</code> and a <a href="https://github.com/HubSpot/sortable/tree/master/css" target="_blank">theme file</a> to your page:</p>
 <pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable-theme-dark.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
-<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
-            <p>Add the attribute <code>sortable</code> to your <code>&lt;table&gt;</code> elements, and initialize them:</p>
+<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable.min.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
+            <p>Add the attribute <code>data-sortable</code> and the theme class name to your <code>&lt;table&gt;</code> elements, and initialize them:</p>
 <pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">data-sortable</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable-theme-dark<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
     <span class="token comment" spellcheck="true">&lt;!-- ... --&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">&gt;</span></span>
 <span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span>sortable<span class="token punctuation">.</span><span class="token function">init<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
+            <p>And that's it! Learn more by visiting the <a href="/sortable">documentation</a>.
         </div>
     </td></tr></table>
     <table id="themeShowcase" class="showcase themes sortable-theme-bootstrap"><tr><td>
