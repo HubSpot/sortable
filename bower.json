@@ -5,7 +5,7 @@
   "authors": [
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>"
   ],
-  "description": "The simplest and cleanest way to make an HTML table sortable.",
+  "description": "The simplest, most elegant way to sort a table.",
   "main": "sortable.coffee",
   "license": "MIT",
   "keywords": [
