@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="/sortable/css/sortable-theme-bootstrap.css" />
 
     <style>
+        /* Prism.js */
+        code[class*="language-"], pre[class*="language-"] {color: black; font-family: Consolas, Monaco, 'Andale Mono', monospace; direction: ltr; text-align: left; white-space: pre; word-spacing: normal; -moz-tab-size: 4; -o-tab-size: 4; tab-size: 4; -webkit-hyphens: none; -moz-hyphens: none; -ms-hyphens: none; hyphens: none; } /* Code blocks */ pre[class*="language-"] {padding: 1em; margin: .5em 0; overflow: auto; font-size: 14px; } :not(pre) > code[class*="language-"], pre[class*="language-"] {background: rgba(0, 0, 0, .05); } /* Inline code */ :not(pre) > code[class*="language-"] {padding: .1em; border-radius: .3em; } .token.comment, .token.prolog, .token.doctype, .token.cdata {color: slategray; } .token.punctuation {color: #999; } .namespace {opacity: .7; } .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol {color: #905; } .token.selector, .token.attr-name, .token.string, .token.builtin {color: #690; } .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string, .token.variable {color: #a67f59; } .token.atrule, .token.attr-value, .token.keyword {color: #07a; } .token.regex, .token.important {color: #e90; } .token.important {font-weight: bold; } .token.entity {cursor: help; }
+
         html, body {
             height: 100%;
         }
@@ -109,14 +112,43 @@
             }
         }
 
+        table.showcase.about {
+            background: #fff1dd;
+        }
+
+        table.showcase.about p > code {
+            background: rgba(0, 0, 0, .05);
+        }
+
+        table.showcase.about p,
+        table.showcase.about pre {
+            text-align: left;
+            width: 500px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 568px) {
+            table.showcase.about p,
+            table.showcase.about pre {
+                width: 400px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            table.showcase.about p,
+            table.showcase.about pre {
+                width: 280px;
+            }
+        }
+
         table.showcase.themes {
             background: #eee;
         }
 
         table.showcase.themes.sortable-theme-minimal {
             background: #fff;
-            border-top: 4px solid #e0e0e0;
-            border-bottom: 4px solid #e0e0e0;
         }
 
         table.showcase.themes.sortable-theme-light {
@@ -125,6 +157,10 @@
 
         table.showcase.themes.sortable-theme-dark {
             background: #323232;
+        }
+
+        table.showcase.themes.sortable-theme-bootstrap {
+            background: #f2f8ff;
         }
 
         table.showcase.themes.sortable-theme-dark h1,
@@ -224,6 +260,23 @@
                 Data compiled 11/26/13 from <a href="http://gs.statcounter.com/#browser-ww-monthly-201306-201306-bar" target="_blank" rel="nofollow">StatCounter</a> and <a href="http://en.wikipedia.org/wiki/Usage_share_of_web_browsers" target="_blank" rel="nofollow">Wikipedia</a>.
             </p>
         </div>
+    </td></tr></table>
+    <table class="showcase about"><tr><td>
+        <div class="showcase-inner">
+            <h1>About</h1>
+            <p>Sortable is an open-source javascript and CSS library which adds sorting functionality to tables.</p>
+            <p>To use, simply add <code>sortable.js</code> and a <a href="https://github.com/HubSpot/sortable/tree/master/css" target="_blank">theme file</a> to your page:</p>
+<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable-theme-default.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
+                    <p>Add the attribute <code>data-sorting="true"</code> to your <code>&lt;table&gt;</code> elements, and initialize them:</p>
+<pre class="  language-javascript"><code class="  language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> tables<span class="token punctuation">,</span> i<span class="token punctuation">,</span> selector<span class="token punctuation">;</span>
+    selector <span class="token operator">=</span> <span class="token string">'table[data-sortable="true"]'</span><span class="token punctuation">;</span>
+    tables <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelectorAll<span class="token punctuation">(</span></span>selector<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tables<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sortable<span class="token punctuation">.</span><span class="token function">init<span class="token punctuation">(</span></span>tables<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>        </div>
     </td></tr></table>
     <table id="themeShowcase" class="showcase themes sortable-theme-bootstrap"><tr><td>
         <div class="showcase-inner">
