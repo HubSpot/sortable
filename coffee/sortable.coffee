@@ -4,6 +4,8 @@ descending = 'descending'
 numberRegExp = /^-?[£$¤]?[\d,.]+%?$/
 trimRegExp = /^\s+|\s+$/g
 
+clickEvent = if 'ontouchstart' in document.documentElement then 'touchstart' else 'click'
+
 sortable =
 
   init: ->
@@ -27,7 +29,7 @@ sortable =
   setupClickableTH: (table, th, i) ->
     type = sortable.getColumnType table, i
 
-    th.addEventListener 'click', (e) ->
+    th.addEventListener clickEvent, (e) ->
       sorted = @getAttribute('data-sorted') is 'true'
       sortedDirection = @getAttribute 'data-sorted-direction'
 

@@ -1,5 +1,6 @@
 (function() {
-  var ascending, descending, numberRegExp, sortable, trimRegExp;
+  var ascending, clickEvent, descending, numberRegExp, sortable, trimRegExp,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   ascending = 'ascending';
 
@@ -8,6 +9,8 @@
   numberRegExp = /^-?[£$¤]?[\d,.]+%?$/;
 
   trimRegExp = /^\s+|\s+$/g;
+
+  clickEvent = __indexOf.call(document.documentElement, 'ontouchstart') >= 0 ? 'touchstart' : 'click';
 
   sortable = {
     init: function() {
@@ -41,7 +44,7 @@
     setupClickableTH: function(table, th, i) {
       var type;
       type = sortable.getColumnType(table, i);
-      return th.addEventListener('click', function(e) {
+      return th.addEventListener(clickEvent, function(e) {
         var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
         sorted = this.getAttribute('data-sorted') === 'true';
         sortedDirection = this.getAttribute('data-sorted-direction');

@@ -1,6 +1,6 @@
 {
   "name": "sortable",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "The simplest and cleanest way to make an HTML table sortable.",
   "author": "Adam Schwartz <adam.flynn.schwartz@gmail.com>",
   "license": "MIT",
