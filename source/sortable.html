@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>sortable.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>sortable.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ascending = <span class="string">'ascending'</span>
+descending = <span class="string">'descending'</span>
+
+numberRegExp = <span class="regexp">/^-?[£$¤]?[\d,.]+%?$/</span>
+trimRegExp = <span class="regexp">/^\s+|\s+$/g</span>
+
+touchDevice = `<span class="javascript"><span class="string">'ontouchstart'</span> <span class="keyword">in</span> document.documentElement</span>`
+clickEvent = <span class="keyword">if</span> touchDevice <span class="keyword">then</span> <span class="string">'touchstart'</span> <span class="keyword">else</span> <span class="string">'click'</span>
+
+sortable =
+
+  init: -&gt;
+    tables = document.querySelectorAll <span class="string">'table[data-sortable]'</span>
+    sortable.initTable table <span class="keyword">for</span> table <span class="keyword">in</span> tables
+
+  initTable: (table) -&gt;
+    <span class="keyword">return</span> <span class="keyword">if</span> table.tHead.rows.length <span class="keyword">isnt</span> <span class="number">1</span>
+    <span class="keyword">return</span> <span class="keyword">if</span> table.getAttribute(<span class="string">'data-sortable-initialized'</span>) <span class="keyword">is</span> <span class="string">'true'</span>
+
+    table.setAttribute <span class="string">'data-sortable-initialized'</span>, <span class="string">'true'</span>
+
+    ths = table.querySelectorAll(<span class="string">'th'</span>)
+
+    <span class="keyword">for</span> th, i <span class="keyword">in</span> ths
+      <span class="keyword">if</span> th.getAttribute(<span class="string">'data-sortable'</span>) <span class="keyword">isnt</span> <span class="string">'false'</span>
+        sortable.setupClickableTH table, th, i
+
+    table
+
+  setupClickableTH: (table, th, i) -&gt;
+    type = sortable.getColumnType table, i
+
+    th.addEventListener clickEvent, (e) -&gt;
+      sorted = <span class="property">@getAttribute</span>(<span class="string">'data-sorted'</span>) <span class="keyword">is</span> <span class="string">'true'</span>
+      sortedDirection = <span class="property">@getAttribute</span> <span class="string">'data-sorted-direction'</span>
+
+      <span class="keyword">if</span> sorted
+        newSortedDirection = <span class="keyword">if</span> sortedDirection <span class="keyword">is</span> ascending <span class="keyword">then</span> descending <span class="keyword">else</span> ascending
+      <span class="keyword">else</span>
+        newSortedDirection = type.defaultSortDirection
+
+      ths = <span class="property">@parentNode</span>.querySelectorAll(<span class="string">'th'</span>)
+      <span class="keyword">for</span> th <span class="keyword">in</span> ths
+        th.setAttribute <span class="string">'data-sorted'</span>, <span class="string">'false'</span>
+        th.removeAttribute <span class="string">'data-sorted-direction'</span>
+
+      <span class="property">@setAttribute</span> <span class="string">'data-sorted'</span>, <span class="string">'true'</span>
+      <span class="property">@setAttribute</span> <span class="string">'data-sorted-direction'</span>, newSortedDirection
+
+      tBody = table.tBodies[<span class="number">0</span>]
+      rowArray = []
+
+      <span class="keyword">for</span> row <span class="keyword">in</span> tBody.rows
+        rowArray.push [sortable.getNodeValue(row.cells[i]), row]
+
+      <span class="keyword">if</span> sorted
+        rowArray.reverse()
+      <span class="keyword">else</span>
+        rowArray.sort type.compare
+
+      <span class="keyword">for</span> rowArrayObject <span class="keyword">in</span> rowArray
+        tBody.appendChild rowArrayObject[<span class="number">1</span>]
+
+  getColumnType: (table, i) -&gt;
+    <span class="keyword">for</span> row <span class="keyword">in</span> table.tBodies[<span class="number">0</span>].rows
+      text = sortable.getNodeValue row.cells[i]
+      <span class="keyword">return</span> sortable.types.numeric <span class="keyword">if</span> text <span class="keyword">isnt</span> <span class="string">''</span> <span class="keyword">and</span> text.match(numberRegExp)
+    <span class="keyword">return</span> sortable.types.alpha
+
+  getNodeValue: (node) -&gt;
+    <span class="keyword">return</span> <span class="string">''</span> <span class="keyword">unless</span> node
+    <span class="keyword">return</span> node.getAttribute(<span class="string">'data-value'</span>) <span class="keyword">if</span> node.getAttribute(<span class="string">'data-value'</span>) <span class="keyword">isnt</span> <span class="literal">null</span>
+    <span class="keyword">return</span> node.innerText.replace(trimRegExp, <span class="string">''</span>) <span class="keyword">unless</span> <span class="keyword">typeof</span> node.innerText <span class="keyword">is</span> <span class="string">'undefined'</span>
+    node.textContent.replace trimRegExp, <span class="string">''</span>
+
+  types:
+
+    numeric:
+      defaultSortDirection: descending
+      compare: (a, b) -&gt;
+        aa = parseFloat(a[<span class="number">0</span>].replace(<span class="regexp">/[^0-9.-]/g</span>, <span class="string">''</span>))
+        bb = parseFloat(b[<span class="number">0</span>].replace(<span class="regexp">/[^0-9.-]/g</span>, <span class="string">''</span>))
+        aa = <span class="number">0</span> <span class="keyword">if</span> isNaN(aa)
+        bb = <span class="number">0</span> <span class="keyword">if</span> isNaN(bb)
+        bb - aa
+
+    alpha:
+      defaultSortDirection: ascending
+      compare: (a, b) -&gt;
+        aa = a[<span class="number">0</span>].toLowerCase()
+        bb = b[<span class="number">0</span>].toLowerCase()
+        <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> aa <span class="keyword">is</span> bb
+        <span class="keyword">return</span> -<span class="number">1</span> <span class="keyword">if</span> aa &lt; bb
+        <span class="number">1</span>
+
+window.sortable = sortable</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
