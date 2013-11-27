@@ -1,33 +1,33 @@
 /* line 2, ../sass/_sortable.sass */
-table[data-sortable="true"] {
+table[data-sortable] {
   border-collapse: collapse;
   border-spacing: 0;
 }
 /* line 6, ../sass/_sortable.sass */
-table[data-sortable="true"] th {
+table[data-sortable] th {
   vertical-align: bottom;
   font-weight: bold;
 }
 /* line 10, ../sass/_sortable.sass */
-table[data-sortable="true"] th, table[data-sortable="true"] td {
+table[data-sortable] th, table[data-sortable] td {
   text-align: left;
   padding: 10px;
 }
 /* line 14, ../sass/_sortable.sass */
-table[data-sortable="true"] th:not([data-sort="false"]) {
+table[data-sortable] th:not([data-sortable="false"]) {
   -webkit-user-select: none;
   cursor: pointer;
   position: relative;
 }
 /* line 21, ../sass/_sortable.sass */
-table[data-sortable="true"] th[data-sorted="true"]:after {
+table[data-sortable] th[data-sorted="true"]:after {
   content: "";
   display: inline-block;
   height: 0;
   width: 30px;
 }
 /* line 27, ../sass/_sortable.sass */
-table[data-sortable="true"] th[data-sorted="true"]:before {
+table[data-sortable] th[data-sorted="true"]:before {
   content: "";
   display: inline-block;
   height: 0;
@@ -40,28 +40,28 @@ table[data-sortable="true"] th[data-sorted="true"]:before {
   right: 10px;
 }
 /* line 39, ../sass/_sortable.sass */
-table[data-sortable="true"] th[data-sorted="true"][data-sorted-direction="descending"]:before {
+table[data-sortable] th[data-sorted="true"][data-sorted-direction="descending"]:before {
   border-top-color: inherit;
   top: 4px;
   bottom: 0;
 }
 /* line 44, ../sass/_sortable.sass */
-table[data-sortable="true"] th[data-sorted="true"][data-sorted-direction="ascending"]:before {
+table[data-sortable] th[data-sorted="true"][data-sorted-direction="ascending"]:before {
   border-bottom-color: inherit;
   top: 0;
   bottom: 4px;
 }
 
 /* line 5, ../sass/sortable-theme-dark.sass */
-table[data-sortable="true"].sortable-theme-dark {
+table[data-sortable].sortable-theme-dark {
   color: #b9b9b9;
   background: #252525;
 }
 /* line 9, ../sass/sortable-theme-dark.sass */
-table[data-sortable="true"].sortable-theme-dark tbody td {
+table[data-sortable].sortable-theme-dark tbody td {
   border-top: 1px solid #2e2e2e;
 }
 /* line 12, ../sass/sortable-theme-dark.sass */
-table[data-sortable="true"].sortable-theme-dark th[data-sorted="true"] {
+table[data-sortable].sortable-theme-dark th[data-sorted="true"] {
   background: #2e2e2e;
 }

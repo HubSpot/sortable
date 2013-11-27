@@ -6,13 +6,20 @@ trimRegExp = /^\s+|\s+$/g
 
 sortable =
 
-  init: (table) ->
+  init: ->
+    tables = document.querySelectorAll 'table[data-sortable]'
+    sortable.initTable table for table in tables
+
+  initTable: (table) ->
     return if table.tHead.rows.length isnt 1
+    return if table.getAttribute('data-sortable-initialized') is 'true'
+
+    table.setAttribute 'data-sortable-initialized', 'true'
 
     ths = table.querySelectorAll('th')
 
     for th, i in ths
-      if th.getAttribute('data-sort') isnt 'false'
+      if th.getAttribute('data-sortable') isnt 'false'
         sortable.setupClickableTH table, th, i
 
     table

@@ -2,7 +2,7 @@
   "name": "sortable",
   "repo": "adamschwartz/sortable",
   "description": "The simplest and cleanest way to make an HTML table sortable.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "http://adamschwartz.co/sortable",
   "license": "MIT",
   "keywords": [

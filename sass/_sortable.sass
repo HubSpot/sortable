@@ -1,5 +1,5 @@
 =sortable
-    table[data-sortable="true"]
+    table[data-sortable]
         border-collapse: collapse
         border-spacing: 0
 
@@ -11,7 +11,7 @@
             text-align: left
             padding: 10px
 
-        th:not([data-sort="false"])
+        th:not([data-sortable="false"])
             -webkit-user-select: none
             cursor: pointer
             position: relative

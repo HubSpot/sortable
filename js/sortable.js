@@ -10,15 +10,29 @@
   trimRegExp = /^\s+|\s+$/g;
 
   sortable = {
-    init: function(table) {
+    init: function() {
+      var table, tables, _i, _len, _results;
+      tables = document.querySelectorAll('table[data-sortable]');
+      _results = [];
+      for (_i = 0, _len = tables.length; _i < _len; _i++) {
+        table = tables[_i];
+        _results.push(sortable.initTable(table));
+      }
+      return _results;
+    },
+    initTable: function(table) {
       var i, th, ths, _i, _len;
       if (table.tHead.rows.length !== 1) {
         return;
       }
+      if (table.getAttribute('data-sortable-initialized') === 'true') {
+        return;
+      }
+      table.setAttribute('data-sortable-initialized', 'true');
       ths = table.querySelectorAll('th');
       for (i = _i = 0, _len = ths.length; _i < _len; i = ++_i) {
         th = ths[i];
-        if (th.getAttribute('data-sort') !== 'false') {
+        if (th.getAttribute('data-sortable') !== 'false') {
           sortable.setupClickableTH(table, th, i);
         }
       }
