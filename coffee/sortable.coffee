@@ -4,7 +4,8 @@ descending = 'descending'
 numberRegExp = /^-?[£$¤]?[\d,.]+%?$/
 trimRegExp = /^\s+|\s+$/g
 
-clickEvent = if 'ontouchstart' in document.documentElement then 'touchstart' else 'click'
+touchDevice = `'ontouchstart' in document.documentElement`
+clickEvent = if touchDevice then 'touchstart' else 'click'
 
 sortable =
 

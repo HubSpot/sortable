@@ -1,6 +1,5 @@
 (function() {
-  var ascending, clickEvent, descending, numberRegExp, sortable, trimRegExp,
-    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+  var ascending, clickEvent, descending, numberRegExp, sortable, touchDevice, trimRegExp;
 
   ascending = 'ascending';
 
@@ -10,7 +9,9 @@
 
   trimRegExp = /^\s+|\s+$/g;
 
-  clickEvent = __indexOf.call(document.documentElement, 'ontouchstart') >= 0 ? 'touchstart' : 'click';
+  touchDevice = 'ontouchstart' in document.documentElement;
+
+  clickEvent = touchDevice ? 'touchstart' : 'click';
 
   sortable = {
     init: function() {
