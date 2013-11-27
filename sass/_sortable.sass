@@ -13,35 +13,35 @@
 
         th:not([data-sortable="false"])
             -webkit-user-select: none
+            -moz-user-select: none
+            -ms-user-select: none
+            -o-user-select: none
+            user-select: none
             cursor: pointer
-            position: relative
 
-        th[data-sorted="true"]
+        th
 
             &:after
                 content: ""
+                visibility: hidden
                 display: inline-block
-                height: 0
-                width: 30px
-
-            &:before
-                content: ""
-                display: inline-block
+                vertical-align: inherit
                 height: 0
                 width: 0
                 border-width: 5px
                 border-style: solid
                 border-color: transparent
-                position: absolute
-                margin: auto
-                right: 10px
+                margin-right: 5px
+                margin-left: 10px
+                float: right
 
-            &[data-sorted-direction="descending"]:before
+            &[data-sorted="true"]:after
+                visibility: visible
+
+            &[data-sorted-direction="descending"]:after
                 border-top-color: inherit
-                top: 4px
-                bottom: 0
+                margin-top: 8px
 
-            &[data-sorted-direction="ascending"]:before
+            &[data-sorted-direction="ascending"]:after
                 border-bottom-color: inherit
-                top: 0
-                bottom: 4px
+                margin-top: 8px - 5px
