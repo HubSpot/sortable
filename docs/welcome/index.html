@@ -219,9 +219,9 @@
             <h2>The simplest, most elegant way to sort a table.</h2>
             <p>
                 <a class="button" href="http://github.com/hubspot/sortable">★ On Github</a> &nbsp;&nbsp;
-                <a class="button dark" href="http://github.com/hubspot/sortable">Download</a>
+                <a class="button dark" href="https://github.com/HubSpot/sortable/releases">Download</a>
             </p>
-            <table data-sortable class="sortable-theme-light">
+            <table class="sortable-theme-light" data-sortable>
                 <thead>
                     <tr>
                         <th data-sortable="false">Browser</th>
@@ -284,7 +284,7 @@
 <pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable-theme-dark.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable.min.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
             <p>Add the attribute <code>data-sortable</code> and the theme class name to your <code>&lt;table&gt;</code> elements, and initialize them:</p>
-<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">data-sortable</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable-theme-dark<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+<pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable-theme-dark<span class="token punctuation">"</span></span> <span class="token attr-name">data-sortable</span><span class="token punctuation">&gt;</span></span>
     <span class="token comment" spellcheck="true">&lt;!-- ... --&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">&gt;</span></span>
 <span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span>sortable<span class="token punctuation">.</span><span class="token function">init<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
@@ -295,7 +295,7 @@
         <div class="showcase-inner">
             <h1>Themes</h1>
             <h2>Sortables for every occasion.</h2>
-            <table id="themeTable" data-sortable class="sortable-theme-bootstrap">
+            <table id="themeTable" class="sortable-theme-bootstrap" data-sortable>
                 <thead>
                     <tr>
                         <th data-sortable="false">Browser</th>
