@@ -190,16 +190,16 @@
 
         table.showcase.themes .themes-list li a {
             cursor: pointer;
-            color: #888;
+            opacity: 0.3;
             padding: .5em;
             display: inline-block;
         }
 
         table.showcase.themes .themes-list li a.selected {
-            color: #333;
+            opacity: 1;
         }
 
-        table.showcase.themes.sortable-theme-dark .themes-list li a.selected {
+        table.showcase.themes.sortable-theme-dark .themes-list li a {
             color: #fff;
         }
     </style>
@@ -339,7 +339,10 @@
                 <li><a data-theme-name="minimal">Minimal</a></li>
                 <li><a data-theme-name="light">Light</a></li>
                 <li><a data-theme-name="dark" >Dark</a></li>
+                <br/>
                 <li><a data-theme-name="bootstrap" class="selected">Bootstrap</a></li>
+                <li><a data-theme-name="slick">Slick</a></li>
+                <li><a data-theme-name="finder">Finder</a></li>
             </ul>
         </div>
     </td></tr></table>
