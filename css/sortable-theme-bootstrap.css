@@ -33,7 +33,7 @@ table[data-sortable] th:after {
   border-width: 5px;
   border-style: solid;
   border-color: transparent;
-  margin-right: 5px;
+  margin-right: 1px;
   margin-left: 10px;
   float: right;
 }
@@ -69,20 +69,20 @@ table[data-sortable].sortable-theme-bootstrap tbody td {
   border-top: 1px solid #e0e0e0;
 }
 /* line 18, ../sass/sortable-theme-bootstrap.sass */
-table[data-sortable].sortable-theme-bootstrap tbody > tr:nth-child(odd) > td {
-  background-color: #f9f9f9;
-}
-/* line 21, ../sass/sortable-theme-bootstrap.sass */
 table[data-sortable].sortable-theme-bootstrap th[data-sorted="true"] {
   color: #3a87ad;
   background: #d9edf7;
   border-bottom-color: #bce8f1;
 }
-/* line 26, ../sass/sortable-theme-bootstrap.sass */
+/* line 23, ../sass/sortable-theme-bootstrap.sass */
 table[data-sortable].sortable-theme-bootstrap th[data-sorted="true"][data-sorted-direction="descending"]:after {
   border-top-color: #3a87ad;
 }
-/* line 29, ../sass/sortable-theme-bootstrap.sass */
+/* line 26, ../sass/sortable-theme-bootstrap.sass */
 table[data-sortable].sortable-theme-bootstrap th[data-sorted="true"][data-sorted-direction="ascending"]:after {
   border-bottom-color: #3a87ad;
+}
+/* line 31, ../sass/sortable-theme-bootstrap.sass */
+table[data-sortable].sortable-theme-bootstrap.sortable-theme-bootstrap-striped tbody > tr:nth-child(odd) > td {
+  background-color: #f9f9f9;
 }

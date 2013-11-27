@@ -15,9 +15,6 @@ table[data-sortable].sortable-theme-bootstrap
     tbody td
         border-top: 1px solid #e0e0e0
 
-    tbody > tr:nth-child(odd) > td
-        background-color: #f9f9f9
-
     th[data-sorted="true"]
         color: #3a87ad
         background: #d9edf7
@@ -28,3 +25,8 @@ table[data-sortable].sortable-theme-bootstrap
 
         &[data-sorted-direction="ascending"]:after
             border-bottom-color: #3a87ad
+
+    &.sortable-theme-bootstrap-striped
+
+        tbody > tr:nth-child(odd) > td
+            background-color: #f9f9f9
