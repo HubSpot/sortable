@@ -14,10 +14,12 @@ Example:
 
 ##### `init`
 
-To initialize all tables on the page, call `init`.
+All tables on the page will be automatically initted when the page is loaded.
+
+If you add tables with javascript, call `init` after they are added to the page:
 
 ```coffeescript
-sortable.init()
+Sortable.init()
 ```
 
 ##### `initTable`
@@ -25,8 +27,8 @@ sortable.init()
 To initialize an individual table, call `initTable`.
 
 ```coffeescript
-exampleTable = document.querySelector('#exampleTable[data-sortable]')
-sortable.initTable(exampleTable)
+exampleTable = document.querySelector('#exampleTable')
+Sortable.initTable(exampleTable)
 ```
 
 #### Sorting options
@@ -70,4 +72,3 @@ To disable sorting on a particular column, add `data-sortable="false"` to the `<
 <p style="-webkit-transform: translateZ(0)"></p>
 <script src="/sortable/js/sortable.js"></script>
 <link rel="stylesheet" href="/sortable/css/sortable-theme-light.css" />
-<script>setTimeout(function(){ sortable.init(); }, 0);</script>

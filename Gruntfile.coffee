@@ -12,7 +12,7 @@ module.exports = (grunt) ->
         tasks: ['coffee', 'uglify', 'compass']
 
     uglify:
-      vex:
+      sortable:
         src: 'js/sortable.js'
         dest: 'js/sortable.min.js'
         options:
