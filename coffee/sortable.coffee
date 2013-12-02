@@ -1,16 +1,14 @@
-ascending = 'ascending'
-descending = 'descending'
+SELECTOR = 'table[data-sortable]'
 
 numberRegExp = /^-?[£$¤]?[\d,.]+%?$/
 trimRegExp = /^\s+|\s+$/g
 
-touchDevice = `'ontouchstart' in document.documentElement`
+touchDevice = 'ontouchstart' of document.documentElement
 clickEvent = if touchDevice then 'touchstart' else 'click'
 
 sortable =
-
   init: ->
-    tables = document.querySelectorAll 'table[data-sortable]'
+    tables = document.querySelectorAll SELECTOR
     sortable.initTable table for table in tables
 
   initTable: (table) ->
@@ -35,7 +33,7 @@ sortable =
       sortedDirection = @getAttribute 'data-sorted-direction'
 
       if sorted
-        newSortedDirection = if sortedDirection is ascending then descending else ascending
+        newSortedDirection = if sortedDirection is 'ascending' then 'descending' else 'ascending'
       else
         newSortedDirection = type.defaultSortDirection
 
@@ -74,9 +72,8 @@ sortable =
     node.textContent.replace trimRegExp, ''
 
   types:
-
     numeric:
-      defaultSortDirection: descending
+      defaultSortDirection: 'descending'
       compare: (a, b) ->
         aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''))
         bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''))
@@ -85,7 +82,7 @@ sortable =
         bb - aa
 
     alpha:
-      defaultSortDirection: ascending
+      defaultSortDirection: 'ascending'
       compare: (a, b) ->
         aa = a[0].toLowerCase()
         bb = b[0].toLowerCase()
@@ -93,4 +90,6 @@ sortable =
         return -1 if aa < bb
         1
 
-window.sortable = sortable
+setTimeout sortable.init, 0
+
+window.Sortable = sortable
