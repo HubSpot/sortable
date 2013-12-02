@@ -1,8 +1,7 @@
 ## Sort Table
 
 ### [Demo](http://github.hubspot.com/sortable/docs/welcome)
-
-Documentation coming soon.
+### [Documentation](http://github.hubspot.com/sortable/)
 
 #### Credits
 
