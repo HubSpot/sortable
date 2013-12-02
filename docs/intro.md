@@ -57,7 +57,7 @@ To learn more about how to use sortable, visit our API pages.
 
 #### Credits
 
-Sortable is free and open-source, released on the [MIT Licence](https://github.com/HubSpot/sortable/blob/master/LICENSE).
+Sortable is free and open-source, released on the [MIT License](https://github.com/HubSpot/sortable/blob/master/LICENSE).
 
 #### Credits
 
