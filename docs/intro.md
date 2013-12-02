@@ -52,8 +52,8 @@ This example uses the "bootstrap" theme. For a full list of supported themes, ch
 
 To learn more about how to use sortable, visit our API pages.
 
-- [Basic](http://github.hubspot.com/vex/api/basic)
-- [Themes](http://github.hubspot.com/vex/api/themes)
+- [Basic](http://github.hubspot.com/sortable/api/basic)
+- [Themes](http://github.hubspot.com/sortable/api/themes)
 
 #### Credits
 
