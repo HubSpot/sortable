@@ -14,7 +14,7 @@ sortable =
     sortable.initTable table for table in tables
 
   initTable: (table) ->
-    return if table.tHead.rows.length isnt 1
+    return if table.tHead?.rows.length isnt 1
     return if table.getAttribute('data-sortable-initialized') is 'true'
 
     table.setAttribute 'data-sortable-initialized', 'true'
