@@ -6,6 +6,12 @@ trimRegExp = /^\s+|\s+$/g
 touchDevice = 'ontouchstart' of document.documentElement
 clickEvent = if touchDevice then 'touchstart' else 'click'
 
+addEventListener = (el, event, handler) ->
+  if el.addEventListener?
+    el.addEventListener event, handler, false
+  else
+    el.attachEvent "on#{ event }", handler
+
 sortable =
   init: (options={}) ->
     options.selector ?= SELECTOR
@@ -30,7 +36,7 @@ sortable =
   setupClickableTH: (table, th, i) ->
     type = sortable.getColumnType table, i
 
-    th.addEventListener clickEvent, (e) ->
+    addEventListener th, clickEvent, (e) ->
       sorted = @getAttribute('data-sorted') is 'true'
       sortedDirection = @getAttribute 'data-sorted-direction'
 
