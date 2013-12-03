@@ -51,12 +51,12 @@ This example uses the "bootstrap" theme. For a full list of supported themes, ch
 
 To learn more about how to use sortable, visit our API pages.
 
-- [Basic](http://github.hubspot.com/sortable/api/basic)
+- [Options](http://github.hubspot.com/sortable/api/options)
 - [Themes](http://github.hubspot.com/sortable/api/themes)
 
 #### Credits
 
-Sortable is free and open-source, released on the [MIT Licenese](https://github.com/HubSpot/sortable/blob/master/LICENSE).
+Sortable is free and open-source, released on the [MIT License](https://github.com/HubSpot/sortable/blob/master/LICENSE).
 
 #### Credits
 
