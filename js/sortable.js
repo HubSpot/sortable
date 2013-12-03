@@ -12,9 +12,15 @@
   clickEvent = touchDevice ? 'touchstart' : 'click';
 
   sortable = {
-    init: function() {
+    init: function(options) {
       var table, tables, _i, _len, _results;
-      tables = document.querySelectorAll(SELECTOR);
+      if (options == null) {
+        options = {};
+      }
+      if (options.selector == null) {
+        options.selector = SELECTOR;
+      }
+      tables = document.querySelectorAll(options.selector);
       _results = [];
       for (_i = 0, _len = tables.length; _i < _len; _i++) {
         table = tables[_i];
@@ -23,8 +29,8 @@
       return _results;
     },
     initTable: function(table) {
-      var i, th, ths, _i, _len;
-      if (table.tHead.rows.length !== 1) {
+      var i, th, ths, _i, _len, _ref;
+      if (((_ref = table.tHead) != null ? _ref.rows.length : void 0) !== 1) {
         return;
       }
       if (table.getAttribute('data-sortable-initialized') === 'true') {

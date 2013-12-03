@@ -7,12 +7,14 @@ touchDevice = 'ontouchstart' of document.documentElement
 clickEvent = if touchDevice then 'touchstart' else 'click'
 
 sortable =
-  init: ->
-    tables = document.querySelectorAll SELECTOR
+  init: (options={}) ->
+    options.selector ?= SELECTOR
+
+    tables = document.querySelectorAll options.selector
     sortable.initTable table for table in tables
 
   initTable: (table) ->
-    return if table.tHead.rows.length isnt 1
+    return if table.tHead?.rows.length isnt 1
     return if table.getAttribute('data-sortable-initialized') is 'true'
 
     table.setAttribute 'data-sortable-initialized', 'true'
