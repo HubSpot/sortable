@@ -23,7 +23,7 @@ Here is a demo of the "Bootstrap" theme.
 
 #### Browser Support
 
-- IE10+
+- IE8+
 - Firefox 4+
 - Current WebKit (Chrome, Safari)
 - Opera
