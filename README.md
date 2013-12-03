@@ -1,8 +1,8 @@
-## Sort Table
+## Sortable
 
-### [Demo](http://github.hubspot.com/sortable/docs/welcome)
+### [Demo](http://github.hubspot.com/sortable/docs/welcome) &nbsp;&nbsp; [Documentation](http://github.hubspot.com/sortable)
 
-Documentation coming soon.
+Sortable is an open-source javascript and CSS library which adds sorting functionality to tables. It is tiny (`<2kb`) and has no dependencies.
 
 #### Credits
 
