@@ -36,11 +36,33 @@
         table.showcase {
             height: 100%;
             width: 100%;
+            position: relative;
         }
 
         table.showcase .showcase-inner {
             margin: 40px auto 60px;
             padding: 10px;
+        }
+
+        table.showcase:after {
+            content: "";
+            display: block;
+            position: absolute;
+            opacity: 0.5;
+            left: 0;
+            right: 0;
+            bottom: 20px;
+            margin: auto;
+            height: 0;
+            width: 0;
+            border-width: 18px;
+            border-style: solid;
+            border-color: transparent;
+            border-top-color: inherit;
+        }
+
+        table.showcase.last-showcase:after {
+            display: none;
         }
 
         table.showcase .showcase-inner h1 {
@@ -216,7 +238,7 @@
     <table class="showcase hero"><tr><td>
         <div class="showcase-inner">
             <h1>Sortable</h1>
-            <h2>The simplest, most elegant way to sort a table.</h2>
+            <h2>Drop-in script to make your tables sortable.</h2>
             <p>
                 <a class="button" href="http://github.com/hubspot/sortable">★ On Github</a> &nbsp;&nbsp;
                 <a class="button dark" href="https://github.com/HubSpot/sortable/releases">Download</a>
@@ -283,11 +305,11 @@
             <p>Then simply add <code>sortable.min.js</code> and a <a href="https://github.com/HubSpot/sortable/tree/master/css" target="_blank">theme file</a> to your page:</p>
 <pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable-theme-dark.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable.min.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
-            <p>Add the attribute <code>data-sortable</code> and the theme class name to your <code>&lt;table&gt;</code> elements, and initialize them:</p>
+            <p>Add the attribute <code>data-sortable</code> and the theme class name to your <code>&lt;table&gt;</code> elements:</p>
 <pre class="  language-markup"><code class="  language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sortable-theme-dark<span class="token punctuation">"</span></span> <span class="token attr-name">data-sortable</span><span class="token punctuation">&gt;</span></span>
     <span class="token comment" spellcheck="true">&lt;!-- ... --&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">&gt;</span></span>
-<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span>sortable<span class="token punctuation">.</span><span class="token function">init<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
+</code></pre>
             <p>And that's it! Learn more by visiting the <a href="/sortable">documentation</a>.
         </div>
     </td></tr></table>
@@ -355,7 +377,7 @@
         </div>
     </td></tr></table>
 
-    <table class="showcase share"><tr><td>
+    <table class="showcase last-showcase share"><tr><td>
         <div class="showcase-inner">
             <h1>Share</h1>
             <h2>Help us spread the word.</h2>
@@ -378,7 +400,7 @@
             </style>
             <div class="share-buttons">
                 <div class="share-button retweet-button">
-                    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://github.hubspot.com/sortable/docs/welcome" data-text="sortable.js - The simplest, most elegant way to sort a table." data-count="horizontal" data-via="HubSpotDev">Tweet</a>
+                    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://github.hubspot.com/sortable/docs/welcome" data-text="sortable.js - Drop-in script to make your tables sortable." data-count="horizontal" data-via="HubSpotDev">Tweet</a>
                     <script>
                         (function(){
                             var recommends, button;
@@ -407,7 +429,6 @@
 
     <!-- Sortable initialization -->
     <script src="/sortable/js/sortable.js"></script>
-    <script>sortable.init();</script>
 
     <!-- Themes switcher -->
     <script>
@@ -427,6 +448,27 @@
                 });
             }
         })();
+    </script>
+
+    <!-- HubSpot analytics -->
+    <script type="text/javascript">
+        (function(d,s,i,r) {
+            if (d.getElementById(i)){return;}
+            var n=d.createElement(s),e=d.getElementsByTagName(s)[0];
+            n.id=i;n.src='//js.hubspot.com/analytics/'+(Math.ceil(new Date()/r)*r)+'/51294.js';
+            e.parentNode.insertBefore(n, e);
+        })(document,"script","hs-analytics",300000);
+    </script>
+
+    <!-- Google analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-45159009-1', 'hubspot.com');
+        ga('send', 'pageview');
     </script>
 </body>
 </html>

@@ -1,9 +1,7 @@
 (function() {
-  var ascending, clickEvent, descending, numberRegExp, sortable, touchDevice, trimRegExp;
+  var SELECTOR, clickEvent, numberRegExp, sortable, touchDevice, trimRegExp;
 
-  ascending = 'ascending';
-
-  descending = 'descending';
+  SELECTOR = 'table[data-sortable]';
 
   numberRegExp = /^-?[£$¤]?[\d,.]+%?$/;
 
@@ -14,9 +12,15 @@
   clickEvent = touchDevice ? 'touchstart' : 'click';
 
   sortable = {
-    init: function() {
+    init: function(options) {
       var table, tables, _i, _len, _results;
-      tables = document.querySelectorAll('table[data-sortable]');
+      if (options == null) {
+        options = {};
+      }
+      if (options.selector == null) {
+        options.selector = SELECTOR;
+      }
+      tables = document.querySelectorAll(options.selector);
       _results = [];
       for (_i = 0, _len = tables.length; _i < _len; _i++) {
         table = tables[_i];
@@ -25,8 +29,8 @@
       return _results;
     },
     initTable: function(table) {
-      var i, th, ths, _i, _len;
-      if (table.tHead.rows.length !== 1) {
+      var i, th, ths, _i, _len, _ref;
+      if (((_ref = table.tHead) != null ? _ref.rows.length : void 0) !== 1) {
         return;
       }
       if (table.getAttribute('data-sortable-initialized') === 'true') {
@@ -50,7 +54,7 @@
         sorted = this.getAttribute('data-sorted') === 'true';
         sortedDirection = this.getAttribute('data-sorted-direction');
         if (sorted) {
-          newSortedDirection = sortedDirection === ascending ? descending : ascending;
+          newSortedDirection = sortedDirection === 'ascending' ? 'descending' : 'ascending';
         } else {
           newSortedDirection = type.defaultSortDirection;
         }
@@ -108,7 +112,7 @@
     },
     types: {
       numeric: {
-        defaultSortDirection: descending,
+        defaultSortDirection: 'descending',
         compare: function(a, b) {
           var aa, bb;
           aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''));
@@ -123,7 +127,7 @@
         }
       },
       alpha: {
-        defaultSortDirection: ascending,
+        defaultSortDirection: 'ascending',
         compare: function(a, b) {
           var aa, bb;
           aa = a[0].toLowerCase();
@@ -140,6 +144,8 @@
     }
   };
 
-  window.sortable = sortable;
+  setTimeout(sortable.init, 0);
+
+  window.Sortable = sortable;
 
 }).call(this);

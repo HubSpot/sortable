@@ -30,23 +30,23 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre>ascending = <span class="string">'ascending'</span>
-descending = <span class="string">'descending'</span>
+            <div class="content"><div class='highlight'><pre>SELECTOR = <span class="string">'table[data-sortable]'</span>
 
 numberRegExp = <span class="regexp">/^-?[£$¤]?[\d,.]+%?$/</span>
 trimRegExp = <span class="regexp">/^\s+|\s+$/g</span>
 
-touchDevice = `<span class="javascript"><span class="string">'ontouchstart'</span> <span class="keyword">in</span> document.documentElement</span>`
+touchDevice = <span class="string">'ontouchstart'</span> <span class="keyword">of</span> document.documentElement
 clickEvent = <span class="keyword">if</span> touchDevice <span class="keyword">then</span> <span class="string">'touchstart'</span> <span class="keyword">else</span> <span class="string">'click'</span>
 
 sortable =
+  init: (options={}) -&gt;
+    options.selector ?= SELECTOR
 
-  init: -&gt;
-    tables = document.querySelectorAll <span class="string">'table[data-sortable]'</span>
+    tables = document.querySelectorAll options.selector
     sortable.initTable table <span class="keyword">for</span> table <span class="keyword">in</span> tables
 
   initTable: (table) -&gt;
-    <span class="keyword">return</span> <span class="keyword">if</span> table.tHead.rows.length <span class="keyword">isnt</span> <span class="number">1</span>
+    <span class="keyword">return</span> <span class="keyword">if</span> table.tHead?.rows.length <span class="keyword">isnt</span> <span class="number">1</span>
     <span class="keyword">return</span> <span class="keyword">if</span> table.getAttribute(<span class="string">'data-sortable-initialized'</span>) <span class="keyword">is</span> <span class="string">'true'</span>
 
     table.setAttribute <span class="string">'data-sortable-initialized'</span>, <span class="string">'true'</span>
@@ -67,7 +67,7 @@ sortable =
       sortedDirection = <span class="property">@getAttribute</span> <span class="string">'data-sorted-direction'</span>
 
       <span class="keyword">if</span> sorted
-        newSortedDirection = <span class="keyword">if</span> sortedDirection <span class="keyword">is</span> ascending <span class="keyword">then</span> descending <span class="keyword">else</span> ascending
+        newSortedDirection = <span class="keyword">if</span> sortedDirection <span class="keyword">is</span> <span class="string">'ascending'</span> <span class="keyword">then</span> <span class="string">'descending'</span> <span class="keyword">else</span> <span class="string">'ascending'</span>
       <span class="keyword">else</span>
         newSortedDirection = type.defaultSortDirection
 
@@ -106,9 +106,8 @@ sortable =
     node.textContent.replace trimRegExp, <span class="string">''</span>
 
   types:
-
     numeric:
-      defaultSortDirection: descending
+      defaultSortDirection: <span class="string">'descending'</span>
       compare: (a, b) -&gt;
         aa = parseFloat(a[<span class="number">0</span>].replace(<span class="regexp">/[^0-9.-]/g</span>, <span class="string">''</span>))
         bb = parseFloat(b[<span class="number">0</span>].replace(<span class="regexp">/[^0-9.-]/g</span>, <span class="string">''</span>))
@@ -117,7 +116,7 @@ sortable =
         bb - aa
 
     alpha:
-      defaultSortDirection: ascending
+      defaultSortDirection: <span class="string">'ascending'</span>
       compare: (a, b) -&gt;
         aa = a[<span class="number">0</span>].toLowerCase()
         bb = b[<span class="number">0</span>].toLowerCase()
@@ -125,7 +124,9 @@ sortable =
         <span class="keyword">return</span> -<span class="number">1</span> <span class="keyword">if</span> aa &lt; bb
         <span class="number">1</span>
 
-window.sortable = sortable</pre></div></div>
+setTimeout sortable.init, <span class="number">0</span>
+
+window.Sortable = sortable</pre></div></div>
             
         </li>
         

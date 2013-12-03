@@ -36,12 +36,13 @@
     <span class="comment">&lt;!-- ... --&gt;</span>
 <span class="tag">&lt;/<span class="title">table</span>&gt;</span></code></pre>
 <h5><code>init</code></h5>
-<p>To initialize all tables on the page, call <code>init</code>.</p>
-<pre><code class="lang-coffeescript">sortable.init()</code></pre>
+<p>All tables on the page will be automatically initted when the page is loaded.</p>
+<p>If you add tables with javascript, call <code>init</code> after they are added to the page:</p>
+<pre><code class="lang-coffeescript">Sortable.init()</code></pre>
 <h5><code>initTable</code></h5>
 <p>To initialize an individual table, call <code>initTable</code>.</p>
-<pre><code class="lang-coffeescript">exampleTable = document.querySelector(<span class="string">'#exampleTable[data-sortable]'</span>)
-sortable.initTable(exampleTable)</code></pre>
+<pre><code class="lang-coffeescript">exampleTable = document.querySelector(<span class="string">'#exampleTable'</span>)
+Sortable.initTable(exampleTable)</code></pre>
 <h4>Sorting options</h4>
 <h5><code>data-value</code></h5>
 <p>By default, sortable will automatically detect whether a column contains alpha or numeric data. If you&#39;d rather have a particular column sort on custom data, set the attribute <code>data-value</code> on a <code>&lt;td&gt;</code>.</p>
@@ -70,9 +71,9 @@ sortable.initTable(exampleTable)</code></pre>
 <span class="tag">&lt;/<span class="title">table</span>&gt;</span></code></pre>
 <p><!-- Resources for the demos --></p>
 <p><p style="-webkit-transform: translateZ(0)"></p></p>
-<script src="/sortable/js/sortable.js"></script>
+<p><script src="/sortable/js/sortable.js"></script></p>
 <link rel="stylesheet" href="/sortable/css/sortable-theme-light.css" />
-<script>setTimeout(function(){ sortable.init(); }, 0);</script></div></div></div></div><div class="hs3-public-footer"><div class="row-fluid hs-page-width-normal"><div class="span3 hidden-phone"><h3>HubSpot</h3><ul><li><a href="http://www.hubspot.com">Home</a></li><li><a href="http://www.hubspot.com/software">Products</a></li><li><a href="http://www.hubspot.com/internet-marketing-company/">About</a></li></ul></div><div class="span3"><h3>Projects</h3><ul><li><a href="http://github.hubspot.com/messenger">Messenger</a></li><li><a href="http://github.hubspot.com/facewall">Facewall</a></li><li><a href="http://github.hubspot.com/jquery-zoomer">jQuery Zoomer</a></li><li><a href="http://github.hubspot.com/humanize">Humanize</a></li><li><a href="http://github.hubspot.com/teeble">Teeble</a></li></ul></div><div class="span3"><h3>Development Team</h3><ul><li><a href="http://dev.hubspot.com">Home</a></li><li><a href="http://dev.hubspot.com/teams">Teams</a></li><li><a href="http://dev.hubspot.com/people">People</a></li><li><a href="http://dev.hubspot.com/jobs">Jobs</a></li></ul></div><div class="span3 hidden-phone"><h3>Developer API</h3><ul><li><a href="http://developers.hubspot.com/">Developer Documentation</a></li></ul></div></div></div><!-- Start of Async HubSpot Analytics Code -->
+</div></div></div></div><div class="hs3-public-footer"><div class="row-fluid hs-page-width-normal"><div class="span3 hidden-phone"><h3>HubSpot</h3><ul><li><a href="http://www.hubspot.com">Home</a></li><li><a href="http://www.hubspot.com/software">Products</a></li><li><a href="http://www.hubspot.com/internet-marketing-company/">About</a></li></ul></div><div class="span3"><h3>Projects</h3><ul><li><a href="http://github.hubspot.com/messenger">Messenger</a></li><li><a href="http://github.hubspot.com/facewall">Facewall</a></li><li><a href="http://github.hubspot.com/jquery-zoomer">jQuery Zoomer</a></li><li><a href="http://github.hubspot.com/humanize">Humanize</a></li><li><a href="http://github.hubspot.com/teeble">Teeble</a></li></ul></div><div class="span3"><h3>Development Team</h3><ul><li><a href="http://dev.hubspot.com">Home</a></li><li><a href="http://dev.hubspot.com/teams">Teams</a></li><li><a href="http://dev.hubspot.com/people">People</a></li><li><a href="http://dev.hubspot.com/jobs">Jobs</a></li></ul></div><div class="span3 hidden-phone"><h3>Developer API</h3><ul><li><a href="http://developers.hubspot.com/">Developer Documentation</a></li></ul></div></div></div><!-- Start of Async HubSpot Analytics Code -->
 <script type="text/javascript">
     (function(d,s,i,r) {
         if (d.getElementById(i)){return;}
