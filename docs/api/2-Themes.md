@@ -35,7 +35,6 @@ You can download a release (containing all 6 themes) [here](/sortable). Or you c
 <!-- Resources for the demos -->
 <p style="-webkit-transform: translateZ(0)"></p>
 <script src="/sortable/js/sortable.js"></script>
-<script>setTimeout(function(){ sortable.init(); }, 0);</script>
 <style>
 .hs-doc-content table {
     border: 0;

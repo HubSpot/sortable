@@ -35,7 +35,6 @@ For the most common usage of sortable, you'll want to include following:
 ```html
 <script src="sortable.min.js"></script>
 <link rel="stylesheet" href="sortable-theme-bootstrap.css" />
-<script>setTimeout(function(){ sortable.init(); }, 0);</script>
 ```
 
 Now any table with the attribute `data-sortable` will be made sortable. To get the styling, you'll also need to add a class name to the table to match the theme you chose:
@@ -75,4 +74,3 @@ Sortable was built by [Adam Schwartz](http://twitter.com/adamfschwartz)
 }
 </style>
 <link rel="stylesheet" href="/sortable/css/sortable-theme-bootstrap.css">
-<script>setTimeout(function(){ sortable.init(); }, 0);</script>

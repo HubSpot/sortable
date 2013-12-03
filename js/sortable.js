@@ -1,9 +1,7 @@
 (function() {
-  var ascending, clickEvent, descending, numberRegExp, sortable, touchDevice, trimRegExp;
+  var SELECTOR, clickEvent, numberRegExp, sortable, touchDevice, trimRegExp;
 
-  ascending = 'ascending';
-
-  descending = 'descending';
+  SELECTOR = 'table[data-sortable]';
 
   numberRegExp = /^-?[£$¤]?[\d,.]+%?$/;
 
@@ -16,7 +14,7 @@
   sortable = {
     init: function() {
       var table, tables, _i, _len, _results;
-      tables = document.querySelectorAll('table[data-sortable]');
+      tables = document.querySelectorAll(SELECTOR);
       _results = [];
       for (_i = 0, _len = tables.length; _i < _len; _i++) {
         table = tables[_i];
@@ -50,7 +48,7 @@
         sorted = this.getAttribute('data-sorted') === 'true';
         sortedDirection = this.getAttribute('data-sorted-direction');
         if (sorted) {
-          newSortedDirection = sortedDirection === ascending ? descending : ascending;
+          newSortedDirection = sortedDirection === 'ascending' ? 'descending' : 'ascending';
         } else {
           newSortedDirection = type.defaultSortDirection;
         }
@@ -108,7 +106,7 @@
     },
     types: {
       numeric: {
-        defaultSortDirection: descending,
+        defaultSortDirection: 'descending',
         compare: function(a, b) {
           var aa, bb;
           aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''));
@@ -123,7 +121,7 @@
         }
       },
       alpha: {
-        defaultSortDirection: ascending,
+        defaultSortDirection: 'ascending',
         compare: function(a, b) {
           var aa, bb;
           aa = a[0].toLowerCase();
@@ -140,6 +138,8 @@
     }
   };
 
-  window.sortable = sortable;
+  setTimeout(sortable.init, 0);
+
+  window.Sortable = sortable;
 
 }).call(this);
