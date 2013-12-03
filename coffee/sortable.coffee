@@ -7,8 +7,10 @@ touchDevice = 'ontouchstart' of document.documentElement
 clickEvent = if touchDevice then 'touchstart' else 'click'
 
 sortable =
-  init: ->
-    tables = document.querySelectorAll SELECTOR
+  init: (options={}) ->
+    options.selector ?= SELECTOR
+
+    tables = document.querySelectorAll options.selector
     sortable.initTable table for table in tables
 
   initTable: (table) ->

@@ -12,9 +12,15 @@
   clickEvent = touchDevice ? 'touchstart' : 'click';
 
   sortable = {
-    init: function() {
+    init: function(options) {
       var table, tables, _i, _len, _results;
-      tables = document.querySelectorAll(SELECTOR);
+      if (options == null) {
+        options = {};
+      }
+      if (options.selector == null) {
+        options.selector = SELECTOR;
+      }
+      tables = document.querySelectorAll(options.selector);
       _results = [];
       for (_i = 0, _len = tables.length; _i < _len; _i++) {
         table = tables[_i];
