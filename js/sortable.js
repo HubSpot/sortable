@@ -1,5 +1,5 @@
 (function() {
-  var SELECTOR, clickEvent, numberRegExp, sortable, touchDevice, trimRegExp;
+  var SELECTOR, addEventListener, clickEvent, numberRegExp, sortable, touchDevice, trimRegExp;
 
   SELECTOR = 'table[data-sortable]';
 
@@ -10,6 +10,14 @@
   touchDevice = 'ontouchstart' in document.documentElement;
 
   clickEvent = touchDevice ? 'touchstart' : 'click';
+
+  addEventListener = function(el, event, handler) {
+    if (el.addEventListener != null) {
+      return el.addEventListener(event, handler, false);
+    } else {
+      return el.attachEvent("on" + event, handler);
+    }
+  };
 
   sortable = {
     init: function(options) {
@@ -49,7 +57,7 @@
     setupClickableTH: function(table, th, i) {
       var type;
       type = sortable.getColumnType(table, i);
-      return th.addEventListener(clickEvent, function(e) {
+      return addEventListener(th, clickEvent, function(e) {
         var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
         sorted = this.getAttribute('data-sorted') === 'true';
         sortedDirection = this.getAttribute('data-sorted-direction');
