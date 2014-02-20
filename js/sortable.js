@@ -100,8 +100,13 @@
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         row = _ref[_i];
         text = sortable.getNodeValue(row.cells[i]);
-        if (text !== '' && text.match(numberRegExp)) {
-          return sortable.types.numeric;
+        if (text !== '') {
+          if (text.match(numberRegExp)) {
+            return sortable.types.numeric;
+          }
+          if (!isNaN(Date.parse(text))) {
+            return sortable.types.date;
+          }
         }
       }
       return sortable.types.alpha;
@@ -138,6 +143,21 @@
         defaultSortDirection: 'ascending',
         compare: function(a, b) {
           return a[0].localeCompare(b[0]);
+        }
+      },
+      date: {
+        defaultSortDirection: 'ascending',
+        compare: function(a, b) {
+          var aa, bb;
+          aa = Date.parse(a[0]);
+          bb = Date.parse(b[0]);
+          if (isNaN(aa)) {
+            aa = 0;
+          }
+          if (isNaN(bb)) {
+            bb = 0;
+          }
+          return aa - bb;
         }
       }
     }

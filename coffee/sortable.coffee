@@ -70,7 +70,12 @@ sortable =
   getColumnType: (table, i) ->
     for row in table.tBodies[0].rows
       text = sortable.getNodeValue row.cells[i]
-      return sortable.types.numeric if text isnt '' and text.match(numberRegExp)
+      if text isnt ''
+        if text.match(numberRegExp)
+          return sortable.types.numeric
+        if not isNaN Date.parse(text)
+          return sortable.types.date
+
     return sortable.types.alpha
 
   getNodeValue: (node) ->
@@ -93,6 +98,15 @@ sortable =
       defaultSortDirection: 'ascending'
       compare: (a, b) ->
         a[0].localeCompare b[0]
+
+    date:
+      defaultSortDirection: 'ascending'
+      compare: (a, b) ->
+        aa = Date.parse(a[0])
+        bb = Date.parse(b[0])
+        aa = 0 if isNaN(aa)
+        bb = 0 if isNaN(bb)
+        aa - bb
 
 setTimeout sortable.init, 0
 
