@@ -92,11 +92,7 @@ sortable =
     alpha:
       defaultSortDirection: 'ascending'
       compare: (a, b) ->
-        aa = a[0].toLowerCase()
-        bb = b[0].toLowerCase()
-        return 0 if aa is bb
-        return -1 if aa < bb
-        1
+        a[0].localeCompare b[0]
 
 setTimeout sortable.init, 0
 

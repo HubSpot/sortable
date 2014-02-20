@@ -137,16 +137,7 @@
       alpha: {
         defaultSortDirection: 'ascending',
         compare: function(a, b) {
-          var aa, bb;
-          aa = a[0].toLowerCase();
-          bb = b[0].toLowerCase();
-          if (aa === bb) {
-            return 0;
-          }
-          if (aa < bb) {
-            return -1;
-          }
-          return 1;
+          return a[0].localeCompare(b[0]);
         }
       }
     }
