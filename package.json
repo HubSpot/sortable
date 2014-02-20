@@ -1,6 +1,6 @@
 {
   "name": "sortable",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "The simplest, most elegant way to sort a table.",
   "author": "Adam Schwartz <adam.flynn.schwartz@gmail.com>",
   "license": "MIT",
