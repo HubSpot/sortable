@@ -83,8 +83,8 @@ sortable =
     numeric:
       defaultSortDirection: 'descending'
       compare: (a, b) ->
-        aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''))
-        bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''))
+        aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''), 10)
+        bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''), 10)
         aa = 0 if isNaN(aa)
         bb = 0 if isNaN(bb)
         bb - aa

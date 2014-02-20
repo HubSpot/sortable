@@ -123,8 +123,8 @@
         defaultSortDirection: 'descending',
         compare: function(a, b) {
           var aa, bb;
-          aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''));
-          bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''));
+          aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''), 10);
+          bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''), 10);
           if (isNaN(aa)) {
             aa = 0;
           }
