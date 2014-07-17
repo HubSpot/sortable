@@ -1,4 +1,20 @@
-(function() {
+(function (definition) {
+
+    // CommonJS
+    if (typeof exports === "object") {
+        module.exports = definition();
+
+    // RequireJS
+    } else if (typeof define === "function" && define.amd) {
+        define(definition);
+
+    // <script>
+    } else {
+        Sortable = definition();
+    }
+
+})(function() {
+
   var SELECTOR, addEventListener, clickEvent, numberRegExp, sortable, touchDevice, trimRegExp;
 
   SELECTOR = 'table[data-sortable]';
@@ -165,6 +181,6 @@
 
   setTimeout(sortable.init, 0);
 
-  window.Sortable = sortable;
+  return sortable;
 
-}).call(this);
+});
