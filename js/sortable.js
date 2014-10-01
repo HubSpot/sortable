@@ -59,6 +59,9 @@
       type = sortable.getColumnType(table, i);
       return addEventListener(th, clickEvent, function(e) {
         var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
+        var completed_event = new Event('sortable:sorted');
+        var start_event = new Event('sortable:start');
+        table.dispatchEvent(start_event);
         sorted = this.getAttribute('data-sorted') === 'true';
         sortedDirection = this.getAttribute('data-sorted-direction');
         if (sorted) {
@@ -91,6 +94,7 @@
           rowArrayObject = rowArray[_k];
           _results.push(tBody.appendChild(rowArrayObject[1]));
         }
+        table.dispatchEvent(completed_event);
         return _results;
       });
     },
