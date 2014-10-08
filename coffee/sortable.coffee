@@ -56,15 +56,16 @@ sortable =
       tBody = table.tBodies[0]
       rowArray = []
 
-      for row in tBody.rows
-        rowArray.push [sortable.getNodeValue(row.cells[i]), row]
+      for row, position in tBody.rows
+        rowArray.push [sortable.getNodeValue(row.cells[i]), row, position]
 
-      if sorted
-        rowArray.reverse()
-      else
-        rowArray.sort type.compare
-        if newSortedDirection is 'descending'
-          rowArray.reverse()
+      sign = if newSortedDirection is 'descending' then -1 else 1
+      rowArray.sort (a, b) ->
+        value = type.compare(a, b)
+        if value != 0
+          value * sign
+        else
+          a[2] - b[2]
 
       for rowArrayObject in rowArray
         tBody.appendChild rowArrayObject[1]
