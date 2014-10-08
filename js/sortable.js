@@ -64,7 +64,7 @@
         if (sorted) {
           newSortedDirection = sortedDirection === 'ascending' ? 'descending' : 'ascending';
         } else {
-          newSortedDirection = type.defaultSortDirection;
+          newSortedDirection = this.getAttribute('data-default-direction') || type.defaultSortDirection;
         }
         ths = this.parentNode.querySelectorAll('th');
         for (_i = 0, _len = ths.length; _i < _len; _i++) {
