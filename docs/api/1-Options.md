@@ -51,6 +51,23 @@ By default, sortable will automatically detect whether a column contains alpha o
 </table>
 ```
 
+##### `data-default-direction`
+
+By default, numbers will be sorted in descending order, dates and string in ascending order. You can change it using `data-default-direction` attribute with value `ascending` or `descending`.
+
+```html
+<table data-sortable>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th data-default-direction="ascending">Age</th>
+            <th>Brownie points</th>
+        </tr>
+    </thead>
+    <tbody><!-- ... --></tbody>
+</table>
+```
+
 ##### `th` `data-sortable="false"`
 
 To disable sorting on a particular column, add `data-sortable="false"` to the `<th>` for that column.

@@ -64,7 +64,7 @@
         if (sorted) {
           newSortedDirection = sortedDirection === 'ascending' ? 'descending' : 'ascending';
         } else {
-          newSortedDirection = type.defaultSortDirection;
+          newSortedDirection = this.getAttribute('data-default-direction') || type.defaultSortDirection;
         }
         ths = this.parentNode.querySelectorAll('th');
         for (_i = 0, _len = ths.length; _i < _len; _i++) {
@@ -85,6 +85,9 @@
           rowArray.reverse();
         } else {
           rowArray.sort(type.compare);
+          if (newSortedDirection === 'descending') {
+            rowArray.reverse();
+          }
         }
         _results = [];
         for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
@@ -136,7 +139,7 @@
           if (isNaN(bb)) {
             bb = 0;
           }
-          return bb - aa;
+          return aa - bb;
         }
       },
       alpha: {

@@ -43,7 +43,7 @@ sortable =
       if sorted
         newSortedDirection = if sortedDirection is 'ascending' then 'descending' else 'ascending'
       else
-        newSortedDirection = type.defaultSortDirection
+        newSortedDirection = @getAttribute('data-default-direction') || type.defaultSortDirection
 
       ths = @parentNode.querySelectorAll('th')
       for th in ths
@@ -63,6 +63,8 @@ sortable =
         rowArray.reverse()
       else
         rowArray.sort type.compare
+        if newSortedDirection is 'descending'
+          rowArray.reverse()
 
       for rowArrayObject in rowArray
         tBody.appendChild rowArrayObject[1]
@@ -92,7 +94,7 @@ sortable =
         bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''), 10)
         aa = 0 if isNaN(aa)
         bb = 0 if isNaN(bb)
-        bb - aa
+        aa - bb
 
     alpha:
       defaultSortDirection: 'ascending'
