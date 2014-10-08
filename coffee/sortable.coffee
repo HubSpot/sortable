@@ -37,10 +37,8 @@ sortable =
     type = sortable.getColumnType table, i
 
     addEventListener th, clickEvent, (e) ->
-      sorted = @getAttribute('data-sorted') is 'true'
-      sortedDirection = @getAttribute 'data-sorted-direction'
-
-      if sorted
+      if @getAttribute('data-sorted') is 'true'
+        sortedDirection = @getAttribute 'data-sorted-direction'
         newSortedDirection = if sortedDirection is 'ascending' then 'descending' else 'ascending'
       else
         newSortedDirection = type.defaultSortDirection
@@ -56,13 +54,16 @@ sortable =
       tBody = table.tBodies[0]
       rowArray = []
 
-      for row in tBody.rows
-        rowArray.push [sortable.getNodeValue(row.cells[i]), row]
+      for row, position in tBody.rows
+        rowArray.push [sortable.getNodeValue(row.cells[i]), row, position]
 
-      if sorted
-        rowArray.reverse()
-      else
-        rowArray.sort type.compare
+      sign = if newSortedDirection is 'descending' then -1 else 1
+      rowArray.sort (a, b) ->
+        value = type.compare(a, b)
+        if value != 0
+          value * sign
+        else
+          a[2] - b[2]
 
       for rowArrayObject in rowArray
         tBody.appendChild rowArrayObject[1]
@@ -92,7 +93,7 @@ sortable =
         bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''), 10)
         aa = 0 if isNaN(aa)
         bb = 0 if isNaN(bb)
-        bb - aa
+        aa - bb
 
     alpha:
       defaultSortDirection: 'ascending'

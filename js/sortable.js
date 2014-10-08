@@ -58,10 +58,9 @@
       var type;
       type = sortable.getColumnType(table, i);
       return addEventListener(th, clickEvent, function(e) {
-        var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
-        sorted = this.getAttribute('data-sorted') === 'true';
-        sortedDirection = this.getAttribute('data-sorted-direction');
-        if (sorted) {
+        var newSortedDirection, position, row, rowArray, rowArrayObject, sign, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
+        if (this.getAttribute('data-sorted') === 'true') {
+          sortedDirection = this.getAttribute('data-sorted-direction');
           newSortedDirection = sortedDirection === 'ascending' ? 'descending' : 'ascending';
         } else {
           newSortedDirection = type.defaultSortDirection;
@@ -77,15 +76,20 @@
         tBody = table.tBodies[0];
         rowArray = [];
         _ref = tBody.rows;
-        for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-          row = _ref[_j];
-          rowArray.push([sortable.getNodeValue(row.cells[i]), row]);
+        for (position = _j = 0, _len1 = _ref.length; _j < _len1; position = ++_j) {
+          row = _ref[position];
+          rowArray.push([sortable.getNodeValue(row.cells[i]), row, position]);
         }
-        if (sorted) {
-          rowArray.reverse();
-        } else {
-          rowArray.sort(type.compare);
-        }
+        sign = newSortedDirection === 'descending' ? -1 : 1;
+        rowArray.sort(function(a, b) {
+          var value;
+          value = type.compare(a, b);
+          if (value !== 0) {
+            return value * sign;
+          } else {
+            return a[2] - b[2];
+          }
+        });
         _results = [];
         for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
           rowArrayObject = rowArray[_k];
@@ -136,7 +140,7 @@
           if (isNaN(bb)) {
             bb = 0;
           }
-          return bb - aa;
+          return aa - bb;
         }
       },
       alpha: {
