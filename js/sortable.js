@@ -85,6 +85,9 @@
           rowArray.reverse();
         } else {
           rowArray.sort(type.compare);
+          if (newSortedDirection === 'descending') {
+            rowArray.reverse();
+          }
         }
         _results = [];
         for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
@@ -136,7 +139,7 @@
           if (isNaN(bb)) {
             bb = 0;
           }
-          return bb - aa;
+          return aa - bb;
         }
       },
       alpha: {
