@@ -58,10 +58,9 @@
       var type;
       type = sortable.getColumnType(table, i);
       return addEventListener(th, clickEvent, function(e) {
-        var newSortedDirection, position, row, rowArray, rowArrayObject, sign, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
-        sorted = this.getAttribute('data-sorted') === 'true';
-        sortedDirection = this.getAttribute('data-sorted-direction');
-        if (sorted) {
+        var newSortedDirection, position, row, rowArray, rowArrayObject, sign, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
+        if (this.getAttribute('data-sorted') === 'true') {
+          sortedDirection = this.getAttribute('data-sorted-direction');
           newSortedDirection = sortedDirection === 'ascending' ? 'descending' : 'ascending';
         } else {
           newSortedDirection = type.defaultSortDirection;

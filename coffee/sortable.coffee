@@ -37,10 +37,8 @@ sortable =
     type = sortable.getColumnType table, i
 
     addEventListener th, clickEvent, (e) ->
-      sorted = @getAttribute('data-sorted') is 'true'
-      sortedDirection = @getAttribute 'data-sorted-direction'
-
-      if sorted
+      if @getAttribute('data-sorted') is 'true'
+        sortedDirection = @getAttribute 'data-sorted-direction'
         newSortedDirection = if sortedDirection is 'ascending' then 'descending' else 'ascending'
       else
         newSortedDirection = type.defaultSortDirection
