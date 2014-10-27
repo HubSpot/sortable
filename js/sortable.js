@@ -107,6 +107,7 @@
           if (!isNaN(Date.parse(text))) {
             return sortable.types.date;
           }
+          break;
         }
       }
       return sortable.types.alpha;

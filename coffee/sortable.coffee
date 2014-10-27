@@ -75,7 +75,11 @@ sortable =
           return sortable.types.numeric
         if not isNaN Date.parse(text)
           return sortable.types.date
-
+        # If neither of the above are true,
+        #   but the text still isn't empty,
+        #   then the entire column should be considered
+        #   alphabetical.
+        break
     return sortable.types.alpha
 
   getNodeValue: (node) ->
