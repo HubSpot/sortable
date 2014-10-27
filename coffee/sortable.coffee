@@ -68,19 +68,26 @@ sortable =
         tBody.appendChild rowArrayObject[1]
 
   getColumnType: (table, i) ->
+    type = null
     for row in table.tBodies[0].rows
       text = sortable.getNodeValue row.cells[i]
       if text isnt ''
         if text.match(numberRegExp)
-          return sortable.types.numeric
-        if not isNaN Date.parse(text)
-          return sortable.types.date
-        # If neither of the above are true,
-        #   but the text still isn't empty,
-        #   then the entire column should be considered
-        #   alphabetical.
-        break
-    return sortable.types.alpha
+          if type? and type isnt sortable.types.numeric
+            type = sortable.types.alpha
+            break
+          else
+            type = sortable.types.numeric
+        else if not isNaN Date.parse(text)
+          if type? and type isnt sortable.types.date
+            type = sortable.types.alpha
+            break
+          else
+            type = sortable.types.date
+        else
+          type = sortable.types.alpha
+          break
+    return type
 
   getNodeValue: (node) ->
     return '' unless node
