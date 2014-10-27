@@ -95,21 +95,34 @@
       });
     },
     getColumnType: function(table, i) {
-      var row, text, _i, _len, _ref;
+      var row, text, type, _i, _len, _ref;
+      type = null;
       _ref = table.tBodies[0].rows;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         row = _ref[_i];
         text = sortable.getNodeValue(row.cells[i]);
         if (text !== '') {
           if (text.match(numberRegExp)) {
-            return sortable.types.numeric;
-          }
-          if (!isNaN(Date.parse(text))) {
-            return sortable.types.date;
+            if ((type != null) && type !== sortable.types.numeric) {
+              type = sortable.types.alpha;
+              break;
+            } else {
+              type = sortable.types.numeric;
+            }
+          } else if (!isNaN(Date.parse(text))) {
+            if ((type != null) && type !== sortable.types.date) {
+              type = sortable.types.alpha;
+              break;
+            } else {
+              type = sortable.types.date;
+            }
+          } else {
+            type = sortable.types.alpha;
+            break;
           }
         }
       }
-      return sortable.types.alpha;
+      return type;
     },
     getNodeValue: function(node) {
       if (!node) {
