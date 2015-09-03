@@ -12,7 +12,7 @@ Example:
 </table>
 ```
 
-##### `init`
+##### `init`(options)
 
 All tables on the page will be automatically initted when the page is loaded.
 
@@ -29,11 +29,12 @@ The following are the default options set by the core Sortable library. You may 
 ```coffeescript
 {
     selector: 'table[data-sortable]',
+    onSort: function(table) {},
     onSorted: function(table) {}
 }
 ```
 
-##### `initTable`
+##### `initTable`(table)
 
 To initialize an individual table, call `initTable`.
 
@@ -79,34 +80,32 @@ To disable sorting on a particular column, add `data-sortable="false"` to the `<
 </table>
 ```
 
-#### Event Callback Example
+#### Events
 
-This JavaScript will re-adjust 'even' / 'odd' CSS classes of `<tr>` elements in a table after sorting has completed.
+Instead of event callback options in `init`, you may also listen to these fired events:
+
+**Event Type**    | **Description**
+----------------- | -----------------------------------------------------------------------
+`Sortable.sort`   | This event fires immediately when the column sort is triggered.
+`Sortable.sorted` | This event is fired when the sorted column is made visible to the user.
+
+This example JavaScript showcases how to toggle a 'sorted' class on the `<table>` element.
 
 ```javascript
-var fixEvenOdd = function(table) {
-    var i, len, row, rows;
+var i, table;
+var tables = document.querySelectorAll('table[data-sortable]');
 
-    if ('function' === typeof table.querySelectorAll && 'object' === typeof table.classList) {
-        rows = table.querySelectorAll('tbody tr');
+for (i = 0; i < tables.length; i++) {
+    table = tables[i];
 
-        for (i = 0, len = rows.length; i < len; i++) {
-            row = rows[i];
+    table.addEventListener('Sortable.sort', function (e) {
+        e.target.classList.add('sorting');
+    }, false);
 
-            if (i % 2 === 0 && row.classList.contains('odd')) {
-                row.classList.remove('odd');
-                row.classList.add('even');
-            } else if (i % 2 === 1 && row.classList.contains('even')) {
-                row.classList.remove('even');
-                row.classList.add('odd');
-            }
-        }
-    }
-};
-
-Sortable.init({
-    onSorted: fixEvenOdd
-});
+    table.addEventListener('Sortable.sorted', function (e) {
+        e.target.classList.remove('sorting');
+    }, false);
+}
 ```
 
 <!-- Resources for the demos -->
