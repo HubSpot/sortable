@@ -1,5 +1,5 @@
 (function() {
-  var SELECTOR, addEventListener, clickEvent, numberRegExp, sortable, touchDevice, trimRegExp;
+  var SELECTOR, addEventListener, clickEvent, numberRegExp, onSort, onSorted, sortable, touchDevice, trimRegExp;
 
   SELECTOR = 'table[data-sortable]';
 
@@ -10,6 +10,10 @@
   touchDevice = 'ontouchstart' in document.documentElement;
 
   clickEvent = touchDevice ? 'touchstart' : 'click';
+
+  onSort = null;
+
+  onSorted = null;
 
   addEventListener = function(el, event, handler) {
     if (el.addEventListener != null) {
@@ -27,6 +31,12 @@
       }
       if (options.selector == null) {
         options.selector = SELECTOR;
+      }
+      if (onSort == null) {
+        onSort = typeof options.onSort === 'function' ? options.onSort : void 0;
+      }
+      if (onSorted == null) {
+        onSorted = typeof options.onSorted === 'function' ? options.onSorted : void 0;
       }
       tables = document.querySelectorAll(options.selector);
       _results = [];
@@ -58,9 +68,20 @@
       var type;
       type = sortable.getColumnType(table, i);
       return addEventListener(th, clickEvent, function(e) {
-        var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
+        var newSortedDirection, row, rowArray, rowArrayObject, sortEvent, sorted, sortedDirection, sortedEvent, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref;
         sorted = this.getAttribute('data-sorted') === 'true';
         sortedDirection = this.getAttribute('data-sorted-direction');
+        if (typeof CustomEvent === 'function') {
+          sortEvent = new CustomEvent('Sortable.sort', {
+            bubbles: true
+          });
+          if (typeof table.dispatchEvent === "function") {
+            table.dispatchEvent(sortEvent);
+          }
+        }
+        if (typeof onSort === "function") {
+          onSort(table);
+        }
         if (sorted) {
           newSortedDirection = sortedDirection === 'ascending' ? 'descending' : 'ascending';
         } else {
@@ -86,12 +107,19 @@
         } else {
           rowArray.sort(type.compare);
         }
-        _results = [];
         for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
           rowArrayObject = rowArray[_k];
-          _results.push(tBody.appendChild(rowArrayObject[1]));
+          tBody.appendChild(rowArrayObject[1]);
         }
-        return _results;
+        if (typeof CustomEvent === 'function') {
+          sortedEvent = new CustomEvent('Sortable.sorted', {
+            bubbles: true
+          });
+          if (typeof table.dispatchEvent === "function") {
+            table.dispatchEvent(sortedEvent);
+          }
+        }
+        return typeof onSorted === "function" ? onSorted(table) : void 0;
       });
     },
     getColumnType: function(table, i) {

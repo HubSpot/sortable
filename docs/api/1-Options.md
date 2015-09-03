@@ -12,7 +12,7 @@ Example:
 </table>
 ```
 
-##### `init`
+##### `init`(options)
 
 All tables on the page will be automatically initted when the page is loaded.
 
@@ -22,7 +22,19 @@ If you add tables with javascript, call `init` after they are added to the page:
 Sortable.init()
 ```
 
-##### `initTable`
+##### Default Options
+
+The following are the default options set by the core Sortable library. You may change them by passing new options to `init`.
+
+```coffeescript
+{
+    selector: 'table[data-sortable]',
+    onSort: function(table) {},
+    onSorted: function(table) {}
+}
+```
+
+##### `initTable`(table)
 
 To initialize an individual table, call `initTable`.
 
@@ -66,6 +78,34 @@ To disable sorting on a particular column, add `data-sortable="false"` to the `<
     </thead>
     <tbody><!-- ... --></tbody>
 </table>
+```
+
+#### Events
+
+Instead of event callback options in `init`, you may also listen to these fired events:
+
+**Event Type**    | **Description**
+----------------- | -----------------------------------------------------------------------
+`Sortable.sort`   | This event fires immediately when the column sort is triggered.
+`Sortable.sorted` | This event is fired when the sorted column is made visible to the user.
+
+This example JavaScript showcases how to toggle a 'sorted' class on the `<table>` element.
+
+```javascript
+var i, table;
+var tables = document.querySelectorAll('table[data-sortable]');
+
+for (i = 0; i < tables.length; i++) {
+    table = tables[i];
+
+    table.addEventListener('Sortable.sort', function (e) {
+        e.target.classList.add('sorting');
+    }, false);
+
+    table.addEventListener('Sortable.sorted', function (e) {
+        e.target.classList.remove('sorting');
+    }, false);
+}
 ```
 
 <!-- Resources for the demos -->
