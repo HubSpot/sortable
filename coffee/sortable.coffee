@@ -6,6 +6,8 @@ trimRegExp = /^\s+|\s+$/g
 touchDevice = 'ontouchstart' of document.documentElement
 clickEvent = if touchDevice then 'touchstart' else 'click'
 
+onSorted = null
+
 addEventListener = (el, event, handler) ->
   if el.addEventListener?
     el.addEventListener event, handler, false
@@ -15,6 +17,8 @@ addEventListener = (el, event, handler) ->
 sortable =
   init: (options={}) ->
     options.selector ?= SELECTOR
+
+    onSorted ?= if typeof options.onSorted is 'function' then options.onSorted
 
     tables = document.querySelectorAll options.selector
     sortable.initTable table for table in tables
@@ -66,6 +70,8 @@ sortable =
 
       for rowArrayObject in rowArray
         tBody.appendChild rowArrayObject[1]
+
+      onSorted?(table)
 
   getColumnType: (table, i) ->
     for row in table.tBodies[0].rows

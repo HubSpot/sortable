@@ -22,6 +22,17 @@ If you add tables with javascript, call `init` after they are added to the page:
 Sortable.init()
 ```
 
+##### Default Options
+
+The following are the default options set by the core Sortable library. You may change them by passing new options to `init`.
+
+```coffeescript
+{
+    selector: 'table[data-sortable]',
+    onSorted: function(table) {}
+}
+```
+
 ##### `initTable`
 
 To initialize an individual table, call `initTable`.
@@ -66,6 +77,36 @@ To disable sorting on a particular column, add `data-sortable="false"` to the `<
     </thead>
     <tbody><!-- ... --></tbody>
 </table>
+```
+
+#### Event Callback Example
+
+This JavaScript will re-adjust 'even' / 'odd' CSS classes of `<tr>` elements in a table after sorting has completed.
+
+```javascript
+var fixEvenOdd = function(table) {
+    var i, len, row, rows;
+
+    if ('function' === typeof table.querySelectorAll && 'object' === typeof table.classList) {
+        rows = table.querySelectorAll('tbody tr');
+
+        for (i = 0, len = rows.length; i < len; i++) {
+            row = rows[i];
+
+            if (i % 2 === 0 && row.classList.contains('odd')) {
+                row.classList.remove('odd');
+                row.classList.add('even');
+            } else if (i % 2 === 1 && row.classList.contains('even')) {
+                row.classList.remove('even');
+                row.classList.add('odd');
+            }
+        }
+    }
+};
+
+Sortable.init({
+    onSorted: fixEvenOdd
+});
 ```
 
 <!-- Resources for the demos -->
