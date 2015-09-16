@@ -41,7 +41,7 @@
       return _results;
     },
     initTable: function(table) {
-      var i, th, ths, _i, _len, _ref;
+      var defaultSort, i, th, ths, _i, _len, _ref;
       if (((_ref = table.tHead) != null ? _ref.rows.length : void 0) !== 1) {
         return;
       }
@@ -54,6 +54,10 @@
         th = ths[i];
         if (th.getAttribute('data-sortable') !== 'false') {
           sortable.setupClickableTH(table, th, i);
+        }
+        defaultSort = th.getAttribute('data-default-sort');
+        if (defaultSort) {
+          sortable.sort(th, defaultSort);
         }
       }
       return table;
@@ -120,12 +124,13 @@
       }
       return _results;
     },
-    sort: function(clickedEl) {
-      var columnIndex, compare, i, item, newSortedDirection, position, row, rowArray, sorted, sortedDirection, tBody, table, th, ths, type, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
+    sort: function(clickedEl, sortedDirection) {
+      var columnIndex, compare, i, item, newSortedDirection, position, row, rowArray, sorted, tBody, table, th, ths, type, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
+      console.log('sorting', clickedEl, sortedDirection);
       table = clickedEl.parentNode.parentNode.parentNode;
       ths = clickedEl.parentNode.querySelectorAll('th');
       sorted = clickedEl.getAttribute('data-sorted') === 'true';
-      sortedDirection = clickedEl.getAttribute('data-sorted-direction');
+      sortedDirection = sortedDirection || clickedEl.getAttribute('data-sorted-direction');
       for (i = _i = 0, _len = ths.length; _i < _len; i = ++_i) {
         th = ths[i];
         th.setAttribute('data-sorted', 'false');

@@ -31,6 +31,9 @@ sortable =
     for th, i in ths
       if th.getAttribute('data-sortable') isnt 'false'
         sortable.setupClickableTH table, th, i
+      defaultSort = th.getAttribute('data-default-sort')
+      if defaultSort
+        sortable.sort th, defaultSort
 
     table
 
@@ -71,12 +74,12 @@ sortable =
     sortable.typesObject = {}
     sortable.typesObject[type.name] = type for type in types
 
-  sort: (clickedEl) ->
+  sort: (clickedEl, sortedDirection) ->
     table = clickedEl.parentNode.parentNode.parentNode
     ths = clickedEl.parentNode.querySelectorAll('th')
 
     sorted = clickedEl.getAttribute('data-sorted') is 'true'
-    sortedDirection = clickedEl.getAttribute 'data-sorted-direction'
+    sortedDirection = sortedDirection or clickedEl.getAttribute 'data-sorted-direction'
 
     for th, i in ths
       th.setAttribute 'data-sorted', 'false'
