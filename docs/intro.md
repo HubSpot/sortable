@@ -10,6 +10,12 @@ Here is a demo of the “Bootstrap” theme.
 <table class="sortable-theme-bootstrap" data-sortable> <thead> <tr> <th data-sortable="false">Browser</th> <th data-sorted="true" data-sorted-direction="descending">Usage</th> <th>Initial release</th> <th>Stable version</th> </tr> </thead> <tbody> <tr> <td>Chrome</td> <td>42.68%</td> <td data-value="2008">September 2, 2008</td> <td>31.0.1650.57</td> </tr> <tr> <td>Internet Explorer</td> <td>25.44%</td> <td data-value="1995">August 16, 1995</td> <td>11.0.1</td> </tr> <tr> <td>Firefox</td> <td>20.01%</td> <td data-value="2002">September 23, 2002</td> <td>25.0.1</td> </tr> <tr> <td>Safari</td> <td>8.39%</td> <td data-value="2003">January 7, 2003</td> <td>7.0</td> </tr> <tr> <td>Opera</td> <td>1.03%</td> <td data-value="1994">Late 1994</td> <td>18.0.1284.49</td> </tr> <tr> <td>Other</td> <td data-value="0">2.44%</td> <td data-value="-1"></td> <td></td> </tr> </tbody> </table>
 <p style="display: none"></p>
 
+#### Install with Eager
+
+The easiest way to add Sortable to your site is with [Eager](http://eager.io). Click Install to see a live preview of Sortable on your website.
+
+<iframe style="height: 48px; width: 180px" src="//install.eager.io?appId=sortable" allowtransparency="true" scroll="no" frameBorder="0"></iframe>
+
 #### Features
 
 - Drop-in script and styles
