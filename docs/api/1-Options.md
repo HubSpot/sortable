@@ -16,7 +16,7 @@ Example:
 
 All tables on the page will be automatically initted when the page is loaded.
 
-If you add tables with javascript, call `init` after they are added to the page:
+If you add tables with JavaScript, call `init` after they are added to the page:
 
 ```coffeescript
 Sortable.init()
@@ -67,6 +67,68 @@ To disable sorting on a particular column, add `data-sortable="false"` to the `<
     <tbody><!-- ... --></tbody>
 </table>
 ```
+
+##### `th` `data-sortable-type="TYPE_NAME"`
+
+By default, the `type` of data in each column is determined by reading the first cell of a column and trying to `match` it to the list of types. To specify a type directly, use `data-sortable-type`.
+
+The default types supplied by Sortable are `alpha`, `numeric`, and `date`.
+
+```html
+<table data-sortable>
+    <thead>
+        <tr>
+            <th data-sortable-type="alpha">Numbers sorted alphabetically</th>
+            <!-- ... -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>10</td>
+            <td>2</td>
+            <td>312</td>
+            <td>4</td>
+        </tr>
+        <!-- ... -->
+    </tbody>
+</table>
+```
+
+#### Custom Types
+
+The default types supplied by Sortable are `alpha`, `numeric`, and `date`. To supply you own, call `Sortable.setupTypes(customTypesArray)` and pass in your custom types array.
+
+Here’s how Sortable internally sets up the defaults.
+
+```coffeescript
+sortable.setupTypes [{
+  name: 'numeric'
+  defaultSortDirection: 'descending'
+  match: (a) -> a.match numberRegExp
+  comparator: (a) -> parseFloat(a.replace(/[^0-9.-]/g, ''), 10) or 0
+}, {
+  name: 'date'
+  defaultSortDirection: 'ascending'
+  reverse: true
+  match: (a) -> not isNaN Date.parse a
+  comparator: (a) -> Date.parse(a) or 0
+}, {
+  name: 'alpha'
+  defaultSortDirection: 'ascending'
+  match: -> true
+  compare: (a, b) -> a.localeCompare b
+}]
+```
+
+Each type must specify the following:
+
+- A `name` which is used to identify the type, in particular the `data-sortable-type="NAME"` attibute which can be specified on a `th`.
+- A `defaultSortDirection` which can be either `ascending` or `descending`.
+- A `match` function which is used to decide which columns are which types (unless `data-sortable-type` is specified).
+- Either a `comparator` or a `compare` function for the custom sorting handled by this type:
+    - `comparator` is used when you want to simply write a function to process the values before the each sort comparison is made by Sortable.
+    - `compare` is used when you want to actually do handle the entire sort comparison yourself.
+- Optionally specify `reverse` to change what `ascending` and `descending` mean with respect to the sort direction of the data for this column type.
 
 <!-- Resources for the demos -->
 <p style="-webkit-transform: translateZ(0)"></p>
