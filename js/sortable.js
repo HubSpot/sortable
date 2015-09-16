@@ -1,5 +1,5 @@
 (function() {
-  var SELECTOR, addEventListener, clickEvent, numberRegExp, sortable, touchDevice, trimRegExp;
+  var SELECTOR, addEventListener, clickEvents, numberRegExp, sortable, touchDevice, trimRegExp;
 
   SELECTOR = 'table[data-sortable]';
 
@@ -7,9 +7,13 @@
 
   trimRegExp = /^\s+|\s+$/g;
 
+  clickEvents = ['click'];
+
   touchDevice = 'ontouchstart' in document.documentElement;
 
-  clickEvent = touchDevice ? 'touchstart' : 'click';
+  if (touchDevice) {
+    clickEvents.push('touchstart');
+  }
 
   addEventListener = function(el, event, handler) {
     if (el.addEventListener != null) {
@@ -55,10 +59,15 @@
       return table;
     },
     setupClickableTH: function(table, th, i) {
-      var type;
+      var eventName, onClick, type, _i, _len, _results;
       type = sortable.getColumnType(table, i);
-      return addEventListener(th, clickEvent, function(e) {
-        var newSortedDirection, row, rowArray, rowArrayObject, sorted, sortedDirection, tBody, ths, _i, _j, _k, _len, _len1, _len2, _ref, _results;
+      onClick = function(e) {
+        var compare, item, newSortedDirection, position, row, rowArray, sorted, sortedDirection, tBody, ths, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
+        if (event.handled !== true) {
+          event.handled = true;
+        } else {
+          return false;
+        }
         sorted = this.getAttribute('data-sorted') === 'true';
         sortedDirection = this.getAttribute('data-sorted-direction');
         if (sorted) {
@@ -76,95 +85,152 @@
         this.setAttribute('data-sorted-direction', newSortedDirection);
         tBody = table.tBodies[0];
         rowArray = [];
-        _ref = tBody.rows;
-        for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-          row = _ref[_j];
-          rowArray.push([sortable.getNodeValue(row.cells[i]), row]);
-        }
-        if (sorted) {
-          rowArray.reverse();
+        if (!sorted) {
+          if (type.compare != null) {
+            _compare = type.compare;
+          } else {
+            _compare = function(a, b) {
+              return b - a;
+            };
+          }
+          compare = function(a, b) {
+            if (a[0] === b[0]) {
+              return a[2] - b[2];
+            }
+            if (type.reverse) {
+              return _compare(b[0], a[0]);
+            } else {
+              return _compare(a[0], b[0]);
+            }
+          };
+          _ref = tBody.rows;
+          for (position = _j = 0, _len1 = _ref.length; _j < _len1; position = ++_j) {
+            row = _ref[position];
+            value = sortable.getNodeValue(row.cells[i]);
+            if (type.comparator != null) {
+              value = type.comparator(value);
+            }
+            rowArray.push([value, row, position]);
+          }
+          rowArray.sort(compare);
+          for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
+            row = rowArray[_k];
+            tBody.appendChild(row[1]);
+          }
         } else {
-          rowArray.sort(type.compare);
+          _ref1 = tBody.rows;
+          for (_l = 0, _len3 = _ref1.length; _l < _len3; _l++) {
+            item = _ref1[_l];
+            rowArray.push(item);
+          }
+          rowArray.reverse();
+          for (_m = 0, _len4 = rowArray.length; _m < _len4; _m++) {
+            row = rowArray[_m];
+            tBody.appendChild(row);
+          }
         }
-        _results = [];
-        for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
-          rowArrayObject = rowArray[_k];
-          _results.push(tBody.appendChild(rowArrayObject[1]));
+        if (typeof window['CustomEvent'] === 'function') {
+          return typeof table.dispatchEvent === "function" ? table.dispatchEvent(new CustomEvent('Sortable.sorted', {
+            bubbles: true
+          })) : void 0;
         }
-        return _results;
-      });
+      };
+      _results = [];
+      for (_i = 0, _len = clickEvents.length; _i < _len; _i++) {
+        eventName = clickEvents[_i];
+        _results.push(addEventListener(th, eventName, onClick));
+      }
+      return _results;
     },
     getColumnType: function(table, i) {
-      var row, text, _i, _len, _ref;
-      _ref = table.tBodies[0].rows;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        row = _ref[_i];
+      var row, specified, text, type, _i, _j, _len, _len1, _ref, _ref1, _ref2;
+      specified = (_ref = table.querySelectorAll('th')[i]) != null ? _ref.getAttribute('data-sortable-type') : void 0;
+      if (specified != null) {
+        return sortable.typesObject[specified];
+      }
+      _ref1 = table.tBodies[0].rows;
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        row = _ref1[_i];
         text = sortable.getNodeValue(row.cells[i]);
-        if (text !== '') {
-          if (text.match(numberRegExp)) {
-            return sortable.types.numeric;
-          }
-          if (!isNaN(Date.parse(text))) {
-            return sortable.types.date;
+        _ref2 = sortable.types;
+        for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
+          type = _ref2[_j];
+          if (type.match(text)) {
+            return type;
           }
         }
       }
-      return sortable.types.alpha;
+      return sortable.typesObject.alpha;
     },
     getNodeValue: function(node) {
+      var dataValue;
       if (!node) {
         return '';
       }
-      if (node.getAttribute('data-value') !== null) {
-        return node.getAttribute('data-value');
+      dataValue = node.getAttribute('data-value');
+      if (dataValue !== null) {
+        return dataValue;
       }
       if (typeof node.innerText !== 'undefined') {
         return node.innerText.replace(trimRegExp, '');
       }
       return node.textContent.replace(trimRegExp, '');
     },
-    types: {
-      numeric: {
-        defaultSortDirection: 'descending',
-        compare: function(a, b) {
-          var aa, bb;
-          aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''), 10);
-          bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''), 10);
-          if (isNaN(aa)) {
-            aa = 0;
-          }
-          if (isNaN(bb)) {
-            bb = 0;
-          }
-          return bb - aa;
-        }
-      },
-      alpha: {
-        defaultSortDirection: 'ascending',
-        compare: function(a, b) {
-          return a[0].localeCompare(b[0]);
-        }
-      },
-      date: {
-        defaultSortDirection: 'ascending',
-        compare: function(a, b) {
-          var aa, bb;
-          aa = Date.parse(a[0]);
-          bb = Date.parse(b[0]);
-          if (isNaN(aa)) {
-            aa = 0;
-          }
-          if (isNaN(bb)) {
-            bb = 0;
-          }
-          return aa - bb;
-        }
+    setupTypes: function(types) {
+      var type, _i, _len, _results;
+      sortable.types = types;
+      sortable.typesObject = {};
+      _results = [];
+      for (_i = 0, _len = types.length; _i < _len; _i++) {
+        type = types[_i];
+        _results.push(sortable.typesObject[type.name] = type);
       }
+      return _results;
     }
   };
 
+  sortable.setupTypes([
+    {
+      name: 'numeric',
+      defaultSortDirection: 'descending',
+      match: function(a) {
+        return a.match(numberRegExp);
+      },
+      comparator: function(a) {
+        return parseFloat(a.replace(/[^0-9.-]/g, ''), 10) || 0;
+      }
+    }, {
+      name: 'date',
+      defaultSortDirection: 'ascending',
+      reverse: true,
+      match: function(a) {
+        return !isNaN(Date.parse(a));
+      },
+      comparator: function(a) {
+        return Date.parse(a) || 0;
+      }
+    }, {
+      name: 'alpha',
+      defaultSortDirection: 'ascending',
+      match: function() {
+        return true;
+      },
+      compare: function(a, b) {
+        return a.localeCompare(b);
+      }
+    }
+  ]);
+
   setTimeout(sortable.init, 0);
 
-  window.Sortable = sortable;
+  if (typeof define === 'function' && define.amd) {
+    define(function() {
+      return sortable;
+    });
+  } else if (typeof exports !== 'undefined') {
+    module.exports = sortable;
+  } else {
+    window.Sortable = sortable;
+  }
 
 }).call(this);
