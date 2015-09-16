@@ -85,8 +85,8 @@
 
         .button {
             display: inline-block;
-            border: 2px solid #333;
-            color: #333;
+            border: 2px solid #fff;
+            color: #fff;
             padding: 1em 1.25em;
             font-weight: 500;
             text-transform: uppercase;
@@ -99,8 +99,28 @@
         }
 
         .button.dark {
-            background: #333;
+            background: #fff;
+            color: #0bab74;
+        }
+
+        table.showcase.hero {
+            background: #14c589;
             color: #fff;
+        }
+
+        table.showcase.hero:after {
+            border-top-color: #fff
+        }
+
+        table.showcase.hero table[data-sortable].sortable-theme-bootstrap {
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        table.showcase.hero table[data-sortable].sortable-theme-bootstrap th[data-sorted="true"] {
+            color: #0daf77;
+            background: #b8f1dd;
+            border-bottom-color: #22bd88;
         }
 
         table.showcase .showcase-inner table[data-sortable] {
@@ -112,7 +132,9 @@
         }
 
         table.showcase .showcase-inner p.source {
-            color: #888;
+            color: rgba(255, 255, 255, .7);
+            font-weight: 300;
+            letter-spacing: .01em;
             text-align: center;
             font-size: 12px;
             margin: 0 0 3em;
@@ -137,6 +159,10 @@
             table.showcase .showcase-inner table[data-sortable] tr *:nth-child(3) {
                 display: none;
             }
+        }
+
+        table.showcase.about {
+            background: #fff1dd;
         }
 
         table.showcase.about {
@@ -243,7 +269,7 @@
                 <a class="button" href="http://github.com/hubspot/sortable">★ On Github</a> &nbsp;&nbsp;
                 <a class="button dark" href="https://github.com/HubSpot/sortable/releases">Download</a>
             </p>
-            <table class="sortable-theme-light" data-sortable>
+            <table class="sortable-theme-bootstrap" data-sortable>
                 <thead>
                     <tr>
                         <th data-sortable="false">Browser</th>
@@ -299,7 +325,7 @@
 
     <table class="showcase about"><tr><td>
         <div class="showcase-inner">
-            <h1>How to Use</h1>
+            <h1>About</h1>
             <p>Sortable is an open-source javascript and CSS library which adds sorting functionality to tables. It is tiny (<code>&lt;2kb</code>) and has no dependencies.</p>
             <p>To use, first <a href="https://github.com/HubSpot/sortable/releases" target="_blank">download the latest release</a>.
             <p>Then simply add <code>sortable.min.js</code> and a <a href="https://github.com/HubSpot/sortable/tree/master/css" target="_blank">theme file</a> to your page:</p>
@@ -313,6 +339,18 @@
             <p>And that's it! Learn more by visiting the <a href="/sortable">documentation</a>.
         </div>
     </td></tr></table>
+
+    <table class="showcase install"><tr><td>
+        <div class="showcase-inner">
+            <h1>Install</h1>
+            <p>The easiest way to add Sortable onto your site is with <a href="http://eager.io" style="color: #bf0c78">Eager</a>.</p>
+            <p>Click Install to see a live preview of sorted tables on your website.</p>
+            <center>
+                <iframe style="height: 48px; width: 180px" src="//install.eager.io?appId=sortable" allowtransparency="true" scroll="no" frameBorder="0"></iframe>
+            </center>
+        </div>
+    </td></tr></table>
+
     <table id="themeShowcase" class="showcase themes sortable-theme-bootstrap"><tr><td>
         <div class="showcase-inner">
             <h1>Themes</h1>
