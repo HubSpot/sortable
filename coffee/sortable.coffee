@@ -3,8 +3,9 @@ SELECTOR = 'table[data-sortable]'
 numberRegExp = /^-?[£$¤]?[\d,.]+%?$/
 trimRegExp = /^\s+|\s+$/g
 
+clickEvents = ['click']
 touchDevice = 'ontouchstart' of document.documentElement
-clickEvent = if touchDevice then 'touchstart' else 'click'
+clickEvents.push 'touchstart' if touchDevice
 
 addEventListener = (el, event, handler) ->
   if el.addEventListener?
@@ -36,7 +37,12 @@ sortable =
   setupClickableTH: (table, th, i) ->
     type = sortable.getColumnType table, i
 
-    addEventListener th, clickEvent, (e) ->
+    onClick = (e) ->
+      if event.handled isnt true
+        event.handled = true
+      else
+        return false
+
       sorted = @getAttribute('data-sorted') is 'true'
       sortedDirection = @getAttribute 'data-sorted-direction'
 
@@ -56,58 +62,90 @@ sortable =
       tBody = table.tBodies[0]
       rowArray = []
 
-      for row in tBody.rows
-        rowArray.push [sortable.getNodeValue(row.cells[i]), row]
+      if not sorted
+        if type.compare?
+          _compare = type.compare
+        else
+          _compare = (a, b) ->
+            b - a
 
-      if sorted
-        rowArray.reverse()
+        compare = (a, b) ->
+          if a[0] is b[0]
+            return a[2] - b[2]
+
+          if type.reverse
+            _compare b[0], a[0]
+          else
+            _compare a[0], b[0]
+
+        for row, position in tBody.rows
+          value = sortable.getNodeValue(row.cells[i])
+          if type.comparator?
+            value = type.comparator(value)
+
+          rowArray.push [value, row, position]
+
+        rowArray.sort compare
+        tBody.appendChild row[1] for row in rowArray
       else
-        rowArray.sort type.compare
+        rowArray.push item for item in tBody.rows
+        rowArray.reverse()
+        tBody.appendChild row for row in rowArray
 
-      for rowArrayObject in rowArray
-        tBody.appendChild rowArrayObject[1]
+      if typeof window['CustomEvent'] is 'function'
+        table.dispatchEvent?(new CustomEvent 'Sortable.sorted', { bubbles: true })
+
+    for eventName in clickEvents
+      addEventListener th, eventName, onClick
 
   getColumnType: (table, i) ->
+    specified = table.querySelectorAll('th')[i]?.getAttribute('data-sortable-type')
+    return sortable.typesObject[specified] if specified?
+
     for row in table.tBodies[0].rows
       text = sortable.getNodeValue row.cells[i]
-      if text isnt ''
-        if text.match(numberRegExp)
-          return sortable.types.numeric
-        if not isNaN Date.parse(text)
-          return sortable.types.date
 
-    return sortable.types.alpha
+      for type in sortable.types
+        if type.match text
+          return type
+
+    return sortable.typesObject.alpha
 
   getNodeValue: (node) ->
     return '' unless node
-    return node.getAttribute('data-value') if node.getAttribute('data-value') isnt null
+    dataValue = node.getAttribute 'data-value'
+    return dataValue if dataValue isnt null
     return node.innerText.replace(trimRegExp, '') unless typeof node.innerText is 'undefined'
     node.textContent.replace trimRegExp, ''
 
-  types:
-    numeric:
-      defaultSortDirection: 'descending'
-      compare: (a, b) ->
-        aa = parseFloat(a[0].replace(/[^0-9.-]/g, ''), 10)
-        bb = parseFloat(b[0].replace(/[^0-9.-]/g, ''), 10)
-        aa = 0 if isNaN(aa)
-        bb = 0 if isNaN(bb)
-        bb - aa
+  setupTypes: (types) ->
+    sortable.types = types
+    sortable.typesObject = {}
+    sortable.typesObject[type.name] = type for type in types
 
-    alpha:
-      defaultSortDirection: 'ascending'
-      compare: (a, b) ->
-        a[0].localeCompare b[0]
-
-    date:
-      defaultSortDirection: 'ascending'
-      compare: (a, b) ->
-        aa = Date.parse(a[0])
-        bb = Date.parse(b[0])
-        aa = 0 if isNaN(aa)
-        bb = 0 if isNaN(bb)
-        aa - bb
+sortable.setupTypes [{
+  name: 'numeric'
+  defaultSortDirection: 'descending'
+  match: (a) -> a.match numberRegExp
+  comparator: (a) -> parseFloat(a.replace(/[^0-9.-]/g, ''), 10) or 0
+}, {
+  name: 'date'
+  defaultSortDirection: 'ascending'
+  reverse: true
+  match: (a) -> not isNaN Date.parse a
+  comparator: (a) -> Date.parse(a) or 0
+}, {
+  name: 'alpha'
+  defaultSortDirection: 'ascending'
+  match: -> true
+  compare: (a, b) -> a.localeCompare b
+}]
 
 setTimeout sortable.init, 0
 
-window.Sortable = sortable
+if typeof define is 'function' and define.amd
+  define -> sortable
+else if typeof exports isnt 'undefined'
+  module.exports = sortable
+else
+  window.Sortable = sortable
