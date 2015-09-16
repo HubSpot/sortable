@@ -31,6 +31,17 @@ exampleTable = document.querySelector('#exampleTable')
 Sortable.initTable(exampleTable)
 ```
 
+#### Events
+
+An `CustomEvent` called `Sortable.sorted` is fired whenever a sort is completed.
+
+Here’s an example of how you might listen to this event:
+
+```coffeescript
+exampleTable = document.querySelector('#exampleTable')
+exampleTable.addEventListener 'Sortable.sorted', -> console.log '#exampleTable was sorted!'
+```
+
 #### Sorting options
 
 ##### `data-value`
