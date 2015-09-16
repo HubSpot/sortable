@@ -35,65 +35,13 @@ sortable =
     table
 
   setupClickableTH: (table, th, i) ->
-    type = sortable.getColumnType table, i
-
     onClick = (e) ->
       if e.handled isnt true
         e.handled = true
       else
         return false
 
-      sorted = @getAttribute('data-sorted') is 'true'
-      sortedDirection = @getAttribute 'data-sorted-direction'
-
-      if sorted
-        newSortedDirection = if sortedDirection is 'ascending' then 'descending' else 'ascending'
-      else
-        newSortedDirection = type.defaultSortDirection
-
-      ths = @parentNode.querySelectorAll('th')
-      for th in ths
-        th.setAttribute 'data-sorted', 'false'
-        th.removeAttribute 'data-sorted-direction'
-
-      @setAttribute 'data-sorted', 'true'
-      @setAttribute 'data-sorted-direction', newSortedDirection
-
-      tBody = table.tBodies[0]
-      rowArray = []
-
-      if not sorted
-        if type.compare?
-          _compare = type.compare
-        else
-          _compare = (a, b) ->
-            b - a
-
-        compare = (a, b) ->
-          if a[0] is b[0]
-            return a[2] - b[2]
-
-          if type.reverse
-            _compare b[0], a[0]
-          else
-            _compare a[0], b[0]
-
-        for row, position in tBody.rows
-          value = sortable.getNodeValue(row.cells[i])
-          if type.comparator?
-            value = type.comparator(value)
-
-          rowArray.push [value, row, position]
-
-        rowArray.sort compare
-        tBody.appendChild row[1] for row in rowArray
-      else
-        rowArray.push item for item in tBody.rows
-        rowArray.reverse()
-        tBody.appendChild row for row in rowArray
-
-      if typeof window['CustomEvent'] is 'function'
-        table.dispatchEvent?(new CustomEvent 'Sortable.sorted', { bubbles: true })
+      sortable.sort e.target
 
     for eventName in clickEvents
       addEventListener th, eventName, onClick
@@ -122,6 +70,66 @@ sortable =
     sortable.types = types
     sortable.typesObject = {}
     sortable.typesObject[type.name] = type for type in types
+
+  sort: (clickedEl) ->
+    table = clickedEl.parentNode.parentNode.parentNode
+    ths = clickedEl.parentNode.querySelectorAll('th')
+
+    sorted = clickedEl.getAttribute('data-sorted') is 'true'
+    sortedDirection = clickedEl.getAttribute 'data-sorted-direction'
+
+    for th, i in ths
+      th.setAttribute 'data-sorted', 'false'
+      th.removeAttribute 'data-sorted-direction'
+
+      if th is clickedEl
+        columnIndex = i
+
+    type = sortable.getColumnType table, columnIndex
+
+    if sorted
+      newSortedDirection = if sortedDirection is 'ascending' then 'descending' else 'ascending'
+    else
+      newSortedDirection = type.defaultSortDirection
+
+    clickedEl.setAttribute 'data-sorted', 'true'
+    clickedEl.setAttribute 'data-sorted-direction', newSortedDirection
+
+    tBody = table.tBodies[0]
+    rowArray = []
+
+    unless sorted
+      if type.compare?
+        _compare = type.compare
+      else
+        _compare = (a, b) ->
+          b - a
+
+      compare = (a, b) ->
+        if a[0] is b[0]
+          return a[2] - b[2]
+
+        if type.reverse
+          _compare b[0], a[0]
+        else
+          _compare a[0], b[0]
+
+      for row, position in tBody.rows
+        value = sortable.getNodeValue(row.cells[columnIndex])
+        if type.comparator?
+          value = type.comparator(value)
+
+        rowArray.push [value, row, position]
+
+      rowArray.sort compare
+      tBody.appendChild row[1] for row in rowArray
+    else
+      rowArray.push item for item in tBody.rows
+      rowArray.reverse()
+      tBody.appendChild row for row in rowArray
+
+    if typeof window['CustomEvent'] is 'function'
+      table.dispatchEvent?(new CustomEvent 'Sortable.sorted', { bubbles: true })
 
 sortable.setupTypes [{
   name: 'numeric'
