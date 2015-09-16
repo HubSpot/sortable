@@ -1,6 +1,8 @@
 (function(){
+  var options = INSTALL_OPTIONS;
+
   Array.prototype.forEach.call(document.querySelectorAll('table'), function(table){
-    tables.setAttribute('data-sortable');
-    tables.add('sortable-theme-' + INSTALL_OPTIONS.theme);
+    table.setAttribute('data-sortable');
+    table.add('sortable-theme-' + options.theme);
   });
 })();

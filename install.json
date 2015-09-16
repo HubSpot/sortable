@@ -9,11 +9,11 @@
     "body": [
       {
         "type": "script",
-        "src": "./js/sortable.js"
+        "src": "./js/install.js"
       },
       {
         "type": "script",
-        "src": "./js/install.js"
+        "src": "./js/sortable.js"
       }
     ]
   },
@@ -39,9 +39,6 @@
           "finder": "Finder"
         },
         "default": "minimal"
-      },
-      "": {
-
       }
     }
   }
