@@ -34,7 +34,7 @@ The easiest way to add Sortable to your site is with [Eager](http://eager.io). C
 - Current WebKit (Chrome, Safari)
 - Opera
 
-#### Including
+#### Manually Including
 
 For the most common usage of sortable, you’ll want to include following:
 
