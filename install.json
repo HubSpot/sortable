@@ -1,0 +1,48 @@
+{
+  "resources": {
+    "head": [
+      {
+        "type": "style",
+        "src": "./css/sortable-theme-{{ options.theme }}.css"
+      }
+    ],
+    "body": [
+      {
+        "type": "script",
+        "src": "./js/sortable.js"
+      },
+      {
+        "type": "script",
+        "src": "./js/install.js"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "theme": {
+        "title": "Theme",
+        "type": "string",
+        "enum": [
+          "minimal",
+          "light",
+          "bootstrap",
+          "slick",
+          "dark",
+          "finder"
+        ],
+        "enumNames": {
+          "minimal": "Minimal",
+          "light": "Light",
+          "bootstrap": "Bootstrap",
+          "slick": "Slick",
+          "dark": "Dark",
+          "finder": "Finder"
+        },
+        "default": "minimal"
+      },
+      "": {
+
+      }
+    }
+  }
+}
