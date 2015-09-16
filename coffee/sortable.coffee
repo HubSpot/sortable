@@ -38,8 +38,8 @@ sortable =
     type = sortable.getColumnType table, i
 
     onClick = (e) ->
-      if event.handled isnt true
-        event.handled = true
+      if e.handled isnt true
+        e.handled = true
       else
         return false
 
