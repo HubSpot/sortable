@@ -51,7 +51,7 @@ Now any table with the attribute `sortable` will be made sortable. To get the st
 </table>
 ```
 
-This example uses the “Bootstrap” theme. For a full list of supported themes, check out [Themes](/sortable/api/themes).
+This example uses the “Bootstrap” theme. If the tables on your site already have styling, you may want to try the “Minimal” theme instead. For a full list of supported themes, check out [Themes](/sortable/api/themes).
 
 #### Learn More
 
