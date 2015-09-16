@@ -63,8 +63,8 @@
       type = sortable.getColumnType(table, i);
       onClick = function(e) {
         var compare, item, newSortedDirection, position, row, rowArray, sorted, sortedDirection, tBody, ths, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
-        if (event.handled !== true) {
-          event.handled = true;
+        if (e.handled !== true) {
+          e.handled = true;
         } else {
           return false;
         }
