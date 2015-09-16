@@ -124,18 +124,17 @@
       }
       return _results;
     },
-    sort: function(clickedEl, sortedDirection) {
+    sort: function(columnHeader, sortedDirection) {
       var columnIndex, compare, i, item, newSortedDirection, position, row, rowArray, sorted, tBody, table, th, ths, type, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
-      console.log('sorting', clickedEl, sortedDirection);
-      table = clickedEl.parentNode.parentNode.parentNode;
-      ths = clickedEl.parentNode.querySelectorAll('th');
-      sorted = clickedEl.getAttribute('data-sorted') === 'true';
-      sortedDirection = sortedDirection || clickedEl.getAttribute('data-sorted-direction');
+      table = columnHeader.parentNode.parentNode.parentNode;
+      ths = columnHeader.parentNode.querySelectorAll('th');
+      sorted = columnHeader.getAttribute('data-sorted') === 'true';
+      sortedDirection = sortedDirection || columnHeader.getAttribute('data-sorted-direction');
       for (i = _i = 0, _len = ths.length; _i < _len; i = ++_i) {
         th = ths[i];
         th.setAttribute('data-sorted', 'false');
         th.removeAttribute('data-sorted-direction');
-        if (th === clickedEl) {
+        if (th === columnHeader) {
           columnIndex = i;
         }
       }
@@ -145,8 +144,8 @@
       } else {
         newSortedDirection = type.defaultSortDirection;
       }
-      clickedEl.setAttribute('data-sorted', 'true');
-      clickedEl.setAttribute('data-sorted-direction', newSortedDirection);
+      columnHeader.setAttribute('data-sorted', 'true');
+      columnHeader.setAttribute('data-sorted-direction', newSortedDirection);
       tBody = table.tBodies[0];
       rowArray = [];
       if (!sorted) {

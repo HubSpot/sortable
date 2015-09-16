@@ -74,18 +74,18 @@ sortable =
     sortable.typesObject = {}
     sortable.typesObject[type.name] = type for type in types
 
-  sort: (clickedEl, sortedDirection) ->
-    table = clickedEl.parentNode.parentNode.parentNode
-    ths = clickedEl.parentNode.querySelectorAll('th')
+  sort: (columnHeader, sortedDirection) ->
+    table = columnHeader.parentNode.parentNode.parentNode
+    ths = columnHeader.parentNode.querySelectorAll('th')
 
-    sorted = clickedEl.getAttribute('data-sorted') is 'true'
-    sortedDirection = sortedDirection or clickedEl.getAttribute 'data-sorted-direction'
+    sorted = columnHeader.getAttribute('data-sorted') is 'true'
+    sortedDirection = sortedDirection or columnHeader.getAttribute 'data-sorted-direction'
 
     for th, i in ths
       th.setAttribute 'data-sorted', 'false'
       th.removeAttribute 'data-sorted-direction'
 
-      if th is clickedEl
+      if th is columnHeader
         columnIndex = i
 
     type = sortable.getColumnType table, columnIndex
@@ -95,8 +95,8 @@ sortable =
     else
       newSortedDirection = type.defaultSortDirection
 
-    clickedEl.setAttribute 'data-sorted', 'true'
-    clickedEl.setAttribute 'data-sorted-direction', newSortedDirection
+    columnHeader.setAttribute 'data-sorted', 'true'
+    columnHeader.setAttribute 'data-sorted-direction', newSortedDirection
 
     tBody = table.tBodies[0]
     rowArray = []
