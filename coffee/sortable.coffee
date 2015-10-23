@@ -37,11 +37,16 @@ sortable =
   setupClickableTH: (table, th, i) ->
     type = sortable.getColumnType table, i
 
+    eventHandled = false
+
     onClick = (e) ->
-      if e.handled isnt true
-        e.handled = true
-      else
-        return false
+      if eventHandled
+        return
+
+      eventHandled = true
+      setTimeout ->
+        eventHandled = false
+      , 0
 
       sorted = @getAttribute('data-sorted') is 'true'
       sortedDirection = @getAttribute 'data-sorted-direction'
