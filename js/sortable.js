@@ -1,5 +1,5 @@
 (function() {
-  var SELECTOR, addEventListener, clickEvents, numberRegExp, sortable, touchDevice, trimRegExp;
+  var SELECTOR, addEventListener, clickEvents, numberRegExp, sortable, touchDevice, trimRegExp, hasMoment, momentDateFormat;
 
   SELECTOR = 'table[data-sortable]';
 
@@ -10,6 +10,10 @@
   clickEvents = ['click'];
 
   touchDevice = 'ontouchstart' in document.documentElement;
+
+  hasMoment = (typeof window.moment === 'function');
+
+  momentDateFormat = 'YYYY-MM-DD HH:mm:ss';
 
   if (touchDevice) {
     clickEvents.push('touchstart');
@@ -31,6 +35,9 @@
       }
       if (options.selector == null) {
         options.selector = SELECTOR;
+      }
+      if (options.momentDateFormat !== null) {
+        momentDateFormat = options.momentDateFormat;
       }
       tables = document.querySelectorAll(options.selector);
       _results = [];
@@ -204,10 +211,19 @@
       defaultSortDirection: 'ascending',
       reverse: true,
       match: function(a) {
-        return !isNaN(Date.parse(a));
+        if (hasMoment) {
+          return moment(a, momentDateFormat).isValid();
+        } else {
+          return !isNaN(Date.parse(a));
+        }
       },
       comparator: function(a) {
-        return Date.parse(a) || 0;
+        if (hasMoment) {
+          var d = moment(a, momentDateFormat);
+          return d.isValid() ? d.toDate() : 0;
+        } else {
+          return Date.parse(a) || 0;
+        }
       }
     }, {
       name: 'alpha',
