@@ -134,6 +134,12 @@
             bubbles: true
           })) : void 0;
         }
+        else if (typeof window['CustomEvent'] === 'object')
+        {
+            var customEvent = document.createEvent("Event");
+            customEvent.initEvent("Sortable.sorted", true, false);
+            table.dispatchEvent(customEvent);
+        }
       };
       _results = [];
       for (_i = 0, _len = clickEvents.length; _i < _len; _i++) {
