@@ -31,6 +31,15 @@ exampleTable = document.querySelector('#exampleTable')
 Sortable.initTable(exampleTable)
 ```
 
+##### `sort`
+
+To re-sort table after rows adding, call `sort`.
+
+```coffeescript
+exampleTable = document.querySelector('#exampleTable')
+Sortable.sort(exampleTable)
+```
+
 #### Events
 
 An `CustomEvent` called `Sortable.sorted` is fired whenever a sort is completed.
