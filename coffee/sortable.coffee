@@ -26,11 +26,11 @@ sortable =
 
     table.setAttribute 'data-sortable-initialized', 'true'
 
-    ths = table.querySelectorAll('th')
-
-    for th, i in ths
-      if th.getAttribute('data-sortable') isnt 'false'
+    i = 0
+    for th in table.tHead.rows[0].cells
+      if th.getAttribute('data-sortable') isnt 'false' and th.tagName is 'TH'
         sortable.setupClickableTH table, th, i
+      i += th.colSpan
 
     table
 
@@ -84,11 +84,17 @@ sortable =
             _compare a[0], b[0]
 
         for row, position in tBody.rows
-          value = sortable.getNodeValue(row.cells[i])
-          if type.comparator?
-            value = type.comparator(value)
+          j = 0
 
-          rowArray.push [value, row, position]
+          for cell in row.cells
+            if j == i
+              value = sortable.getNodeValue(cell)
+              if type.comparator?
+                value = type.comparator(value)
+
+              rowArray.push [value, row, position]
+
+            j += cell.colSpan
 
         rowArray.sort compare
         tBody.appendChild row[1] for row in rowArray
