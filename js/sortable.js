@@ -41,7 +41,7 @@
       return _results;
     },
     initTable: function(table) {
-      var i, th, ths, _i, _len, _ref;
+      var i, th, _i, _len, _ref, _ref1;
       if (((_ref = table.tHead) != null ? _ref.rows.length : void 0) !== 1) {
         return;
       }
@@ -49,12 +49,14 @@
         return;
       }
       table.setAttribute('data-sortable-initialized', 'true');
-      ths = table.querySelectorAll('th');
-      for (i = _i = 0, _len = ths.length; _i < _len; i = ++_i) {
-        th = ths[i];
-        if (th.getAttribute('data-sortable') !== 'false') {
+      i = 0;
+      _ref1 = table.tHead.rows[0].cells;
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        th = _ref1[_i];
+        if (th.getAttribute('data-sortable') !== 'false' && th.tagName === 'TH') {
           sortable.setupClickableTH(table, th, i);
         }
+        i += th.colSpan;
       }
       return table;
     },
@@ -62,7 +64,7 @@
       var eventName, onClick, type, _i, _len, _results;
       type = sortable.getColumnType(table, i);
       onClick = function(e) {
-        var compare, item, newSortedDirection, position, row, rowArray, sorted, sortedDirection, tBody, ths, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
+        var cell, compare, item, j, newSortedDirection, position, row, rowArray, sorted, sortedDirection, tBody, ths, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2;
         if (e.handled !== true) {
           e.handled = true;
         } else {
@@ -106,26 +108,34 @@
           _ref = tBody.rows;
           for (position = _j = 0, _len1 = _ref.length; _j < _len1; position = ++_j) {
             row = _ref[position];
-            value = sortable.getNodeValue(row.cells[i]);
-            if (type.comparator != null) {
-              value = type.comparator(value);
+            j = 0;
+            _ref1 = row.cells;
+            for (_k = 0, _len2 = _ref1.length; _k < _len2; _k++) {
+              cell = _ref1[_k];
+              if (j === i) {
+                value = sortable.getNodeValue(cell);
+                if (type.comparator != null) {
+                  value = type.comparator(value);
+                }
+                rowArray.push([value, row, position]);
+              }
+              j += cell.colSpan;
             }
-            rowArray.push([value, row, position]);
           }
           rowArray.sort(compare);
-          for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
-            row = rowArray[_k];
+          for (_l = 0, _len3 = rowArray.length; _l < _len3; _l++) {
+            row = rowArray[_l];
             tBody.appendChild(row[1]);
           }
         } else {
-          _ref1 = tBody.rows;
-          for (_l = 0, _len3 = _ref1.length; _l < _len3; _l++) {
-            item = _ref1[_l];
+          _ref2 = tBody.rows;
+          for (_m = 0, _len4 = _ref2.length; _m < _len4; _m++) {
+            item = _ref2[_m];
             rowArray.push(item);
           }
           rowArray.reverse();
-          for (_m = 0, _len4 = rowArray.length; _m < _len4; _m++) {
-            row = rowArray[_m];
+          for (_n = 0, _len5 = rowArray.length; _n < _len5; _n++) {
+            row = rowArray[_n];
             tBody.appendChild(row);
           }
         }
