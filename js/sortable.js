@@ -59,15 +59,18 @@
       return table;
     },
     setupClickableTH: function(table, th, i) {
-      var eventName, onClick, type, _i, _len, _results;
+      var eventHandled, eventName, onClick, type, _i, _len, _results;
       type = sortable.getColumnType(table, i);
+      eventHandled = false;
       onClick = function(e) {
         var compare, item, newSortedDirection, position, row, rowArray, sorted, sortedDirection, tBody, ths, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
-        if (e.handled !== true) {
-          e.handled = true;
-        } else {
-          return false;
+        if (eventHandled) {
+          return;
         }
+        eventHandled = true;
+        setTimeout(function() {
+          return eventHandled = false;
+        }, 0);
         sorted = this.getAttribute('data-sorted') === 'true';
         sortedDirection = this.getAttribute('data-sorted-direction');
         if (sorted) {
