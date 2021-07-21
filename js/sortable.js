@@ -63,7 +63,7 @@
       type = sortable.getColumnType(table, i);
       eventHandled = false;
       onClick = function(e) {
-        var compare, item, newSortedDirection, position, row, rowArray, sorted, sortedDirection, tBody, ths, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
+        var compare, fragment, item, newSortedDirection, position, row, rowArray, sorted, sortedDirection, tBody, ths, value, _compare, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1;
         if (eventHandled) {
           return;
         }
@@ -116,10 +116,12 @@
             rowArray.push([value, row, position]);
           }
           rowArray.sort(compare);
+          fragment = document.createDocumentFragment();
           for (_k = 0, _len2 = rowArray.length; _k < _len2; _k++) {
             row = rowArray[_k];
-            tBody.appendChild(row[1]);
+            fragment.appendChild(row[1]);
           }
+          tBody.appendChild(fragment);
         } else {
           _ref1 = tBody.rows;
           for (_l = 0, _len3 = _ref1.length; _l < _len3; _l++) {
@@ -127,10 +129,12 @@
             rowArray.push(item);
           }
           rowArray.reverse();
+          fragment = document.createDocumentFragment();
           for (_m = 0, _len4 = rowArray.length; _m < _len4; _m++) {
             row = rowArray[_m];
-            tBody.appendChild(row);
+            fragment.appendChild(row);
           }
+          tBody.appendChild(fragment);
         }
         if (typeof window['CustomEvent'] === 'function') {
           return typeof table.dispatchEvent === "function" ? table.dispatchEvent(new CustomEvent('Sortable.sorted', {

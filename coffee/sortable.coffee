@@ -91,11 +91,19 @@ sortable =
           rowArray.push [value, row, position]
 
         rowArray.sort compare
-        tBody.appendChild row[1] for row in rowArray
+        # use document fragment for performance
+        # when sorting large tables (avoid recalculating styles)
+        fragment = document.createDocumentFragment()
+        fragment.appendChild row[1] for row in rowArray
+        tBody.appendChild fragment
       else
         rowArray.push item for item in tBody.rows
         rowArray.reverse()
-        tBody.appendChild row for row in rowArray
+        # use document fragment for performance
+        # when sorting large tables (avoid recalculating styles)
+        fragment = document.createDocumentFragment()
+        fragment.appendChild row for row in rowArray
+        tBody.appendChild fragment
 
       if typeof window['CustomEvent'] is 'function'
         table.dispatchEvent?(new CustomEvent 'Sortable.sorted', { bubbles: true })
